@@ -7,9 +7,9 @@ var Header = function Header() {
 var Input = function Input() {
   return /*#__PURE__*/React.createElement("input", {
     type: "text",
-    id: "fname",
-    name: "",
-    value: "asdsa"
+    id: "test",
+    name: "test",
+    value: "test"
   });
 };
 

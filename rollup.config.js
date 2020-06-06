@@ -7,7 +7,7 @@ const config = {
         format: 'es'
     },
     external: ['react'],
-    plugins: [babel({ exclude: 'node_modules/**' })]
+    plugins: [babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' })]
 }
  
 export default config
