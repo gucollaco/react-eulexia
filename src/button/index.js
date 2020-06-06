@@ -1,8 +1,12 @@
 import React from 'react'
+import clsx from 'clsx'
 
-const Button = (props) => {
+const Button = ({className, ...props}) => {
     return (
-        <button {...props}/>
+        <button
+            className={clsx(className, 'lexia')}
+            {...props}
+            />
     )
 }
 

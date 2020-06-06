@@ -1,8 +1,12 @@
 import React from 'react'
+import clsx from 'clsx'
 
-const Eulexia = (props) => {
+const Eulexia = ({className, ...props}) => {
     return (
-        <div {...props}>EULEXIA</div>
+        <button
+            className={clsx(className, 'lexia')}
+            {...props}
+            />
     )
 }
 
