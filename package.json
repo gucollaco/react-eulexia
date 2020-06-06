@@ -1,0 +1,23 @@
+{
+  "name": "react-eulexia",
+  "version": "1.0.0",
+  "description": "A component library aiming to help people with dyslexia.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@rollup/plugin-babel": "^5.0.3",
+    "rollup": "^2.13.1"
+  },
+  "author": "Gustavo Collaço",
+  "license": "MIT"
+}
