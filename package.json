@@ -4,11 +4,11 @@
   "description": "A component library aiming to help people with dyslexia.",
   "main": "dist/main.js",
   "scripts": {
-    "build": "rollup --config"
+    "build": "rollup --config",
+    "watch": "rollup --config --watch"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
