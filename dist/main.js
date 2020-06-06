@@ -1,7 +1,11 @@
 import React from 'react';
 
-var Header = function Header() {
-  return /*#__PURE__*/React.createElement("h1", null, "OIE");
+var Button = function Button(props) {
+  return /*#__PURE__*/React.createElement("button", props);
+};
+
+var Eulexia = function Eulexia(props) {
+  return /*#__PURE__*/React.createElement("div", props, "EULEXIA");
 };
 
 var Input = function Input() {
@@ -13,4 +17,4 @@ var Input = function Input() {
   });
 };
 
-export { Header, Input };
+export { Button, Eulexia, Input };
