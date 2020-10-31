@@ -142,9 +142,9 @@ var Eulexia = function Eulexia(_ref) {
     }
   });
   useEffect(function () {
-    document.addEventListener("keydown", escFunction, false);
+    document.addEventListener('keydown', escFunction, false);
     return function () {
-      document.removeEventListener("keydown", escFunction, false);
+      document.removeEventListener('keydown', escFunction, false);
     };
   });
   return /*#__PURE__*/React.createElement("input", {
