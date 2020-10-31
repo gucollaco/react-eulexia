@@ -5,7 +5,9 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "rollup --config",
-    "watch": "rollup --config --watch"
+    "watch": "rollup --config --watch",
+    "lint": "eslint src/**/*.js src/**/*.jsx",
+    "fix": "eslint src/**/*.js src/**/*.jsx --fix"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
@@ -14,10 +16,13 @@
     "@babel/preset-react": "^7.10.1",
     "@rollup/plugin-babel": "^5.0.3",
     "clsx": "^1.1.1",
+    "eslint": "^7.12.1",
+    "eslint-plugin-react": "^7.21.5",
+    "react": "^17.0.1",
     "rollup": "^2.13.1"
   },
   "peerDependencies": {
-    "react": "^16.13.1"
+    "react": "^17.0.1"
   },
   "author": "Gustavo Collaço",
   "license": "MIT"

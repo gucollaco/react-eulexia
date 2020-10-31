@@ -1,13 +1,13 @@
 import React from 'react'
 import clsx from 'clsx'
 
-const Input = ({className, ...props}) => {
+const Button = ({ className, ...props }) => {
     return (
-        <input
+        <button
             className={clsx(className, 'lexia')}
             {...props}
-            />
+        />
     )
 }
 
-export default Input
+export default Button
