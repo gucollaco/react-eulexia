@@ -1,5 +1,5 @@
 import babel from '@rollup/plugin-babel'    
- 
+
 const config = {
     input: 'src/main.js',
     output: {
@@ -9,5 +9,5 @@ const config = {
     external: ['react'],
     plugins: [babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' })]
 }
- 
+
 export default config
