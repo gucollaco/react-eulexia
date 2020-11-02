@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import clsx from 'clsx';
+import { Fab, Action as Action$1 } from 'react-tiny-fab';
 import styled from 'styled-components';
 
 function _extends() {
@@ -251,28 +252,111 @@ var Input = function Input(_ref) {
   }, props));
 };
 
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n        height: 56px;\n        width: 56px;\n        z-index: 9999;\n        background-color: #666666;\n        display: inline-flex;\n        justify-content: center;\n        align-items: center;\n        position: relative;\n        border: none;\n        border-radius: 50%;\n        box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n        cursor: pointer;\n        outline: none;\n        padding: 0;\n        -webkit-user-drag: none;\n        font-weight: bold;\n        color: #f1f1f1;\n        font-size: 18px;\n        > * {\n            transition: ease-in-out transform 0.2s;\n        }\n    "]);
+var EulexiaFab = function EulexiaFab(_ref) {
+  var _ref$event = _ref.event,
+      event = _ref$event === void 0 ? 'hover' : _ref$event,
+      _ref$icon = _ref.icon,
+      className = _ref.className,
+      props = _objectWithoutProperties(_ref, ["event", "icon", "className"]);
 
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n        display: block;\n        position: absolute;\n        top: 0;\n        right: 1px;\n        padding: 10px 0;\n        margin: (-10px) 0;\n        transition: ease-in-out transform 0.2s;\n        > span {\n        opacity: 0;\n        transition: ease-in-out opacity 0.2s;\n        position: absolute;\n        top: 50%;\n        transform: translateY(-50%);\n        margin-right: 6px;\n        background: rgba(0, 0, 0, 0.75);\n        padding: 2px 4px;\n        border-radius: 2px;\n        color: white;\n        font-size: 13px;\n        box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n        &.right {\n            right: 100%;\n        }\n        }\n        &:nth-child(1) {\n        transform: translateY(-60px) scale(0);\n        transition-delay: 0.21s;\n        &.top {\n            transform: translateY(60px) scale(0);\n        }\n        }\n        &:nth-child(2) {\n        transform: translateY(-120px) scale(0);\n        transition-delay: 0.18s;\n        &.top {\n            transform: translateY(120px) scale(0);\n        }\n        }\n        &:nth-child(3) {\n        transform: translateY(-180px) scale(0);\n        transition-delay: 0.15s;\n        &.top {\n            transform: translateY(180px) scale(0);\n        }\n        }\n        &:nth-child(4) {\n        transform: translateY(-240px) scale(0);\n        transition-delay: 0.12s;\n        &.top {\n            transform: translateY(240px) scale(0);\n        }\n        }\n        &:nth-child(5) {\n        transform: translateY(-300px) scale(0);\n        transition-delay: 0.09s;\n        &.top {\n            transform: translateY(300px) scale(0);\n        }\n        }\n        &:nth-child(6) {\n        transform: translateY(-360px) scale(0);\n        transition-delay: 0.03s;\n        &.top {\n            transform: translateY(360px) scale(0);\n        }\n        }\n    "]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
+  return /*#__PURE__*/React.createElement(Fab, {
+    mainButtonStyles: {
+      backgroundColor: '#A7C5E6'
+    },
+    style: {
+      left: 24,
+      bottom: 24
+    },
+    icon: /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      viewBox: "0 0 24 24",
+      width: "24",
+      height: "24"
+    }, /*#__PURE__*/React.createElement("path", {
+      fill: "none",
+      d: "M0 0h24v24H0z"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.954 2.21a9.99 9.99 0 0 1 4.091-.002A3.993 3.993 0 0 0 16 5.07a3.993 3.993 0 0 0 3.457.261A9.99 9.99 0 0 1 21.5 8.876 3.993 3.993 0 0 0 20 12c0 1.264.586 2.391 1.502 3.124a10.043 10.043 0 0 1-2.046 3.543 3.993 3.993 0 0 0-3.456.261 3.993 3.993 0 0 0-1.954 2.86 9.99 9.99 0 0 1-4.091.004A3.993 3.993 0 0 0 8 18.927a3.993 3.993 0 0 0-3.457-.26A9.99 9.99 0 0 1 2.5 15.121 3.993 3.993 0 0 0 4 11.999a3.993 3.993 0 0 0-1.502-3.124 10.043 10.043 0 0 1 2.046-3.543A3.993 3.993 0 0 0 8 5.071a3.993 3.993 0 0 0 1.954-2.86zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+    })),
+    event: event,
+    alwaysShowTitle: true
+  }, /*#__PURE__*/React.createElement(Action$1, {
+    text: "Font Size",
+    onMouseEnter: function onMouseEnter() {
+      return console.log('onmousenter FONT SIZE');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return console.log('onmouseleave FONT SIZE');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "none",
+    d: "M0 0h24v24H0z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"
+  }))), /*#__PURE__*/React.createElement(Action$1, {
+    text: "Font Family",
+    onMouseEnter: function onMouseEnter() {
+      return console.log('onmousenter FONT FAMILY');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return console.log('onmouseleave FONT FAMILY');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "none",
+    d: "M0 0h24v24H0z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13 6v15h-2V6H5V4h14v2z"
+  }))), /*#__PURE__*/React.createElement(Action$1, {
+    text: "Ruler",
+    onMouseEnter: function onMouseEnter() {
+      return console.log('onmousenter RULER');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return console.log('onmouseleave RULER');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "none",
+    d: "M0 0h24v24H0z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M6.343 14.621L3.515 17.45l3.535 3.535L20.485 7.55 16.95 4.015l-2.122 2.121 1.415 1.414-1.415 1.414-1.414-1.414-2.121 2.122 2.121 2.12L12 13.208l-2.121-2.121-2.122 2.121 1.415 1.414-1.415 1.415-1.414-1.415zM17.657 1.893l4.95 4.95a1 1 0 0 1 0 1.414l-14.85 14.85a1 1 0 0 1-1.414 0l-4.95-4.95a1 1 0 0 1 0-1.414l14.85-14.85a1 1 0 0 1 1.414 0z"
+  }))), /*#__PURE__*/React.createElement(Action$1, {
+    text: "Listen Selected Text",
+    onMouseEnter: function onMouseEnter() {
+      return console.log('onmousenter LISTEN');
+    },
+    onMouseLeave: function onMouseLeave() {
+      return console.log('onmouseleave LISTEN');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 24 24",
+    width: "24",
+    height: "24"
+  }, /*#__PURE__*/React.createElement("path", {
+    fill: "none",
+    d: "M0 0h24v24H0z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"
+  }))));
+};
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n        box-sizing: border-box;\n        margin: 25px;\n        position: fixed;\n        white-space: nowrap;\n        z-index: 9998;\n        padding-left: 0;\n        list-style: none;\n        font-size: 100px;\n    "]);
+  var data = _taggedTemplateLiteral(["\n    height: 48px;\n    width: 48px;\n    background-color: #aaaaaa;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    border: none;\n    border-radius: 50%;\n    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n    cursor: pointer;\n    outline: none;\n    padding: 0;\n    -webkit-user-drag: none;\n    font-weight: bold;\n    color: #f1f1f1;\n    margin-right: 4px;\n    font-size: 16px;\n    z-index: 10000;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -280,53 +364,6 @@ function _templateObject() {
 
   return data;
 }
-
-var EulexiaFab = function EulexiaFab(_ref) {
-  var _ref$event = _ref.event,
-      event = _ref$event === void 0 ? 'hover' : _ref$event,
-      className = _ref.className,
-      props = _objectWithoutProperties(_ref, ["event", "className"]);
-
-  var StyledUl = styled.ul(_templateObject());
-  var StyledLi = styled.li(_templateObject2());
-  var MainButton = styled.button(_templateObject3());
-
-  var _useState = useState(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      isOpen = _useState2[0],
-      setIsOpen = _useState2[1];
-
-  var open = function open() {
-    return setIsOpen(true);
-  };
-
-  var close = function close() {
-    return setIsOpen(false);
-  };
-
-  var enter = function enter() {
-    return event === 'hover' && open();
-  };
-
-  var leave = function leave() {
-    return event === 'hover' && close();
-  };
-
-  return /*#__PURE__*/React.createElement(StyledUl, {
-    onMouseEnter: enter,
-    onMouseLeave: leave
-  }, /*#__PURE__*/React.createElement(StyledLi, null, /*#__PURE__*/React.createElement(MainButton, null, "asdasd")));
-};
-
-function _templateObject$1() {
-  var data = _taggedTemplateLiteral(["\n    height: 48px;\n    width: 48px;\n    background-color: #aaaaaa;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    border: none;\n    border-radius: 50%;\n    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n    cursor: pointer;\n    outline: none;\n    padding: 0;\n    -webkit-user-drag: none;\n    font-weight: bold;\n    color: #f1f1f1;\n    margin-right: 4px;\n    font-size: 16px;\n    z-index: 10000;\n"]);
-
-  _templateObject$1 = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-var Action = styled.button(_templateObject$1());
+var Action = styled.button(_templateObject());
 
 export { Button, Eulexia, Action as EulexiaAction, EulexiaFab, Input };
