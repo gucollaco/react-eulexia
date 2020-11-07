@@ -1,6 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import clsx from 'clsx';
 import { Fab, Action as Action$1 } from 'react-tiny-fab';
+import ReactTooltip from 'react-tooltip';
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
 import styled from 'styled-components';
 
 function _extends() {
@@ -252,6 +257,17 @@ var Input = function Input(_ref) {
   }, props));
 };
 
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    .flex {\n        display: flex;\n        flex-direction: column;\n        padding: 10px 0px 10px 0px;\n        font-size: 18px !important;\n        width: 240px;\n    }\n    @media (max-width: 600px) {\n        .flex {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var Styles = styled.div(_templateObject());
+
 var EulexiaFab = function EulexiaFab(_ref) {
   var _ref$event = _ref.event,
       event = _ref$event === void 0 ? 'hover' : _ref$event,
@@ -259,13 +275,28 @@ var EulexiaFab = function EulexiaFab(_ref) {
       className = _ref.className,
       props = _objectWithoutProperties(_ref, ["event", "icon", "className"]);
 
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      fontSizeEnabled = _useState2[0],
+      setFontSizeEnabled = _useState2[1];
+
+  var _useState3 = useState(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      headerFontSize = _useState4[0],
+      setHeaderFontSize = _useState4[1];
+
+  var _useState5 = useState(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      paragraphFontSize = _useState6[0],
+      setParagraphFontSize = _useState6[1];
+
   return /*#__PURE__*/React.createElement(Fab, {
     mainButtonStyles: {
       backgroundColor: '#A7C5E6'
     },
     style: {
-      left: 24,
-      bottom: 24
+      left: 20,
+      bottom: 20
     },
     icon: /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -278,16 +309,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
     }), /*#__PURE__*/React.createElement("path", {
       d: "M9.954 2.21a9.99 9.99 0 0 1 4.091-.002A3.993 3.993 0 0 0 16 5.07a3.993 3.993 0 0 0 3.457.261A9.99 9.99 0 0 1 21.5 8.876 3.993 3.993 0 0 0 20 12c0 1.264.586 2.391 1.502 3.124a10.043 10.043 0 0 1-2.046 3.543 3.993 3.993 0 0 0-3.456.261 3.993 3.993 0 0 0-1.954 2.86 9.99 9.99 0 0 1-4.091.004A3.993 3.993 0 0 0 8 18.927a3.993 3.993 0 0 0-3.457-.26A9.99 9.99 0 0 1 2.5 15.121 3.993 3.993 0 0 0 4 11.999a3.993 3.993 0 0 0-1.502-3.124 10.043 10.043 0 0 1 2.046-3.543A3.993 3.993 0 0 0 8 5.071a3.993 3.993 0 0 0 1.954-2.86zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
     })),
-    event: event,
-    alwaysShowTitle: true
+    event: event
   }, /*#__PURE__*/React.createElement(Action$1, {
-    text: "Font Size",
-    onMouseEnter: function onMouseEnter() {
-      return console.log('onmousenter FONT SIZE');
-    },
-    onMouseLeave: function onMouseLeave() {
-      return console.log('onmouseleave FONT SIZE');
-    }
+    "data-tip": true,
+    "data-for": "fontSize"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -299,13 +324,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Font Family",
-    onMouseEnter: function onMouseEnter() {
-      return console.log('onmousenter FONT FAMILY');
-    },
-    onMouseLeave: function onMouseLeave() {
-      return console.log('onmouseleave FONT FAMILY');
-    }
+    "data-tip": true,
+    "data-effect": "solid",
+    "data-place": "right",
+    "data-text-color": "blue"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -352,18 +374,55 @@ var EulexiaFab = function EulexiaFab(_ref) {
     d: "M0 0h24v24H0z"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"
-  }))));
+  }))), /*#__PURE__*/React.createElement(Styles, null, /*#__PURE__*/React.createElement(ReactTooltip, {
+    id: "fontSize",
+    place: "right",
+    type: "light",
+    effect: "solid",
+    className: "hoverVisible",
+    delayHide: 1000
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex"
+  }, /*#__PURE__*/React.createElement("span", null, "Font size"), /*#__PURE__*/React.createElement("span", null, "Enabled"), /*#__PURE__*/React.createElement(Toggle, {
+    defaultChecked: false,
+    onChange: function onChange(e) {
+      setFontSizeEnabled(e.target.checked);
+      setHeaderFontSize(0);
+      setParagraphFontSize(0);
+    },
+    icons: false
+  }), /*#__PURE__*/React.createElement("span", null, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement(Slider, {
+    min: 8,
+    max: 72,
+    step: 2,
+    tooltip: false,
+    value: fontSizeEnabled ? headerFontSize : 0,
+    disabled: true,
+    onChange: function onChange(value) {
+      return setHeaderFontSize(fontSizeEnabled ? value : 0);
+    }
+  }), /*#__PURE__*/React.createElement("span", null, paragraphFontSize ? "Paragraphs (".concat(paragraphFontSize, " px)") : 'Paragraphs'), /*#__PURE__*/React.createElement(Slider, {
+    min: 8,
+    max: 72,
+    step: 2,
+    tooltip: false,
+    value: fontSizeEnabled ? paragraphFontSize : 0,
+    disabled: true,
+    onChange: function onChange(value) {
+      return setParagraphFontSize(fontSizeEnabled ? value : 0);
+    }
+  })))));
 };
 
-function _templateObject() {
+function _templateObject$1() {
   var data = _taggedTemplateLiteral(["\n    height: 48px;\n    width: 48px;\n    background-color: #aaaaaa;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    border: none;\n    border-radius: 50%;\n    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n    cursor: pointer;\n    outline: none;\n    padding: 0;\n    -webkit-user-drag: none;\n    font-weight: bold;\n    color: #f1f1f1;\n    margin-right: 4px;\n    font-size: 16px;\n    z-index: 10000;\n"]);
 
-  _templateObject = function _templateObject() {
+  _templateObject$1 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Action = styled.button(_templateObject());
+var Action = styled.button(_templateObject$1());
 
 export { Button, Eulexia, Action as EulexiaAction, EulexiaFab, Input };

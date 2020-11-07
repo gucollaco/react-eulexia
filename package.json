@@ -23,8 +23,15 @@
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-tiny-fab": "^4.0.2",
+    "react-tooltip": "^4.2.10",
     "styled-components": "^5.2.1"
   },
   "author": "Gustavo Collaço",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-numeric-input": "^2.2.3",
+    "react-rangeslider": "^2.2.0",
+    "react-slider": "^1.1.1",
+    "react-toggle": "^4.1.1"
+  }
 }
