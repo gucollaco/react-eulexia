@@ -17,7 +17,7 @@ const Styles = styled.div`
     .flex {
         display: flex;
         flex-direction: column;
-        padding: 10px 0px 10px 0px;
+        padding: 10px 0px 15px 0px;
         font-size: 18px !important;
         width: 240px;
     }
@@ -57,9 +57,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
             <Action
                 data-tip
-                data-effect='solid'
-                data-place='right'
-                data-text-color='blue'
+                data-for='fontFamily'
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 6v15h-2V6H5V4h14v2z"/></svg>
             </Action>
@@ -84,7 +82,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                     type='light'
                     effect='solid'
                     className='hoverVisible'
-                    delayHide={1000}
+                    delayHide={200}
                 >
                     <div className='flex'>
                         <span>Font size</span>
@@ -118,6 +116,16 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                             onChange={value => setParagraphFontSize(fontSizeEnabled ? value : 0)}
                         />
                     </div>
+                </ReactTooltip>
+                <ReactTooltip
+                    id='fontFamily'
+                    place='right'
+                    type='light'
+                    effect='solid'
+                    className='hoverVisible'
+                    delayHide={200}
+                >
+                    Font family tooltip
                 </ReactTooltip>
             </Styles>
         </Fab>

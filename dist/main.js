@@ -258,7 +258,7 @@ var Input = function Input(_ref) {
 };
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    .flex {\n        display: flex;\n        flex-direction: column;\n        padding: 10px 0px 10px 0px;\n        font-size: 18px !important;\n        width: 240px;\n    }\n    @media (max-width: 600px) {\n        .flex {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    .flex {\n        display: flex;\n        flex-direction: column;\n        padding: 10px 0px 15px 0px;\n        font-size: 18px !important;\n        width: 240px;\n    }\n    @media (max-width: 600px) {\n        .flex {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -325,9 +325,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
     d: "M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
     "data-tip": true,
-    "data-effect": "solid",
-    "data-place": "right",
-    "data-text-color": "blue"
+    "data-for": "fontFamily"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -380,7 +378,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
     type: "light",
     effect: "solid",
     className: "hoverVisible",
-    delayHide: 1000
+    delayHide: 200
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex"
   }, /*#__PURE__*/React.createElement("span", null, "Font size"), /*#__PURE__*/React.createElement("span", null, "Enabled"), /*#__PURE__*/React.createElement(Toggle, {
@@ -411,7 +409,14 @@ var EulexiaFab = function EulexiaFab(_ref) {
     onChange: function onChange(value) {
       return setParagraphFontSize(fontSizeEnabled ? value : 0);
     }
-  })))));
+  }))), /*#__PURE__*/React.createElement(ReactTooltip, {
+    id: "fontFamily",
+    place: "right",
+    type: "light",
+    effect: "solid",
+    className: "hoverVisible",
+    delayHide: 200
+  }, "Font family tooltip")));
 };
 
 function _templateObject$1() {
