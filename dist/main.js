@@ -290,7 +290,34 @@ var EulexiaFab = function EulexiaFab(_ref) {
       paragraphFontSize = _useState6[0],
       setParagraphFontSize = _useState6[1];
 
+  var changeFontSize = function changeFontSize(elements, fontSize) {
+    var _iterator2 = _createForOfIteratorHelper(elements),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var element = _step2.value;
+        element.style.fontSize = "".concat(fontSize, "px");
+        console.log(element.style.fontSize); // console.log(element.isEqualNode(element))
+        // const elementStyle = element.getAttribute('style')
+        // console.log(element.style.fontSize ? true : false)
+        // const newStyle = elementStyle ? elementStyle + `font-size:${headerFontSize}px;` : `font-size:${headerFontSize}px;`
+        // element.setAttribute('style', newStyle) 
+        // console.log(element)
+        // console.log(window.getComputedStyle(element).fontSize)
+        // element.style.fontSize = `${fontSize}px`
+
+        console.log(element.style); // console.log(element.style.fontSize)
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  };
+
   return /*#__PURE__*/React.createElement(Fab, {
+    id: "eulexiaFab",
     mainButtonStyles: {
       backgroundColor: '#A7C5E6'
     },
@@ -337,7 +364,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M13 6v15h-2V6H5V4h14v2z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Ruler",
     onMouseEnter: function onMouseEnter() {
       return console.log('onmousenter RULER');
     },
@@ -355,7 +381,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M6.343 14.621L3.515 17.45l3.535 3.535L20.485 7.55 16.95 4.015l-2.122 2.121 1.415 1.414-1.415 1.414-1.414-1.414-2.121 2.122 2.121 2.12L12 13.208l-2.121-2.121-2.122 2.121 1.415 1.414-1.415 1.415-1.414-1.415zM17.657 1.893l4.95 4.95a1 1 0 0 1 0 1.414l-14.85 14.85a1 1 0 0 1-1.414 0l-4.95-4.95a1 1 0 0 1 0-1.414l14.85-14.85a1 1 0 0 1 1.414 0z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Listen Selected Text",
     onMouseEnter: function onMouseEnter() {
       return console.log('onmousenter LISTEN');
     },
@@ -372,7 +397,9 @@ var EulexiaFab = function EulexiaFab(_ref) {
     d: "M0 0h24v24H0z"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"
-  }))), /*#__PURE__*/React.createElement(Styles, null, /*#__PURE__*/React.createElement(ReactTooltip, {
+  }))), /*#__PURE__*/React.createElement(Styles, {
+    "font-size": 90
+  }, /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontSize",
     place: "right",
     type: "light",
@@ -381,7 +408,11 @@ var EulexiaFab = function EulexiaFab(_ref) {
     delayHide: 200
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex"
-  }, /*#__PURE__*/React.createElement("span", null, "Font size"), /*#__PURE__*/React.createElement("span", null, "Enabled"), /*#__PURE__*/React.createElement(Toggle, {
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eulexiaText"
+  }, "Font size"), /*#__PURE__*/React.createElement("span", {
+    className: "eulexiaText"
+  }, "Enabled"), /*#__PURE__*/React.createElement(Toggle, {
     defaultChecked: false,
     onChange: function onChange(e) {
       setFontSizeEnabled(e.target.checked);
@@ -389,17 +420,29 @@ var EulexiaFab = function EulexiaFab(_ref) {
       setParagraphFontSize(0);
     },
     icons: false
-  }), /*#__PURE__*/React.createElement("span", null, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement(Slider, {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "eulexiaText"
+  }, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement(Slider, {
     min: 8,
     max: 72,
     step: 2,
     tooltip: false,
     value: fontSizeEnabled ? headerFontSize : 0,
-    disabled: true,
     onChange: function onChange(value) {
-      return setHeaderFontSize(fontSizeEnabled ? value : 0);
+      if (!fontSizeEnabled) return;
+      setHeaderFontSize(value);
+    },
+    onChangeComplete: function onChangeComplete() {
+      if (!fontSizeEnabled) return;
+      var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+      var exceptTags = [':not(.eulexiaText)'];
+      var exceptTagsJoined = exceptTags.join('');
+      var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+      changeFontSize(document.querySelectorAll(textTagsJoined), headerFontSize);
     }
-  }), /*#__PURE__*/React.createElement("span", null, paragraphFontSize ? "Paragraphs (".concat(paragraphFontSize, " px)") : 'Paragraphs'), /*#__PURE__*/React.createElement(Slider, {
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "eulexiaText"
+  }, paragraphFontSize ? "Texts (".concat(paragraphFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement(Slider, {
     min: 8,
     max: 72,
     step: 2,
@@ -407,7 +450,16 @@ var EulexiaFab = function EulexiaFab(_ref) {
     value: fontSizeEnabled ? paragraphFontSize : 0,
     disabled: true,
     onChange: function onChange(value) {
-      return setParagraphFontSize(fontSizeEnabled ? value : 0);
+      if (!fontSizeEnabled) return;
+      setParagraphFontSize(value);
+    },
+    onChangeComplete: function onChangeComplete() {
+      if (!fontSizeEnabled) return;
+      var textTags = ['p', 'li', 'span', 'b', 'i', 'strong', 'em', 'code'];
+      var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
+      var exceptTagsJoined = exceptTags.join('');
+      var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+      changeFontSize(document.querySelectorAll(textTagsJoined), paragraphFontSize);
     }
   }))), /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontFamily",
