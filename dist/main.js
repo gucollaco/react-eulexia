@@ -258,7 +258,7 @@ var Input = function Input(_ref) {
 };
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    .flex {\n        display: flex;\n        flex-direction: column;\n        padding: 10px 0px 15px 0px;\n        font-size: 18px !important;\n        width: 240px;\n    }\n    @media (max-width: 600px) {\n        .flex {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
+  var data = _taggedTemplateLiteral(["\n    .wrapper {\n        padding: 10px 0px 15px 0px;\n        font-size: 18px !important;\n        width: 280px;\n    }\n    .title {\n        font-size 21px !important;\n    }\n    .row {\n        display: flex;\n        flex-direction: row;\n    }\n    .column {\n        display: flex;\n        flex-direction: column;\n    }\n    .item {\n        flex: 1;\n        text-align: left;\n    }\n    .item-text-right {\n        flex: 1;\n        text-align: right;\n    }\n    @media (max-width: 600px) {\n        .wrapper {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -419,9 +419,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
     d: "M0 0h24v24H0z"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"
-  }))), /*#__PURE__*/React.createElement(Styles, {
-    "font-size": 90
-  }, /*#__PURE__*/React.createElement(ReactTooltip, {
+  }))), /*#__PURE__*/React.createElement(Styles, null, /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontSize",
     place: "right",
     type: "light",
@@ -429,12 +427,14 @@ var EulexiaFab = function EulexiaFab(_ref) {
     className: "hoverVisible",
     delayHide: 200
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "eulexiaText"
-  }, "Font size"), /*#__PURE__*/React.createElement("span", {
-    className: "eulexiaText"
-  }, "Enabled"), /*#__PURE__*/React.createElement(Toggle, {
+    className: "wrapper column"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "item title row"
+  }, /*#__PURE__*/React.createElement("strong", {
+    className: "item eulexiaText"
+  }, "Font size"), /*#__PURE__*/React.createElement("div", {
+    className: "item-text-right"
+  }, /*#__PURE__*/React.createElement(Toggle, {
     defaultChecked: false,
     onChange: function onChange(e) {
       setFontSizeEnabled(e.target.checked);
@@ -444,9 +444,16 @@ var EulexiaFab = function EulexiaFab(_ref) {
       clearFontSize(getHtmlTexts());
     },
     icons: false
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "eulexiaText"
-  }, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement(Slider, {
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "item eulexiaText"
+  }, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/React.createElement(Slider, {
     min: 8,
     max: 72,
     step: 2,
@@ -460,9 +467,16 @@ var EulexiaFab = function EulexiaFab(_ref) {
       if (!fontSizeEnabled) return;
       changeFontSize(getHtmlHeaders(), headerFontSize);
     }
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "eulexiaText"
-  }, textFontSize ? "Texts (".concat(textFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement(Slider, {
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "item eulexiaText"
+  }, textFontSize ? "Texts (".concat(textFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/React.createElement(Slider, {
     min: 8,
     max: 72,
     step: 2,
@@ -477,7 +491,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
       if (!fontSizeEnabled) return;
       changeFontSize(getHtmlTexts(), textFontSize);
     }
-  }))), /*#__PURE__*/React.createElement(ReactTooltip, {
+  }))))), /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontFamily",
     place: "right",
     type: "light",
