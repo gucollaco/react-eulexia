@@ -287,8 +287,24 @@ var EulexiaFab = function EulexiaFab(_ref) {
 
   var _useState5 = useState(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      paragraphFontSize = _useState6[0],
-      setParagraphFontSize = _useState6[1];
+      textFontSize = _useState6[0],
+      setTextFontSize = _useState6[1];
+
+  var clearFontSize = function clearFontSize(elements) {
+    var _iterator = _createForOfIteratorHelper(elements),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var element = _step.value;
+        element.style.removeProperty('font-size');
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  };
 
   var changeFontSize = function changeFontSize(elements, fontSize) {
     var _iterator2 = _createForOfIteratorHelper(elements),
@@ -298,22 +314,28 @@ var EulexiaFab = function EulexiaFab(_ref) {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var element = _step2.value;
         element.style.fontSize = "".concat(fontSize, "px");
-        console.log(element.style.fontSize); // console.log(element.isEqualNode(element))
-        // const elementStyle = element.getAttribute('style')
-        // console.log(element.style.fontSize ? true : false)
-        // const newStyle = elementStyle ? elementStyle + `font-size:${headerFontSize}px;` : `font-size:${headerFontSize}px;`
-        // element.setAttribute('style', newStyle) 
-        // console.log(element)
-        // console.log(window.getComputedStyle(element).fontSize)
-        // element.style.fontSize = `${fontSize}px`
-
-        console.log(element.style); // console.log(element.style.fontSize)
       }
     } catch (err) {
       _iterator2.e(err);
     } finally {
       _iterator2.f();
     }
+  };
+
+  var getHtmlHeaders = function getHtmlHeaders() {
+    var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    var exceptTags = [':not(.eulexiaText)'];
+    var exceptTagsJoined = exceptTags.join('');
+    var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+    return document.querySelectorAll(textTagsJoined);
+  };
+
+  var getHtmlTexts = function getHtmlTexts() {
+    var textTags = ['p', 'li', 'span', 'b', 'i', 'strong', 'em', 'code'];
+    var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
+    var exceptTagsJoined = exceptTags.join('');
+    var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+    return document.querySelectorAll(textTagsJoined);
   };
 
   return /*#__PURE__*/React.createElement(Fab, {
@@ -417,7 +439,9 @@ var EulexiaFab = function EulexiaFab(_ref) {
     onChange: function onChange(e) {
       setFontSizeEnabled(e.target.checked);
       setHeaderFontSize(0);
-      setParagraphFontSize(0);
+      setTextFontSize(0);
+      clearFontSize(getHtmlHeaders());
+      clearFontSize(getHtmlTexts());
     },
     icons: false
   }), /*#__PURE__*/React.createElement("span", {
@@ -434,32 +458,24 @@ var EulexiaFab = function EulexiaFab(_ref) {
     },
     onChangeComplete: function onChangeComplete() {
       if (!fontSizeEnabled) return;
-      var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-      var exceptTags = [':not(.eulexiaText)'];
-      var exceptTagsJoined = exceptTags.join('');
-      var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
-      changeFontSize(document.querySelectorAll(textTagsJoined), headerFontSize);
+      changeFontSize(getHtmlHeaders(), headerFontSize);
     }
   }), /*#__PURE__*/React.createElement("span", {
     className: "eulexiaText"
-  }, paragraphFontSize ? "Texts (".concat(paragraphFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement(Slider, {
+  }, textFontSize ? "Texts (".concat(textFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement(Slider, {
     min: 8,
     max: 72,
     step: 2,
     tooltip: false,
-    value: fontSizeEnabled ? paragraphFontSize : 0,
+    value: fontSizeEnabled ? textFontSize : 0,
     disabled: true,
     onChange: function onChange(value) {
       if (!fontSizeEnabled) return;
-      setParagraphFontSize(value);
+      setTextFontSize(value);
     },
     onChangeComplete: function onChangeComplete() {
       if (!fontSizeEnabled) return;
-      var textTags = ['p', 'li', 'span', 'b', 'i', 'strong', 'em', 'code'];
-      var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
-      var exceptTagsJoined = exceptTags.join('');
-      var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
-      changeFontSize(document.querySelectorAll(textTagsJoined), paragraphFontSize);
+      changeFontSize(getHtmlTexts(), textFontSize);
     }
   }))), /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontFamily",

@@ -38,32 +38,32 @@ const Styles = styled.div`
 const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
     const [headerFontSize, setHeaderFontSize] = useState('')
-    const [paragraphFontSize, setParagraphFontSize] = useState('')
+    const [textFontSize, setTextFontSize] = useState('')
 
     const clearFontSize = (elements) => {
         for(const element of elements) element.style.removeProperty('font-size')
     }
 
     const changeFontSize = (elements, fontSize) => {
-        for(const element of elements) {
-            element.style.fontSize = `${fontSize}px`
-
-            console.log(element.style.fontSize)
-            // console.log(element.isEqualNode(element))
-            // const elementStyle = element.getAttribute('style')
-            // console.log(element.style.fontSize ? true : false)
-            // const newStyle = elementStyle ? elementStyle + `font-size:${headerFontSize}px;` : `font-size:${headerFontSize}px;`
-            // element.setAttribute('style', newStyle) 
-            // console.log(element)
-            // console.log(window.getComputedStyle(element).fontSize)
-
-            // element.style.fontSize = `${fontSize}px`
-            console.log(element.style)
-            // console.log(element.style.fontSize)
-
-        }
+        for(const element of elements) element.style.fontSize = `${fontSize}px`
     }
     
+    const getHtmlHeaders = () => {
+        const textTags = ['h1','h2','h3','h4','h5','h6']
+        const exceptTags = [':not(.eulexiaText)']
+        const exceptTagsJoined = exceptTags.join('')
+        const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
+        return document.querySelectorAll(textTagsJoined)
+        
+    }
+    const getHtmlTexts = () => {
+        const textTags = ['p','li','span','b','i','strong','em','code']
+        const exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
+        const exceptTagsJoined = exceptTags.join('')
+        const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
+        return document.querySelectorAll(textTagsJoined)
+    }
+
     return (
         <Fab
             id="eulexiaFab"
@@ -117,7 +117,9 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                             onChange={e => {
                                 setFontSizeEnabled(e.target.checked)
                                 setHeaderFontSize(0)
-                                setParagraphFontSize(0)
+                                setTextFontSize(0)
+                                clearFontSize(getHtmlHeaders())
+                                clearFontSize(getHtmlTexts())
                             }} 
                             icons={false} />
                         <span className="eulexiaText">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
@@ -133,32 +135,24 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                             }}
                             onChangeComplete={() => {
                                 if(!fontSizeEnabled) return
-                                const textTags = ['h1','h2','h3','h4','h5','h6']
-                                const exceptTags = [':not(.eulexiaText)']
-                                const exceptTagsJoined = exceptTags.join('')
-                                const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
-                                changeFontSize(document.querySelectorAll(textTagsJoined), headerFontSize)
+                                changeFontSize(getHtmlHeaders(), headerFontSize)
                             }}
                         />
-                        <span className="eulexiaText">{paragraphFontSize ? `Texts (${paragraphFontSize} px)` : 'Texts'}</span>
+                        <span className="eulexiaText">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
                         <Slider
                             min={8}
                             max={72}
                             step={2}
                             tooltip={false}
-                            value={fontSizeEnabled ? paragraphFontSize : 0}
+                            value={fontSizeEnabled ? textFontSize : 0}
                             disabled
                             onChange={value => {
                                 if(!fontSizeEnabled) return
-                                setParagraphFontSize(value)
+                                setTextFontSize(value)
                             }}
                             onChangeComplete={() => {
                                 if(!fontSizeEnabled) return
-                                const textTags = ['p','li','span','b','i','strong','em','code']
-                                const exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
-                                const exceptTagsJoined = exceptTags.join('')
-                                const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
-                                changeFontSize(document.querySelectorAll(textTagsJoined), paragraphFontSize)
+                                changeFontSize(getHtmlTexts(), textFontSize)
                             }}
                         />
                     </div>
