@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
@@ -66,19 +66,19 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     const [fontFamily, setFontFamily] = useState('')
 
 
-    // useEffect(() => {
-    //     var head = document.head;
-    //     var link = document.createElement("link");
+    useEffect(() => {
+        var head = document.head
+        var link = document.createElement('link')
     
-    //     link.type = "text/css";
-    //     link.rel = "stylesheet";
-    //     link.href = stylePath;
+        link.type = 'text/css'
+        link.rel = 'stylesheet'
+        link.href = 'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
     
-    //     head.appendChild(link);
+        head.appendChild(link)
     
-    //     return () => { head.removeChild(link); }
+        return () => { head.removeChild(link) }
     
-    //   }, [stylePath]);
+    }, [])
 
       
 
@@ -112,7 +112,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     return (
         <>
-            <GoogleFontLoader
+            {/* <GoogleFontLoader
                 fonts={[
                     {
                         font: 'Arial',
@@ -139,7 +139,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                         weights: [400, 700],
                     },
                 ]}
-            />
+            /> */}
             <Fab
                 id="eulexiaFab"
                 mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
@@ -262,20 +262,19 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
                                 <span className="item eulexiaText">Options</span>
-                                <div className="item" style={{width:'100%'}}>
+                                <div className="item" style={{ width:'100%' }}>
                                     <select name="cars" id="fontFamily" onChange={(e)=> {
                                         setFontFamily(e.target.value)
                                         changeFontFamily(getHtmlTexts(), e.target.value)
                                         changeFontFamily(getHtmlHeaders(), e.target.value)
                                     }}>
-                                        <option value="Arial">Arial</option>
-                                        <option value="Century Gothic">Century Gothic</option>
                                         <option value="Courier">Courier</option>
-                                        <option value="Helvetica">Helvetica</option>
                                         <option value="Open Sans">Open Sans</option>
-                                        <option value="Verdana">Verdana</option>
+                                        <option value="Roboto">Roboto</option>
+                                        <option value="Roboto Mono">Roboto Mono</option>
+                                        
                                     </select>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </ReactTooltip>
