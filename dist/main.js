@@ -6,6 +6,7 @@ import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
+import GoogleFontLoader from 'react-google-font-loader';
 import styled from 'styled-components';
 
 function _extends() {
@@ -266,6 +267,8 @@ function _templateObject() {
 
   return data;
 }
+// `
+
 var Styles = styled.div(_templateObject());
 
 var EulexiaFab = function EulexiaFab(_ref) {
@@ -289,6 +292,25 @@ var EulexiaFab = function EulexiaFab(_ref) {
       _useState6 = _slicedToArray(_useState5, 2),
       textFontSize = _useState6[0],
       setTextFontSize = _useState6[1];
+
+  var _useState7 = useState(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      fontFamilyEnabled = _useState8[0],
+      setFontFamilyEnabled = _useState8[1];
+
+  var _useState9 = useState(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      fontFamily = _useState10[0],
+      setFontFamily = _useState10[1]; // useEffect(() => {
+  //     var head = document.head;
+  //     var link = document.createElement("link");
+  //     link.type = "text/css";
+  //     link.rel = "stylesheet";
+  //     link.href = stylePath;
+  //     head.appendChild(link);
+  //     return () => { head.removeChild(link); }
+  //   }, [stylePath]);
+
 
   var clearFontSize = function clearFontSize(elements) {
     var _iterator = _createForOfIteratorHelper(elements),
@@ -322,6 +344,22 @@ var EulexiaFab = function EulexiaFab(_ref) {
     }
   };
 
+  var changeFontFamily = function changeFontFamily(elements, fontFamily) {
+    var _iterator3 = _createForOfIteratorHelper(elements),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var element = _step3.value;
+        element.style.fontFamily = fontFamily;
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  };
+
   var getHtmlHeaders = function getHtmlHeaders() {
     var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
     var exceptTags = [':not(.eulexiaText)'];
@@ -331,14 +369,34 @@ var EulexiaFab = function EulexiaFab(_ref) {
   };
 
   var getHtmlTexts = function getHtmlTexts() {
-    var textTags = ['p', 'li', 'span', 'b', 'i', 'strong', 'em', 'code'];
+    var textTags = ['p', 'li', 'span'];
     var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
     var exceptTagsJoined = exceptTags.join('');
     var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
     return document.querySelectorAll(textTagsJoined);
   };
 
-  return /*#__PURE__*/React.createElement(Fab, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(GoogleFontLoader, {
+    fonts: [{
+      font: 'Arial',
+      weights: [400, 700]
+    }, {
+      font: 'Century Gothic',
+      weights: [400, 700]
+    }, {
+      font: 'Courier',
+      weights: [400, 700]
+    }, {
+      font: 'Helvetica',
+      weights: [400, 700]
+    }, {
+      font: 'Open Sans',
+      weights: [400, 700]
+    }, {
+      font: 'Verdana',
+      weights: [400, 700]
+    }]
+  }), /*#__PURE__*/React.createElement(Fab, {
     id: "eulexiaFab",
     mainButtonStyles: {
       backgroundColor: '#A7C5E6'
@@ -498,7 +556,56 @@ var EulexiaFab = function EulexiaFab(_ref) {
     effect: "solid",
     className: "hoverVisible",
     delayHide: 200
-  }, "Font family tooltip")));
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrapper column"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "item title row"
+  }, /*#__PURE__*/React.createElement("strong", {
+    className: "item eulexiaText"
+  }, "Font family"), /*#__PURE__*/React.createElement("div", {
+    className: "item-text-right"
+  }, /*#__PURE__*/React.createElement(Toggle, {
+    defaultChecked: false,
+    onChange: function onChange(e) {
+      setFontFamilyEnabled(e.target.checked); // setHeaderFontSize(0)
+      // setTextFontSize(0)
+      // clearFontFamily(getHtmlHeaders())
+      // clearFontSize(getHtmlTexts())
+    },
+    icons: false
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "item eulexiaText"
+  }, "Options"), /*#__PURE__*/React.createElement("div", {
+    className: "item",
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/React.createElement("select", {
+    name: "cars",
+    id: "fontFamily",
+    onChange: function onChange(e) {
+      setFontFamily(e.target.value);
+      changeFontFamily(getHtmlTexts(), e.target.value);
+      changeFontFamily(getHtmlHeaders(), e.target.value);
+    }
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "Arial"
+  }, "Arial"), /*#__PURE__*/React.createElement("option", {
+    value: "Century Gothic"
+  }, "Century Gothic"), /*#__PURE__*/React.createElement("option", {
+    value: "Courier"
+  }, "Courier"), /*#__PURE__*/React.createElement("option", {
+    value: "Helvetica"
+  }, "Helvetica"), /*#__PURE__*/React.createElement("option", {
+    value: "Open Sans"
+  }, "Open Sans"), /*#__PURE__*/React.createElement("option", {
+    value: "Verdana"
+  }, "Verdana")))))))));
 };
 
 function _templateObject$1() {

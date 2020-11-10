@@ -29,6 +29,7 @@
   "author": "Gustavo Collaço",
   "license": "MIT",
   "dependencies": {
+    "react-google-font-loader": "^1.1.0",
     "react-numeric-input": "^2.2.3",
     "react-rangeslider": "^2.2.0",
     "react-slider": "^1.1.1",

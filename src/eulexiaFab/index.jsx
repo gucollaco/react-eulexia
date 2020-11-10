@@ -11,7 +11,12 @@ import 'react-rangeslider/lib/index.css'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
 
-import styled from 'styled-components'
+import GoogleFontLoader from 'react-google-font-loader'
+import styled, { createGlobalStyle } from 'styled-components'
+
+// createGlobalStyle`
+
+// `
 
 const Styles = styled.div`
     .wrapper {
@@ -57,6 +62,26 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     const [headerFontSize, setHeaderFontSize] = useState('')
     const [textFontSize, setTextFontSize] = useState('')
 
+    const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
+    const [fontFamily, setFontFamily] = useState('')
+
+
+    // useEffect(() => {
+    //     var head = document.head;
+    //     var link = document.createElement("link");
+    
+    //     link.type = "text/css";
+    //     link.rel = "stylesheet";
+    //     link.href = stylePath;
+    
+    //     head.appendChild(link);
+    
+    //     return () => { head.removeChild(link); }
+    
+    //   }, [stylePath]);
+
+      
+
     const clearFontSize = (elements) => {
         for(const element of elements) element.style.removeProperty('font-size')
     }
@@ -65,6 +90,10 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         for(const element of elements) element.style.fontSize = `${fontSize}px`
     }
     
+    const changeFontFamily = (elements, fontFamily) => {
+        for(const element of elements) element.style.fontFamily = fontFamily
+    }
+
     const getHtmlHeaders = () => {
         const textTags = ['h1','h2','h3','h4','h5','h6']
         const exceptTags = [':not(.eulexiaText)']
@@ -74,7 +103,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     }
 
     const getHtmlTexts = () => {
-        const textTags = ['p','li','span','b','i','strong','em','code']
+        const textTags = ['p','li','span']
         const exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
@@ -82,113 +111,177 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     }
 
     return (
-        <Fab
-            id="eulexiaFab"
-            mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
-            style={{ left: 20, bottom: 20 }}
-            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.954 2.21a9.99 9.99 0 0 1 4.091-.002A3.993 3.993 0 0 0 16 5.07a3.993 3.993 0 0 0 3.457.261A9.99 9.99 0 0 1 21.5 8.876 3.993 3.993 0 0 0 20 12c0 1.264.586 2.391 1.502 3.124a10.043 10.043 0 0 1-2.046 3.543 3.993 3.993 0 0 0-3.456.261 3.993 3.993 0 0 0-1.954 2.86 9.99 9.99 0 0 1-4.091.004A3.993 3.993 0 0 0 8 18.927a3.993 3.993 0 0 0-3.457-.26A9.99 9.99 0 0 1 2.5 15.121 3.993 3.993 0 0 0 4 11.999a3.993 3.993 0 0 0-1.502-3.124 10.043 10.043 0 0 1 2.046-3.543A3.993 3.993 0 0 0 8 5.071a3.993 3.993 0 0 0 1.954-2.86zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>}
-            event={event}
-        >
-            <Action data-tip data-for='fontSize'>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"/></svg>
-            </Action>
+        <>
+            <GoogleFontLoader
+                fonts={[
+                    {
+                        font: 'Arial',
+                        weights: [400, 700],
+                    },
+                    {
+                        font: 'Century Gothic',
+                        weights: [400, 700],
+                    },
+                    {
+                        font: 'Courier',
+                        weights: [400, 700],
+                    },
+                    {
+                        font: 'Helvetica',
+                        weights: [400, 700],
+                    },
+                    {
+                        font: 'Open Sans',
+                        weights: [400, 700],
+                    },
+                    {
+                        font: 'Verdana',
+                        weights: [400, 700],
+                    },
+                ]}
+            />
+            <Fab
+                id="eulexiaFab"
+                mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
+                style={{ left: 20, bottom: 20 }}
+                icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.954 2.21a9.99 9.99 0 0 1 4.091-.002A3.993 3.993 0 0 0 16 5.07a3.993 3.993 0 0 0 3.457.261A9.99 9.99 0 0 1 21.5 8.876 3.993 3.993 0 0 0 20 12c0 1.264.586 2.391 1.502 3.124a10.043 10.043 0 0 1-2.046 3.543 3.993 3.993 0 0 0-3.456.261 3.993 3.993 0 0 0-1.954 2.86 9.99 9.99 0 0 1-4.091.004A3.993 3.993 0 0 0 8 18.927a3.993 3.993 0 0 0-3.457-.26A9.99 9.99 0 0 1 2.5 15.121 3.993 3.993 0 0 0 4 11.999a3.993 3.993 0 0 0-1.502-3.124 10.043 10.043 0 0 1 2.046-3.543A3.993 3.993 0 0 0 8 5.071a3.993 3.993 0 0 0 1.954-2.86zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>}
+                event={event}
+            >
+                <Action data-tip data-for='fontSize'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"/></svg>
+                </Action>
 
-            <Action data-tip data-for='fontFamily'>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 6v15h-2V6H5V4h14v2z"/></svg>
-            </Action>
-            <Action
-                onMouseEnter={() => console.log('onmousenter RULER')}
-                onMouseLeave={() => console.log('onmouseleave RULER')}
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.343 14.621L3.515 17.45l3.535 3.535L20.485 7.55 16.95 4.015l-2.122 2.121 1.415 1.414-1.415 1.414-1.414-1.414-2.121 2.122 2.121 2.12L12 13.208l-2.121-2.121-2.122 2.121 1.415 1.414-1.415 1.415-1.414-1.415zM17.657 1.893l4.95 4.95a1 1 0 0 1 0 1.414l-14.85 14.85a1 1 0 0 1-1.414 0l-4.95-4.95a1 1 0 0 1 0-1.414l14.85-14.85a1 1 0 0 1 1.414 0z"/></svg>
-            </Action>
-            <Action
-                onMouseEnter={() => console.log('onmousenter LISTEN')}
-                onMouseLeave={() => console.log('onmouseleave LISTEN')}
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
-            </Action>
-            <Styles>
-                <ReactTooltip
-                    id='fontSize'
-                    place='right'
-                    type='light'
-                    effect='solid'
-                    className='hoverVisible'
-                    delayHide={200}
+                <Action data-tip data-for='fontFamily'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M13 6v15h-2V6H5V4h14v2z"/></svg>
+                </Action>
+                <Action
+                    onMouseEnter={() => console.log('onmousenter RULER')}
+                    onMouseLeave={() => console.log('onmouseleave RULER')}
                 >
-                    <div className="wrapper column">
-                        <div className="item title row">
-                            <strong className="item eulexiaText">Font size</strong>
-                            <div className="item-text-right">
-                                <Toggle
-                                    defaultChecked={false}
-                                    onChange={e => {
-                                        setFontSizeEnabled(e.target.checked)
-                                        setHeaderFontSize(0)
-                                        setTextFontSize(0)
-                                        clearFontSize(getHtmlHeaders())
-                                        clearFontSize(getHtmlTexts())
-                                    }} 
-                                    icons={false}
-                                />
-                            </div>
-                        </div>
-                        <div className="item column" style={{marginTop: 28}}>
-                            <span className="item eulexiaText">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
-                            <div className="item">
-                                <Slider
-                                    min={8}
-                                    max={72}
-                                    step={2}
-                                    tooltip={false}
-                                    value={fontSizeEnabled ? headerFontSize : 0}
-                                    onChange={value => {
-                                        if(!fontSizeEnabled) return
-                                        setHeaderFontSize(value)
-                                    }}
-                                    onChangeComplete={() => {
-                                        if(!fontSizeEnabled) return
-                                        changeFontSize(getHtmlHeaders(), headerFontSize)
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className="item column" style={{marginTop: 28}}>
-                            <span className="item eulexiaText">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
-                            <div className="item">
-                                <Slider
-                                    min={8}
-                                    max={72}
-                                    step={2}
-                                    tooltip={false}
-                                    value={fontSizeEnabled ? textFontSize : 0}
-                                    disabled
-                                    onChange={value => {
-                                        if(!fontSizeEnabled) return
-                                        setTextFontSize(value)
-                                    }}
-                                    onChangeComplete={() => {
-                                        if(!fontSizeEnabled) return
-                                        changeFontSize(getHtmlTexts(), textFontSize)
-                                    }}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </ReactTooltip>
-                <ReactTooltip
-                    id='fontFamily'
-                    place='right'
-                    type='light'
-                    effect='solid'
-                    className='hoverVisible'
-                    delayHide={200}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M6.343 14.621L3.515 17.45l3.535 3.535L20.485 7.55 16.95 4.015l-2.122 2.121 1.415 1.414-1.415 1.414-1.414-1.414-2.121 2.122 2.121 2.12L12 13.208l-2.121-2.121-2.122 2.121 1.415 1.414-1.415 1.415-1.414-1.415zM17.657 1.893l4.95 4.95a1 1 0 0 1 0 1.414l-14.85 14.85a1 1 0 0 1-1.414 0l-4.95-4.95a1 1 0 0 1 0-1.414l14.85-14.85a1 1 0 0 1 1.414 0z"/></svg>
+                </Action>
+                <Action
+                    onMouseEnter={() => console.log('onmousenter LISTEN')}
+                    onMouseLeave={() => console.log('onmouseleave LISTEN')}
                 >
-                    Font family tooltip
-                </ReactTooltip>
-            </Styles>
-        </Fab>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
+                </Action>
+                <Styles>
+                    <ReactTooltip
+                        id='fontSize'
+                        place='right'
+                        type='light'
+                        effect='solid'
+                        className='hoverVisible'
+                        delayHide={200}
+                    >
+                        <div className="wrapper column">
+                            <div className="item title row">
+                                <strong className="item eulexiaText">Font size</strong>
+                                <div className="item-text-right">
+                                    <Toggle
+                                        defaultChecked={false}
+                                        onChange={e => {
+                                            setFontSizeEnabled(e.target.checked)
+                                            setHeaderFontSize(0)
+                                            setTextFontSize(0)
+                                            clearFontSize(getHtmlHeaders())
+                                            clearFontSize(getHtmlTexts())
+                                        }} 
+                                        icons={false}
+                                    />
+                                </div>
+                            </div>
+                            <div className="item column" style={{ marginTop: 28 }}>
+                                <span className="item eulexiaText">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
+                                <div className="item">
+                                    <Slider
+                                        min={8}
+                                        max={72}
+                                        step={2}
+                                        tooltip={false}
+                                        value={fontSizeEnabled ? headerFontSize : 0}
+                                        onChange={value => {
+                                            if(!fontSizeEnabled) return
+                                            setHeaderFontSize(value)
+                                        }}
+                                        onChangeComplete={() => {
+                                            if(!fontSizeEnabled) return
+                                            changeFontSize(getHtmlHeaders(), headerFontSize)
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="item column" style={{ marginTop: 28 }}>
+                                <span className="item eulexiaText">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
+                                <div className="item">
+                                    <Slider
+                                        min={8}
+                                        max={72}
+                                        step={2}
+                                        tooltip={false}
+                                        value={fontSizeEnabled ? textFontSize : 0}
+                                        disabled
+                                        onChange={value => {
+                                            if(!fontSizeEnabled) return
+                                            setTextFontSize(value)
+                                        }}
+                                        onChangeComplete={() => {
+                                            if(!fontSizeEnabled) return
+                                            changeFontSize(getHtmlTexts(), textFontSize)
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </ReactTooltip>
+                    <ReactTooltip
+                        id='fontFamily'
+                        place='right'
+                        type='light'
+                        effect='solid'
+                        className='hoverVisible'
+                        delayHide={200}
+                    >
+                        <div className="wrapper column">
+                            <div className="item title row">
+                                <strong className="item eulexiaText">Font family</strong>
+                                <div className="item-text-right">
+                                    <Toggle
+                                        defaultChecked={false}
+                                        onChange={e => {
+                                            setFontFamilyEnabled(e.target.checked)
+                                            // setHeaderFontSize(0)
+                                            // setTextFontSize(0)
+                                            // clearFontFamily(getHtmlHeaders())
+                                            // clearFontSize(getHtmlTexts())
+                                        }} 
+                                        icons={false}
+                                    />
+                                </div>
+                            </div>
+                            <div className="item column" style={{ marginTop: 28 }}>
+                                <span className="item eulexiaText">Options</span>
+                                <div className="item" style={{width:'100%'}}>
+                                    <select name="cars" id="fontFamily" onChange={(e)=> {
+                                        setFontFamily(e.target.value)
+                                        changeFontFamily(getHtmlTexts(), e.target.value)
+                                        changeFontFamily(getHtmlHeaders(), e.target.value)
+                                    }}>
+                                        <option value="Arial">Arial</option>
+                                        <option value="Century Gothic">Century Gothic</option>
+                                        <option value="Courier">Courier</option>
+                                        <option value="Helvetica">Helvetica</option>
+                                        <option value="Open Sans">Open Sans</option>
+                                        <option value="Verdana">Verdana</option>
+                                    </select>
+                            </div>
+                            </div>
+                        </div>
+                    </ReactTooltip>
+                </Styles>
+            </Fab>
+        </>
     )
 }
 
