@@ -8,8 +8,7 @@ import Toggle from 'react-toggle';
 import 'react-toggle/style.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import GoogleFontLoader from 'react-google-font-loader';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 function _extends() {
   _extends = Object.assign || function (target) {
@@ -260,8 +259,18 @@ var Input = function Input(_ref) {
   }, props));
 };
 
-function _templateObject() {
+function _templateObject2() {
   var data = _taggedTemplateLiteral(["\n    .wrapper {\n        padding: 10px 0px 15px 0px;\n        font-size: 18px !important;\n        width: 280px;\n    }\n    .title {\n        font-size 21px !important;\n    }\n    .row {\n        display: flex;\n        flex-direction: row;\n    }\n    .column {\n        display: flex;\n        flex-direction: column;\n    }\n    .item {\n        flex: 1;\n        text-align: left;\n    }\n    .item-text-right {\n        flex: 1;\n        text-align: right;\n    }\n    @media (max-width: 600px) {\n        .wrapper {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    .eulexia-font-size-header {\n        ", "\n    }\n    .eulexia-font-size-text {\n        ", "\n    }\n    .eulexia-font-family {\n        ", "\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -269,7 +278,14 @@ function _templateObject() {
 
   return data;
 }
-var Styles = styled.div(_templateObject());
+var GlobalStyle = createGlobalStyle(_templateObject(), function (props) {
+  return props.headerFontSize ? "font-size: ".concat(props.headerFontSize, "px !important;") : '';
+}, function (props) {
+  return props.textFontSize ? "font-size: ".concat(props.textFontSize, "px !important;") : '';
+}, function (props) {
+  return props.fontFamily ? "font-family: ".concat(props.fontFamily, " !important") : '';
+});
+var Styles = styled.div(_templateObject2());
 
 var EulexiaFab = function EulexiaFab(_ref) {
   var _ref$event = _ref.event,
@@ -315,15 +331,16 @@ var EulexiaFab = function EulexiaFab(_ref) {
     };
   }, []);
 
-  var clearFontSize = function clearFontSize(elements) {
+  var addClass = function addClass(elements, className) {
     var _iterator = _createForOfIteratorHelper(elements),
         _step;
 
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var element = _step.value;
-        element.style.removeProperty('font-size');
-      }
+        element.classList.add(className);
+      } // for(const element of elements) element.style.fontSize = `${fontSize}px`
+
     } catch (err) {
       _iterator.e(err);
     } finally {
@@ -331,14 +348,14 @@ var EulexiaFab = function EulexiaFab(_ref) {
     }
   };
 
-  var clearFontFamily = function clearFontFamily(elements) {
+  var removeClass = function removeClass(elements, className) {
     var _iterator2 = _createForOfIteratorHelper(elements),
         _step2;
 
     try {
       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
         var element = _step2.value;
-        element.style.removeProperty('font-family');
+        element.classList.remove(className);
       }
     } catch (err) {
       _iterator2.e(err);
@@ -347,41 +364,9 @@ var EulexiaFab = function EulexiaFab(_ref) {
     }
   };
 
-  var changeFontSize = function changeFontSize(elements, fontSize) {
-    var _iterator3 = _createForOfIteratorHelper(elements),
-        _step3;
-
-    try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var element = _step3.value;
-        element.style.fontSize = "".concat(fontSize, "px");
-      }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
-    }
-  };
-
-  var changeFontFamily = function changeFontFamily(elements, fontFamily) {
-    var _iterator4 = _createForOfIteratorHelper(elements),
-        _step4;
-
-    try {
-      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-        var element = _step4.value;
-        element.style.fontFamily = fontFamily;
-      }
-    } catch (err) {
-      _iterator4.e(err);
-    } finally {
-      _iterator4.f();
-    }
-  };
-
   var getHtmlHeaders = function getHtmlHeaders() {
     var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-    var exceptTags = [':not(.eulexiaText)'];
+    var exceptTags = [':not(.eulexia-test)'];
     var exceptTagsJoined = exceptTags.join('');
     var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
     return document.querySelectorAll(textTagsJoined);
@@ -389,10 +374,25 @@ var EulexiaFab = function EulexiaFab(_ref) {
 
   var getHtmlTexts = function getHtmlTexts() {
     var textTags = ['p', 'li', 'span'];
-    var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
+    var exceptTags = [':not(.eulexia-test)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
     var exceptTagsJoined = exceptTags.join('');
     var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
     return document.querySelectorAll(textTagsJoined);
+  };
+
+  var addFontSizeClasses = function addFontSizeClasses() {
+    addClass(getHtmlHeaders(), 'eulexia-font-size-header');
+    addClass(getHtmlTexts(), 'eulexia-font-size-text');
+  };
+
+  var removeFontSizeClasses = function removeFontSizeClasses() {
+    removeClass(getHtmlHeaders(), 'eulexia-font-size-header');
+    removeClass(getHtmlTexts(), 'eulexia-font-size-text');
+  };
+
+  var clearFontSize = function clearFontSize() {
+    setHeaderFontSize(0);
+    setTextFontSize(0);
   };
 
   var fontOptions = [{
@@ -408,26 +408,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
     value: 'Roboto Mono, monospace',
     label: 'Roboto Mono'
   }];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(GoogleFontLoader, {
-    fonts: [{
-      font: 'Arial',
-      weights: [400, 700]
-    }, {
-      font: 'Century Gothic',
-      weights: [400, 700]
-    }, {
-      font: 'Courier',
-      weights: [400, 700]
-    }, {
-      font: 'Helvetica',
-      weights: [400, 700]
-    }, {
-      font: 'Open Sans',
-      weights: [400, 700]
-    }, {
-      font: 'Verdana',
-      weights: [400, 700]
-    }]
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(GlobalStyle, {
+    headerFontSize: headerFontSize,
+    textFontSize: textFontSize,
+    fontFamily: fontFamily
   }), /*#__PURE__*/React.createElement(Fab, {
     id: "eulexiaFab",
     mainButtonStyles: {
@@ -521,18 +505,21 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "item title row"
   }, /*#__PURE__*/React.createElement("strong", {
-    className: "item eulexiaText"
+    className: "item eulexia-test"
   }, "Font size"), /*#__PURE__*/React.createElement("div", {
     className: "item-text-right"
   }, /*#__PURE__*/React.createElement(Toggle, {
     defaultChecked: false,
     onChange: function onChange(e) {
       setFontSizeEnabled(e.target.checked);
-      if (e.target.checked) return;
-      setHeaderFontSize(0);
-      setTextFontSize(0);
-      clearFontSize(getHtmlHeaders());
-      clearFontSize(getHtmlTexts());
+
+      if (e.target.checked) {
+        addFontSizeClasses();
+        return;
+      }
+
+      clearFontSize();
+      removeFontSizeClasses();
     },
     icons: false
   }))), /*#__PURE__*/React.createElement("div", {
@@ -541,7 +528,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
       marginTop: 28
     }
   }, /*#__PURE__*/React.createElement("span", {
-    className: "item eulexiaText"
+    className: "item eulexia-test"
   }, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement("div", {
     className: "item"
   }, /*#__PURE__*/React.createElement(Slider, {
@@ -549,14 +536,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
     max: 72,
     step: 2,
     tooltip: false,
-    value: fontSizeEnabled ? headerFontSize : 0,
+    value: headerFontSize,
     onChange: function onChange(value) {
       if (!fontSizeEnabled) return;
       setHeaderFontSize(value);
-    },
-    onChangeComplete: function onChangeComplete() {
-      if (!fontSizeEnabled) return;
-      changeFontSize(getHtmlHeaders(), headerFontSize);
     }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "item column",
@@ -564,7 +547,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
       marginTop: 28
     }
   }, /*#__PURE__*/React.createElement("span", {
-    className: "item eulexiaText"
+    className: "item eulexia-test"
   }, textFontSize ? "Texts (".concat(textFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement("div", {
     className: "item"
   }, /*#__PURE__*/React.createElement(Slider, {
@@ -572,15 +555,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
     max: 72,
     step: 2,
     tooltip: false,
-    value: fontSizeEnabled ? textFontSize : 0,
-    disabled: true,
+    value: textFontSize,
     onChange: function onChange(value) {
       if (!fontSizeEnabled) return;
       setTextFontSize(value);
-    },
-    onChangeComplete: function onChangeComplete() {
-      if (!fontSizeEnabled) return;
-      changeFontSize(getHtmlTexts(), textFontSize);
     }
   }))))), /*#__PURE__*/React.createElement(ReactTooltip, {
     id: "fontFamily",
@@ -594,7 +572,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "item title row"
   }, /*#__PURE__*/React.createElement("strong", {
-    className: "item eulexiaText"
+    className: "item eulexia-test"
   }, "Font family"), /*#__PURE__*/React.createElement("div", {
     className: "item-text-right"
   }, /*#__PURE__*/React.createElement(Toggle, {
@@ -603,8 +581,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
       setFontFamilyEnabled(e.target.checked);
       if (e.target.checked) return;
       setFontFamily(null);
-      clearFontFamily(getHtmlHeaders());
-      clearFontFamily(getHtmlTexts());
     },
     icons: false
   }))), /*#__PURE__*/React.createElement("div", {

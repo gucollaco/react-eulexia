@@ -9,11 +9,22 @@ import 'react-rangeslider/lib/index.css'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
 
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
-import GoogleFontLoader from 'react-google-font-loader'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+    .eulexia-font-size-header {
+        ${props => (props.headerFontSize ? `font-size: ${props.headerFontSize}px !important;` : '')}
+    }
+    .eulexia-font-size-text {
+        ${props => (props.textFontSize ? `font-size: ${props.textFontSize}px !important;` : '')}
+    }
+    .eulexia-font-family {
+        ${props => (props.fontFamily ? `font-family: ${props.fontFamily} !important` : '')}
+    }
+`
 
 const Styles = styled.div`
     .wrapper {
@@ -76,25 +87,18 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     
     }, [])
 
-    const clearFontSize = (elements) => {
-        for(const element of elements) element.style.removeProperty('font-size')
+    const addClass = (elements, className) => {
+        for(const element of elements) element.classList.add(className)
+        // for(const element of elements) element.style.fontSize = `${fontSize}px`
     }
 
-    const clearFontFamily = (elements) => {
-        for(const element of elements) element.style.removeProperty('font-family')
-    }
-
-    const changeFontSize = (elements, fontSize) => {
-        for(const element of elements) element.style.fontSize = `${fontSize}px`
-    }
-    
-    const changeFontFamily = (elements, fontFamily) => {
-        for(const element of elements) element.style.fontFamily = fontFamily
+    const removeClass = (elements, className) => {
+        for(const element of elements) element.classList.remove(className)
     }
 
     const getHtmlHeaders = () => {
         const textTags = ['h1','h2','h3','h4','h5','h6']
-        const exceptTags = [':not(.eulexiaText)']
+        const exceptTags = [':not(.eulexia-test)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
         return document.querySelectorAll(textTagsJoined)
@@ -102,10 +106,25 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     const getHtmlTexts = () => {
         const textTags = ['p','li','span']
-        const exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
+        const exceptTags = [':not(.eulexia-test)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
         return document.querySelectorAll(textTagsJoined)
+    }
+
+    const addFontSizeClasses = () => {
+        addClass(getHtmlHeaders(), 'eulexia-font-size-header')
+        addClass(getHtmlTexts(), 'eulexia-font-size-text')
+    }
+
+    const removeFontSizeClasses = () => {
+        removeClass(getHtmlHeaders(), 'eulexia-font-size-header')
+        removeClass(getHtmlTexts(), 'eulexia-font-size-text')
+    }
+
+    const clearFontSize = () => {
+        setHeaderFontSize(0)
+        setTextFontSize(0)
     }
 
     const fontOptions = [
@@ -117,33 +136,10 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     return (
         <>
-            <GoogleFontLoader
-                fonts={[
-                    {
-                        font: 'Arial',
-                        weights: [400, 700],
-                    },
-                    {
-                        font: 'Century Gothic',
-                        weights: [400, 700],
-                    },
-                    {
-                        font: 'Courier',
-                        weights: [400, 700],
-                    },
-                    {
-                        font: 'Helvetica',
-                        weights: [400, 700],
-                    },
-                    {
-                        font: 'Open Sans',
-                        weights: [400, 700],
-                    },
-                    {
-                        font: 'Verdana',
-                        weights: [400, 700],
-                    },
-                ]}
+            <GlobalStyle
+                headerFontSize={headerFontSize}
+                textFontSize={textFontSize}
+                fontFamily={fontFamily}
             />
             <Fab
                 id="eulexiaFab"
@@ -182,59 +178,51 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                     >
                         <div className="wrapper column">
                             <div className="item title row">
-                                <strong className="item eulexiaText">Font size</strong>
+                                <strong className="item eulexia-test">Font size</strong>
                                 <div className="item-text-right">
                                     <Toggle
                                         defaultChecked={false}
                                         onChange={e => {
                                             setFontSizeEnabled(e.target.checked)
-                                            if(e.target.checked) return
-                                            setHeaderFontSize(0)
-                                            setTextFontSize(0)
-                                            clearFontSize(getHtmlHeaders())
-                                            clearFontSize(getHtmlTexts())
+                                            if(e.target.checked) {
+                                                addFontSizeClasses()
+                                                return
+                                            }
+                                            clearFontSize()
+                                            removeFontSizeClasses()
                                         }} 
                                         icons={false}
                                     />
                                 </div>
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexiaText">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
+                                <span className="item eulexia-test">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
                                 <div className="item">
                                     <Slider
                                         min={8}
                                         max={72}
                                         step={2}
                                         tooltip={false}
-                                        value={fontSizeEnabled ? headerFontSize : 0}
+                                        value={headerFontSize}
                                         onChange={value => {
                                             if(!fontSizeEnabled) return
                                             setHeaderFontSize(value)
-                                        }}
-                                        onChangeComplete={() => {
-                                            if(!fontSizeEnabled) return
-                                            changeFontSize(getHtmlHeaders(), headerFontSize)
                                         }}
                                     />
                                 </div>
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexiaText">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
+                                <span className="item eulexia-test">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
                                 <div className="item">
                                     <Slider
                                         min={8}
                                         max={72}
                                         step={2}
                                         tooltip={false}
-                                        value={fontSizeEnabled ? textFontSize : 0}
-                                        disabled
+                                        value={textFontSize}
                                         onChange={value => {
                                             if(!fontSizeEnabled) return
                                             setTextFontSize(value)
-                                        }}
-                                        onChangeComplete={() => {
-                                            if(!fontSizeEnabled) return
-                                            changeFontSize(getHtmlTexts(), textFontSize)
                                         }}
                                     />
                                 </div>
@@ -251,7 +239,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                     >
                         <div className="wrapper column">
                             <div className="item title row">
-                                <strong className="item eulexiaText">Font family</strong>
+                                <strong className="item eulexia-test">Font family</strong>
                                 <div className="item-text-right">
                                     <Toggle
                                         defaultChecked={false}
@@ -259,8 +247,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                             setFontFamilyEnabled(e.target.checked)
                                             if(e.target.checked) return
                                             setFontFamily(null)
-                                            clearFontFamily(getHtmlHeaders())
-                                            clearFontFamily(getHtmlTexts())
                                         }} 
                                         icons={false}
                                     />
