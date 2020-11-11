@@ -380,21 +380,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
     return document.querySelectorAll(textTagsJoined);
   };
 
-  var addFontSizeClasses = function addFontSizeClasses() {
-    addClass(getHtmlHeaders(), 'eulexia-font-size-header');
-    addClass(getHtmlTexts(), 'eulexia-font-size-text');
-  };
-
-  var removeFontSizeClasses = function removeFontSizeClasses() {
-    removeClass(getHtmlHeaders(), 'eulexia-font-size-header');
-    removeClass(getHtmlTexts(), 'eulexia-font-size-text');
-  };
-
-  var clearFontSize = function clearFontSize() {
-    setHeaderFontSize(0);
-    setTextFontSize(0);
-  };
-
   var fontOptions = [{
     value: 'Courier',
     label: 'Courier'
@@ -514,12 +499,15 @@ var EulexiaFab = function EulexiaFab(_ref) {
       setFontSizeEnabled(e.target.checked);
 
       if (e.target.checked) {
-        addFontSizeClasses();
+        addClass(getHtmlHeaders(), 'eulexia-font-size-header');
+        addClass(getHtmlTexts(), 'eulexia-font-size-text');
         return;
       }
 
-      clearFontSize();
-      removeFontSizeClasses();
+      setHeaderFontSize(0);
+      setTextFontSize(0);
+      removeClass(getHtmlHeaders(), 'eulexia-font-size-header');
+      removeClass(getHtmlTexts(), 'eulexia-font-size-text');
     },
     icons: false
   }))), /*#__PURE__*/React.createElement("div", {
@@ -579,8 +567,16 @@ var EulexiaFab = function EulexiaFab(_ref) {
     defaultChecked: false,
     onChange: function onChange(e) {
       setFontFamilyEnabled(e.target.checked);
-      if (e.target.checked) return;
+
+      if (e.target.checked) {
+        addClass(getHtmlHeaders(), 'eulexia-font-family');
+        addClass(getHtmlTexts(), 'eulexia-font-family');
+        return;
+      }
+
       setFontFamily(null);
+      removeClass(getHtmlHeaders(), 'eulexia-font-family');
+      removeClass(getHtmlTexts(), 'eulexia-font-family');
     },
     icons: false
   }))), /*#__PURE__*/React.createElement("div", {
@@ -593,9 +589,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }, /*#__PURE__*/React.createElement(Dropdown, {
     options: fontOptions,
     onChange: function onChange(obj) {
-      setFontFamily(obj.value);
-      changeFontFamily(getHtmlTexts(), obj.value);
-      changeFontFamily(getHtmlHeaders(), obj.value);
+      return setFontFamily(obj.value);
     },
     value: fontFamily,
     placeholder: "Font family...",

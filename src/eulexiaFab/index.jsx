@@ -112,21 +112,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         return document.querySelectorAll(textTagsJoined)
     }
 
-    const addFontSizeClasses = () => {
-        addClass(getHtmlHeaders(), 'eulexia-font-size-header')
-        addClass(getHtmlTexts(), 'eulexia-font-size-text')
-    }
-
-    const removeFontSizeClasses = () => {
-        removeClass(getHtmlHeaders(), 'eulexia-font-size-header')
-        removeClass(getHtmlTexts(), 'eulexia-font-size-text')
-    }
-
-    const clearFontSize = () => {
-        setHeaderFontSize(0)
-        setTextFontSize(0)
-    }
-
     const fontOptions = [
         { value: 'Courier', label: 'Courier' },
         { value: 'Open Sans, sans-serif', label: 'Open Sans' },
@@ -185,11 +170,14 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         onChange={e => {
                                             setFontSizeEnabled(e.target.checked)
                                             if(e.target.checked) {
-                                                addFontSizeClasses()
+                                                addClass(getHtmlHeaders(), 'eulexia-font-size-header')
+                                                addClass(getHtmlTexts(), 'eulexia-font-size-text')
                                                 return
                                             }
-                                            clearFontSize()
-                                            removeFontSizeClasses()
+                                            setHeaderFontSize(0)
+                                            setTextFontSize(0)
+                                            removeClass(getHtmlHeaders(), 'eulexia-font-size-header')
+                                            removeClass(getHtmlTexts(), 'eulexia-font-size-text')
                                         }} 
                                         icons={false}
                                     />
@@ -245,8 +233,14 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         defaultChecked={false}
                                         onChange={e => {
                                             setFontFamilyEnabled(e.target.checked)
-                                            if(e.target.checked) return
+                                            if(e.target.checked) {
+                                                addClass(getHtmlHeaders(), 'eulexia-font-family')
+                                                addClass(getHtmlTexts(), 'eulexia-font-family')
+                                                return
+                                            }
                                             setFontFamily(null)
+                                            removeClass(getHtmlHeaders(), 'eulexia-font-family')
+                                            removeClass(getHtmlTexts(), 'eulexia-font-family')
                                         }} 
                                         icons={false}
                                     />
@@ -256,11 +250,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 <div className="item">
                                     <Dropdown
                                         options={fontOptions}
-                                        onChange={(obj)=> {
-                                            setFontFamily(obj.value)
-                                            changeFontFamily(getHtmlTexts(), obj.value)
-                                            changeFontFamily(getHtmlHeaders(), obj.value)
-                                        }}
+                                        onChange={(obj) => setFontFamily(obj.value)}
                                         value={fontFamily}
                                         placeholder="Font family..."
                                         disabled={!fontFamilyEnabled}
