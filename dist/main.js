@@ -1,6 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import clsx from 'clsx';
 import { Fab, Action as Action$1 } from 'react-tiny-fab';
+import ReactTooltip from 'react-tooltip';
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
+import Toggle from 'react-toggle';
+import 'react-toggle/style.css';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import GoogleFontLoader from 'react-google-font-loader';
 import styled from 'styled-components';
 
 function _extends() {
@@ -252,6 +260,17 @@ var Input = function Input(_ref) {
   }, props));
 };
 
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n    .wrapper {\n        padding: 10px 0px 15px 0px;\n        font-size: 18px !important;\n        width: 280px;\n    }\n    .title {\n        font-size 21px !important;\n    }\n    .row {\n        display: flex;\n        flex-direction: row;\n    }\n    .column {\n        display: flex;\n        flex-direction: column;\n    }\n    .item {\n        flex: 1;\n        text-align: left;\n    }\n    .item-text-right {\n        flex: 1;\n        text-align: right;\n    }\n    @media (max-width: 600px) {\n        .wrapper {\n            width: 160px;\n        }\n    }\n    .hoverVisible {\n        pointer-events: auto !important;\n        &:hover {\n            visibility: visible !important;\n            opacity: 1 !important;\n        }\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+var Styles = styled.div(_templateObject());
+
 var EulexiaFab = function EulexiaFab(_ref) {
   var _ref$event = _ref.event,
       event = _ref$event === void 0 ? 'hover' : _ref$event,
@@ -259,13 +278,164 @@ var EulexiaFab = function EulexiaFab(_ref) {
       className = _ref.className,
       props = _objectWithoutProperties(_ref, ["event", "icon", "className"]);
 
-  return /*#__PURE__*/React.createElement(Fab, {
+  var _useState = useState(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      fontSizeEnabled = _useState2[0],
+      setFontSizeEnabled = _useState2[1];
+
+  var _useState3 = useState(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      headerFontSize = _useState4[0],
+      setHeaderFontSize = _useState4[1];
+
+  var _useState5 = useState(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      textFontSize = _useState6[0],
+      setTextFontSize = _useState6[1];
+
+  var _useState7 = useState(false),
+      _useState8 = _slicedToArray(_useState7, 2),
+      fontFamilyEnabled = _useState8[0],
+      setFontFamilyEnabled = _useState8[1];
+
+  var _useState9 = useState(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      fontFamily = _useState10[0],
+      setFontFamily = _useState10[1];
+
+  useEffect(function () {
+    var head = document.head;
+    var link = document.createElement('link');
+    link.type = 'text/css';
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap';
+    head.appendChild(link);
+    return function () {
+      head.removeChild(link);
+    };
+  }, []);
+
+  var clearFontSize = function clearFontSize(elements) {
+    var _iterator = _createForOfIteratorHelper(elements),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var element = _step.value;
+        element.style.removeProperty('font-size');
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  };
+
+  var clearFontFamily = function clearFontFamily(elements) {
+    var _iterator2 = _createForOfIteratorHelper(elements),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var element = _step2.value;
+        element.style.removeProperty('font-family');
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  };
+
+  var changeFontSize = function changeFontSize(elements, fontSize) {
+    var _iterator3 = _createForOfIteratorHelper(elements),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var element = _step3.value;
+        element.style.fontSize = "".concat(fontSize, "px");
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+  };
+
+  var changeFontFamily = function changeFontFamily(elements, fontFamily) {
+    var _iterator4 = _createForOfIteratorHelper(elements),
+        _step4;
+
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var element = _step4.value;
+        element.style.fontFamily = fontFamily;
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+  };
+
+  var getHtmlHeaders = function getHtmlHeaders() {
+    var textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    var exceptTags = [':not(.eulexiaText)'];
+    var exceptTagsJoined = exceptTags.join('');
+    var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+    return document.querySelectorAll(textTagsJoined);
+  };
+
+  var getHtmlTexts = function getHtmlTexts() {
+    var textTags = ['p', 'li', 'span'];
+    var exceptTags = [':not(.eulexiaText)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)'];
+    var exceptTagsJoined = exceptTags.join('');
+    var textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined);
+    return document.querySelectorAll(textTagsJoined);
+  };
+
+  var fontOptions = [{
+    value: 'Courier',
+    label: 'Courier'
+  }, {
+    value: 'Open Sans, sans-serif',
+    label: 'Open Sans'
+  }, {
+    value: 'Roboto',
+    label: 'Roboto'
+  }, {
+    value: 'Roboto Mono, monospace',
+    label: 'Roboto Mono'
+  }];
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(GoogleFontLoader, {
+    fonts: [{
+      font: 'Arial',
+      weights: [400, 700]
+    }, {
+      font: 'Century Gothic',
+      weights: [400, 700]
+    }, {
+      font: 'Courier',
+      weights: [400, 700]
+    }, {
+      font: 'Helvetica',
+      weights: [400, 700]
+    }, {
+      font: 'Open Sans',
+      weights: [400, 700]
+    }, {
+      font: 'Verdana',
+      weights: [400, 700]
+    }]
+  }), /*#__PURE__*/React.createElement(Fab, {
+    id: "eulexiaFab",
     mainButtonStyles: {
       backgroundColor: '#A7C5E6'
     },
     style: {
-      left: 24,
-      bottom: 24
+      left: 20,
+      bottom: 20
     },
     icon: /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
@@ -278,16 +448,10 @@ var EulexiaFab = function EulexiaFab(_ref) {
     }), /*#__PURE__*/React.createElement("path", {
       d: "M9.954 2.21a9.99 9.99 0 0 1 4.091-.002A3.993 3.993 0 0 0 16 5.07a3.993 3.993 0 0 0 3.457.261A9.99 9.99 0 0 1 21.5 8.876 3.993 3.993 0 0 0 20 12c0 1.264.586 2.391 1.502 3.124a10.043 10.043 0 0 1-2.046 3.543 3.993 3.993 0 0 0-3.456.261 3.993 3.993 0 0 0-1.954 2.86 9.99 9.99 0 0 1-4.091.004A3.993 3.993 0 0 0 8 18.927a3.993 3.993 0 0 0-3.457-.26A9.99 9.99 0 0 1 2.5 15.121 3.993 3.993 0 0 0 4 11.999a3.993 3.993 0 0 0-1.502-3.124 10.043 10.043 0 0 1 2.046-3.543A3.993 3.993 0 0 0 8 5.071a3.993 3.993 0 0 0 1.954-2.86zM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
     })),
-    event: event,
-    alwaysShowTitle: true
+    event: event
   }, /*#__PURE__*/React.createElement(Action$1, {
-    text: "Font Size",
-    onMouseEnter: function onMouseEnter() {
-      return console.log('onmousenter FONT SIZE');
-    },
-    onMouseLeave: function onMouseLeave() {
-      return console.log('onmouseleave FONT SIZE');
-    }
+    "data-tip": true,
+    "data-for": "fontSize"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -299,13 +463,8 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M10 6v15H8V6H2V4h14v2h-6zm8 8v7h-2v-7h-3v-2h8v2h-3z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Font Family",
-    onMouseEnter: function onMouseEnter() {
-      return console.log('onmousenter FONT FAMILY');
-    },
-    onMouseLeave: function onMouseLeave() {
-      return console.log('onmouseleave FONT FAMILY');
-    }
+    "data-tip": true,
+    "data-for": "fontFamily"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
@@ -317,7 +476,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M13 6v15h-2V6H5V4h14v2z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Ruler",
     onMouseEnter: function onMouseEnter() {
       return console.log('onmousenter RULER');
     },
@@ -335,7 +493,6 @@ var EulexiaFab = function EulexiaFab(_ref) {
   }), /*#__PURE__*/React.createElement("path", {
     d: "M6.343 14.621L3.515 17.45l3.535 3.535L20.485 7.55 16.95 4.015l-2.122 2.121 1.415 1.414-1.415 1.414-1.414-1.414-2.121 2.122 2.121 2.12L12 13.208l-2.121-2.121-2.122 2.121 1.415 1.414-1.415 1.415-1.414-1.415zM17.657 1.893l4.95 4.95a1 1 0 0 1 0 1.414l-14.85 14.85a1 1 0 0 1-1.414 0l-4.95-4.95a1 1 0 0 1 0-1.414l14.85-14.85a1 1 0 0 1 1.414 0z"
   }))), /*#__PURE__*/React.createElement(Action$1, {
-    text: "Listen Selected Text",
     onMouseEnter: function onMouseEnter() {
       return console.log('onmousenter LISTEN');
     },
@@ -352,18 +509,133 @@ var EulexiaFab = function EulexiaFab(_ref) {
     d: "M0 0h24v24H0z"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"
-  }))));
+  }))), /*#__PURE__*/React.createElement(Styles, null, /*#__PURE__*/React.createElement(ReactTooltip, {
+    id: "fontSize",
+    place: "right",
+    type: "light",
+    effect: "solid",
+    className: "hoverVisible",
+    delayHide: 200
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrapper column"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "item title row"
+  }, /*#__PURE__*/React.createElement("strong", {
+    className: "item eulexiaText"
+  }, "Font size"), /*#__PURE__*/React.createElement("div", {
+    className: "item-text-right"
+  }, /*#__PURE__*/React.createElement(Toggle, {
+    defaultChecked: false,
+    onChange: function onChange(e) {
+      setFontSizeEnabled(e.target.checked);
+      if (e.target.checked) return;
+      setHeaderFontSize(0);
+      setTextFontSize(0);
+      clearFontSize(getHtmlHeaders());
+      clearFontSize(getHtmlTexts());
+    },
+    icons: false
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "item eulexiaText"
+  }, headerFontSize ? "Headers (".concat(headerFontSize, " px)") : 'Headers'), /*#__PURE__*/React.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/React.createElement(Slider, {
+    min: 8,
+    max: 72,
+    step: 2,
+    tooltip: false,
+    value: fontSizeEnabled ? headerFontSize : 0,
+    onChange: function onChange(value) {
+      if (!fontSizeEnabled) return;
+      setHeaderFontSize(value);
+    },
+    onChangeComplete: function onChangeComplete() {
+      if (!fontSizeEnabled) return;
+      changeFontSize(getHtmlHeaders(), headerFontSize);
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "item eulexiaText"
+  }, textFontSize ? "Texts (".concat(textFontSize, " px)") : 'Texts'), /*#__PURE__*/React.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/React.createElement(Slider, {
+    min: 8,
+    max: 72,
+    step: 2,
+    tooltip: false,
+    value: fontSizeEnabled ? textFontSize : 0,
+    disabled: true,
+    onChange: function onChange(value) {
+      if (!fontSizeEnabled) return;
+      setTextFontSize(value);
+    },
+    onChangeComplete: function onChangeComplete() {
+      if (!fontSizeEnabled) return;
+      changeFontSize(getHtmlTexts(), textFontSize);
+    }
+  }))))), /*#__PURE__*/React.createElement(ReactTooltip, {
+    id: "fontFamily",
+    place: "right",
+    type: "light",
+    effect: "solid",
+    className: "hoverVisible",
+    delayHide: 200
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "wrapper column"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "item title row"
+  }, /*#__PURE__*/React.createElement("strong", {
+    className: "item eulexiaText"
+  }, "Font family"), /*#__PURE__*/React.createElement("div", {
+    className: "item-text-right"
+  }, /*#__PURE__*/React.createElement(Toggle, {
+    defaultChecked: false,
+    onChange: function onChange(e) {
+      setFontFamilyEnabled(e.target.checked);
+      if (e.target.checked) return;
+      setFontFamily(null);
+      clearFontFamily(getHtmlHeaders());
+      clearFontFamily(getHtmlTexts());
+    },
+    icons: false
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "item column",
+    style: {
+      marginTop: 28
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "item"
+  }, /*#__PURE__*/React.createElement(Dropdown, {
+    options: fontOptions,
+    onChange: function onChange(obj) {
+      setFontFamily(obj.value);
+      changeFontFamily(getHtmlTexts(), obj.value);
+      changeFontFamily(getHtmlHeaders(), obj.value);
+    },
+    value: fontFamily,
+    placeholder: "Font family...",
+    disabled: !fontFamilyEnabled
+  }))))))));
 };
 
-function _templateObject() {
+function _templateObject$1() {
   var data = _taggedTemplateLiteral(["\n    height: 48px;\n    width: 48px;\n    background-color: #aaaaaa;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    position: relative;\n    border: none;\n    border-radius: 50%;\n    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);\n    cursor: pointer;\n    outline: none;\n    padding: 0;\n    -webkit-user-drag: none;\n    font-weight: bold;\n    color: #f1f1f1;\n    margin-right: 4px;\n    font-size: 16px;\n    z-index: 10000;\n"]);
 
-  _templateObject = function _templateObject() {
+  _templateObject$1 = function _templateObject() {
     return data;
   };
 
   return data;
 }
-var Action = styled.button(_templateObject());
+var Action = styled.button(_templateObject$1());
 
 export { Button, Eulexia, Action as EulexiaAction, EulexiaFab, Input };
