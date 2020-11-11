@@ -622,7 +622,7 @@ var EulexiaFab = function EulexiaFab(_ref) {
       changeFontFamily(getHtmlHeaders(), obj.value);
     },
     value: fontFamily,
-    placeholder: "Select the font family...",
+    placeholder: "Font family...",
     disabled: !fontFamilyEnabled
   }))))))));
 };

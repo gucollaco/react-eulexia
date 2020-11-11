@@ -276,7 +276,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                             changeFontFamily(getHtmlHeaders(), obj.value)
                                         }}
                                         value={fontFamily}
-                                        placeholder="Select the font family..."
+                                        placeholder="Font family..."
                                         disabled={!fontFamilyEnabled}
                                     />
                                 </div>
