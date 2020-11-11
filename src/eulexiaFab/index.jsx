@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
-// import NumericInput from 'react-numeric-input'
-// import ReactSlider from 'react-slider'
 
 import Slider from 'react-rangeslider'
 import 'react-rangeslider/lib/index.css'
@@ -11,12 +9,11 @@ import 'react-rangeslider/lib/index.css'
 import Toggle from 'react-toggle'
 import 'react-toggle/style.css'
 
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
 import GoogleFontLoader from 'react-google-font-loader'
-import styled, { createGlobalStyle } from 'styled-components'
-
-// createGlobalStyle`
-
-// `
+import styled from 'styled-components'
 
 const Styles = styled.div`
     .wrapper {
@@ -65,10 +62,9 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
     const [fontFamily, setFontFamily] = useState('')
 
-
     useEffect(() => {
-        var head = document.head
-        var link = document.createElement('link')
+        const head = document.head
+        const link = document.createElement('link')
     
         link.type = 'text/css'
         link.rel = 'stylesheet'
@@ -80,10 +76,12 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     
     }, [])
 
-      
-
     const clearFontSize = (elements) => {
         for(const element of elements) element.style.removeProperty('font-size')
+    }
+
+    const clearFontFamily = (elements) => {
+        for(const element of elements) element.style.removeProperty('font-family')
     }
 
     const changeFontSize = (elements, fontSize) => {
@@ -110,9 +108,16 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         return document.querySelectorAll(textTagsJoined)
     }
 
+    const fontOptions = [
+        { value: 'Courier', label: 'Courier' },
+        { value: 'Open Sans, sans-serif', label: 'Open Sans' },
+        { value: 'Roboto', label: 'Roboto' },
+        { value: 'Roboto Mono, monospace', label: 'Roboto Mono' }
+    ]
+
     return (
         <>
-            {/* <GoogleFontLoader
+            <GoogleFontLoader
                 fonts={[
                     {
                         font: 'Arial',
@@ -139,7 +144,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                         weights: [400, 700],
                     },
                 ]}
-            /> */}
+            />
             <Fab
                 id="eulexiaFab"
                 mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
@@ -183,6 +188,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         defaultChecked={false}
                                         onChange={e => {
                                             setFontSizeEnabled(e.target.checked)
+                                            if(e.target.checked) return
                                             setHeaderFontSize(0)
                                             setTextFontSize(0)
                                             clearFontSize(getHtmlHeaders())
@@ -251,29 +257,28 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         defaultChecked={false}
                                         onChange={e => {
                                             setFontFamilyEnabled(e.target.checked)
-                                            // setHeaderFontSize(0)
-                                            // setTextFontSize(0)
-                                            // clearFontFamily(getHtmlHeaders())
-                                            // clearFontSize(getHtmlTexts())
+                                            if(e.target.checked) return
+                                            setFontFamily(null)
+                                            clearFontFamily(getHtmlHeaders())
+                                            clearFontFamily(getHtmlTexts())
                                         }} 
                                         icons={false}
                                     />
                                 </div>
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexiaText">Options</span>
-                                <div className="item" style={{ width:'100%' }}>
-                                    <select name="cars" id="fontFamily" onChange={(e)=> {
-                                        setFontFamily(e.target.value)
-                                        changeFontFamily(getHtmlTexts(), e.target.value)
-                                        changeFontFamily(getHtmlHeaders(), e.target.value)
-                                    }}>
-                                        <option value="Courier">Courier</option>
-                                        <option value="Open Sans">Open Sans</option>
-                                        <option value="Roboto">Roboto</option>
-                                        <option value="Roboto Mono">Roboto Mono</option>
-                                        
-                                    </select>
+                                <div className="item">
+                                    <Dropdown
+                                        options={fontOptions}
+                                        onChange={(obj)=> {
+                                            setFontFamily(obj.value)
+                                            changeFontFamily(getHtmlTexts(), obj.value)
+                                            changeFontFamily(getHtmlHeaders(), obj.value)
+                                        }}
+                                        value={fontFamily}
+                                        placeholder="Select the font family..."
+                                        disabled={!fontFamilyEnabled}
+                                    />
                                 </div>
                             </div>
                         </div>

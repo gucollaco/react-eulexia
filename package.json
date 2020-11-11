@@ -29,9 +29,11 @@
   "author": "Gustavo Collaço",
   "license": "MIT",
   "dependencies": {
+    "react-dropdown": "^1.9.0",
     "react-google-font-loader": "^1.1.0",
     "react-numeric-input": "^2.2.3",
     "react-rangeslider": "^2.2.0",
+    "react-select": "^3.1.0",
     "react-slider": "^1.1.1",
     "react-toggle": "^4.1.1"
   }
