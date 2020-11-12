@@ -89,7 +89,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     const addClass = (elements, className) => {
         for(const element of elements) element.classList.add(className)
-        // for(const element of elements) element.style.fontSize = `${fontSize}px`
     }
 
     const removeClass = (elements, className) => {
