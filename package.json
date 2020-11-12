@@ -15,26 +15,20 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
     "@rollup/plugin-babel": "^5.0.3",
-    "clsx": "^1.1.1",
     "eslint": "^7.12.1",
     "eslint-plugin-react": "^7.21.5",
     "rollup": "^2.13.1"
   },
   "peerDependencies": {
+    "clsx": "^1.1.1",
     "react": ">=16.8.0",
+    "react-dropdown": "^1.9.0",
+    "react-rangeslider": "^2.2.0",
+    "react-toggle": "^4.1.1",
     "react-tiny-fab": "^4.0.2",
     "react-tooltip": "^4.2.10",
     "styled-components": "^5.2.1"
   },
   "author": "Gustavo Collaço",
-  "license": "MIT",
-  "dependencies": {
-    "react-dropdown": "^1.9.0",
-    "react-google-font-loader": "^1.1.0",
-    "react-numeric-input": "^2.2.3",
-    "react-rangeslider": "^2.2.0",
-    "react-select": "^3.1.0",
-    "react-slider": "^1.1.1",
-    "react-toggle": "^4.1.1"
-  }
+  "license": "MIT"
 }
