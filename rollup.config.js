@@ -13,6 +13,7 @@ const config = [
             file: 'dist/index.js',
             format: 'cjs'
         },
+        external: [/@babel\/runtime/],
         plugins: [
             external(),
             resolve(),
@@ -32,6 +33,7 @@ const config = [
             file: 'dist/index.modern.js',
             format: 'es'
         },
+        external: [/@babel\/runtime/],
         plugins: [
             external(),
             resolve(),
