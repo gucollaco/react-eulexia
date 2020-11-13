@@ -1,13 +1,80 @@
-import babel from '@rollup/plugin-babel'    
-
-const config = {
-    input: 'src/main.js',
-    output: {
-        file: 'dist/main.js',
-        format: 'es'
+import babel from '@rollup/plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import external from 'rollup-plugin-peer-deps-external'
+import scss from 'rollup-plugin-scss'
+import { terser } from 'rollup-plugin-terser'
+import { uglify } from 'rollup-plugin-uglify'
+ 
+const config = [
+    {
+        input: 'src/index.js',
+        output: {
+            file: 'dist/index.js',
+            format: 'cjs'
+        },
+        plugins: [
+            external(),
+            resolve(),
+            commonjs({
+                include: [
+                    'node_modules/**'
+                ]
+            }),
+            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+            scss(),
+            uglify()
+        ]
     },
-    external: ['react'],
-    plugins: [babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' })]
-}
+    {
+        input: 'src/index.js',
+        output: {
+            file: 'dist/index.modern.js',
+            format: 'es'
+        },
+        plugins: [
+            external(),
+            resolve(),
+            commonjs({
+                include: [
+                    'node_modules/**'
+                ]
+            }),
+            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+            scss(),
+            terser()
+        ]
+    },
+    {
+        input: 'src/index.js',
+        output: {
+            name: 'ReactEulexia',
+            file: 'dist/index.umd.js',
+            globals: {
+                react: 'React',
+                'styled-components': 'styled',
+                'clsx': 'PropTypes',
+                'react-tiny-fab': 'reactTinyFab',
+                'react-tooltip': 'ReactTolltip',
+                'react-rangeslider': 'Slider',
+                'react-toggle': 'Toggle',
+                'react-dropdown': 'Dropdown'
+            },
+            format: 'umd'
+        },
+        plugins: [
+            external(),
+            resolve(),
+            commonjs({
+                include: [
+                    'node_modules/**'
+                ]
+            }),
+            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+            scss(),
+            terser()
+        ]
+    }
+]
 
 export default config
