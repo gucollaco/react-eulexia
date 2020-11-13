@@ -64,8 +64,48 @@ const Styles = styled.div`
         }
     }
 `
-
+// Hook
+function useLocalStorage(key, initialValue) {
+    // State to store our value
+    // Pass initial state function to useState so logic is only executed once
+    const [storedValue, setStoredValue] = useState(() => {
+      try {
+        // Get from local storage by key
+        const item = window.localStorage.getItem(key);
+        // Parse stored json or if none return initialValue
+        return item ? JSON.parse(item) : initialValue;
+      } catch (error) {
+        // If error also return initialValue
+        console.log(error);
+        return initialValue;
+      }
+    });
+  
+    // Return a wrapped version of useState's setter function that ...
+    // ... persists the new value to localStorage.
+    const setValue = value => {
+      try {
+        // Allow value to be a function so we have same API as useState
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
+        // Save state
+        setStoredValue(valueToStore);
+        // Save to local storage
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      } catch (error) {
+        // A more advanced implementation would handle the error case
+        console.log(error);
+      }
+    };
+  
+    return [storedValue, setValue];
+  }
 const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
+    // const storageFontSizeEnabled = window.localStorage.getItem('fontSizeEnabled') ? true : false
+    // const storageFontFamilyEnabled = window.localStorage.getItem('fontFamilyEnabled') ? true : false
+    
+
+    const [name, setName] = useLocalStorage('name', 'Bob')
     const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
     const [headerFontSize, setHeaderFontSize] = useState('')
     const [textFontSize, setTextFontSize] = useState('')
@@ -82,10 +122,35 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         link.href = 'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
     
         head.appendChild(link)
-    
+
+        if (window.localStorage.getItem('fontSizeEnabled') == true) setFontSizeEnabled(true)
+        if (window.localStorage.getItem('fontFamilyEnabled') == true) setFontFamilyEnabled(true)
+
+        console.log('oiiiii')
         return () => { head.removeChild(link) }
-    
-    }, [])
+    })
+
+    useEffect(() => {
+        if (window.localStorage.getItem('headerFontSizeValue')) {
+            setHeaderFontSize(window.localStorage.getItem('headerFontSizeValue'))
+            addClass(getHtmlHeaders(), 'eulexia-font-size-header')
+        }
+        if (window.localStorage.getItem('textFontSizeValue')) {
+            setTextFontSize(window.localStorage.getItem('textFontSizeValue'))
+            addClass(getHtmlTexts(), 'eulexia-font-size-text')
+        }
+        console.log('BEEN HERE 1')
+    }, [fontSizeEnabled])
+
+    useEffect(() => {
+        if (window.localStorage.getItem('fontFamilyValue')) {
+            setFontFamily(window.localStorage.getItem('fontFamilyValue'))
+            addClass(getHtmlHeaders(), 'eulexia-font-family')
+            addClass(getHtmlTexts(), 'eulexia-font-family')
+        }
+        console.log('BEEN HERE 2')
+
+    }, [fontFamilyEnabled])
 
     const addClass = (elements, className) => {
         for(const element of elements) element.classList.add(className)
@@ -165,18 +230,22 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 <strong className="item eulexia-test">Font size</strong>
                                 <div className="item-text-right">
                                     <Toggle
-                                        defaultChecked={false}
+                                        checked={fontSizeEnabled}
                                         onChange={e => {
                                             setFontSizeEnabled(e.target.checked)
                                             if(e.target.checked) {
                                                 addClass(getHtmlHeaders(), 'eulexia-font-size-header')
                                                 addClass(getHtmlTexts(), 'eulexia-font-size-text')
+                                                window.localStorage.setItem('fontSizeEnabled', 1)
                                                 return
                                             }
                                             setHeaderFontSize(0)
                                             setTextFontSize(0)
                                             removeClass(getHtmlHeaders(), 'eulexia-font-size-header')
                                             removeClass(getHtmlTexts(), 'eulexia-font-size-text')
+                                            window.localStorage.removeItem('fontSizeEnabled')
+                                            window.localStorage.removeItem('headerFontSizeValue')
+                                            window.localStorage.removeItem('textFontSizeValue')
                                         }} 
                                         icons={false}
                                     />
@@ -194,6 +263,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         onChange={value => {
                                             if(!fontSizeEnabled) return
                                             setHeaderFontSize(value)
+                                            window.localStorage.setItem('headerFontSizeValue', value)
                                         }}
                                     />
                                 </div>
@@ -210,6 +280,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                         onChange={value => {
                                             if(!fontSizeEnabled) return
                                             setTextFontSize(value)
+                                            window.localStorage.setItem('textFontSizeValue', value)
                                         }}
                                     />
                                 </div>
@@ -229,17 +300,20 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 <strong className="item eulexia-test">Font family</strong>
                                 <div className="item-text-right">
                                     <Toggle
-                                        defaultChecked={false}
+                                        checked={fontFamilyEnabled}
                                         onChange={e => {
                                             setFontFamilyEnabled(e.target.checked)
                                             if(e.target.checked) {
                                                 addClass(getHtmlHeaders(), 'eulexia-font-family')
                                                 addClass(getHtmlTexts(), 'eulexia-font-family')
+                                                window.localStorage.setItem('fontFamilyEnabled', 1)
                                                 return
                                             }
                                             setFontFamily(null)
                                             removeClass(getHtmlHeaders(), 'eulexia-font-family')
                                             removeClass(getHtmlTexts(), 'eulexia-font-family')
+                                            window.localStorage.removeItem('fontFamilyEnabled')
+                                            window.localStorage.removeItem('fontFamilyValue')
                                         }} 
                                         icons={false}
                                     />
@@ -249,7 +323,10 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 <div className="item">
                                     <Dropdown
                                         options={fontOptions}
-                                        onChange={(obj) => setFontFamily(obj.value)}
+                                        onChange={(obj) => {
+                                            setFontFamily(obj.value)
+                                            window.localStorage.setItem('fontFamilyValue', obj.value)
+                                        }}
                                         value={fontFamily}
                                         placeholder="Font family..."
                                         disabled={!fontFamilyEnabled}
