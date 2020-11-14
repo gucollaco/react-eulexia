@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 
 import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
 import { Slider, StylesSlider } from '../slider/index.jsx'
-// import { Toggle, StylesToggle } from '../toggle/index.jsx'
+import { Toggle, StylesToggle } from '../toggle/index.jsx'
 
 import styled, { createGlobalStyle } from 'styled-components'
 
