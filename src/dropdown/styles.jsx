@@ -48,7 +48,7 @@ const StylesDropdown = createGlobalStyle`
         box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
         box-sizing: border-box;
         margin-top: -1px;
-        max-height: 200px;
+        max-height: 120px;
         overflow-y: auto;
         position: absolute;
         top: 100%;
