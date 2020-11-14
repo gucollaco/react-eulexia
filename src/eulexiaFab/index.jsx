@@ -3,14 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
 
-import Slider from 'react-rangeslider'
-import 'react-rangeslider/lib/index.css'
-
-import Toggle from 'react-toggle'
-import 'react-toggle/style.css'
-
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
+import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
+import { Slider, StylesSlider } from '../slider/index.jsx'
+// import { Toggle, StylesToggle } from '../toggle/index.jsx'
 
 import styled, { createGlobalStyle } from 'styled-components'
 
@@ -64,51 +59,14 @@ const Styles = styled.div`
         }
     }
 `
-// Hook
-function useLocalStorage(key, initialValue) {
-    // State to store our value
-    // Pass initial state function to useState so logic is only executed once
-    const [storedValue, setStoredValue] = useState(() => {
-      try {
-        // Get from local storage by key
-        const item = window.localStorage.getItem(key);
-        // Parse stored json or if none return initialValue
-        return item ? JSON.parse(item) : initialValue;
-      } catch (error) {
-        // If error also return initialValue
-        console.log(error);
-        return initialValue;
-      }
-    });
-  
-    // Return a wrapped version of useState's setter function that ...
-    // ... persists the new value to localStorage.
-    const setValue = value => {
-      try {
-        // Allow value to be a function so we have same API as useState
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
-        // Save state
-        setStoredValue(valueToStore);
-        // Save to local storage
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      } catch (error) {
-        // A more advanced implementation would handle the error case
-        console.log(error);
-      }
-    };
-  
-    return [storedValue, setValue];
-  }
+
 const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     // const storageFontSizeEnabled = window.localStorage.getItem('fontSizeEnabled') ? true : false
     // const storageFontFamilyEnabled = window.localStorage.getItem('fontFamilyEnabled') ? true : false
-    
 
-    const [name, setName] = useLocalStorage('name', 'Bob')
     const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
-    const [headerFontSize, setHeaderFontSize] = useState('')
-    const [textFontSize, setTextFontSize] = useState('')
+    const [headerFontSize, setHeaderFontSize] = useState(0)
+    const [textFontSize, setTextFontSize] = useState(0)
 
     const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
     const [fontFamily, setFontFamily] = useState('')
@@ -126,7 +84,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         if (window.localStorage.getItem('fontSizeEnabled') == true) setFontSizeEnabled(true)
         if (window.localStorage.getItem('fontFamilyEnabled') == true) setFontFamilyEnabled(true)
 
-        console.log('oiiiii')
         return () => { head.removeChild(link) }
     })
 
@@ -139,7 +96,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
             setTextFontSize(window.localStorage.getItem('textFontSizeValue'))
             addClass(getHtmlTexts(), 'eulexia-font-size-text')
         }
-        console.log('BEEN HERE 1')
     }, [fontSizeEnabled])
 
     useEffect(() => {
@@ -148,8 +104,6 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
             addClass(getHtmlHeaders(), 'eulexia-font-family')
             addClass(getHtmlTexts(), 'eulexia-font-family')
         }
-        console.log('BEEN HERE 2')
-
     }, [fontFamilyEnabled])
 
     const addClass = (elements, className) => {
@@ -190,6 +144,9 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                 textFontSize={textFontSize}
                 fontFamily={fontFamily}
             />
+            <StylesDropdown />
+            <StylesToggle />
+            <StylesSlider />
             <Fab
                 id="eulexiaFab"
                 mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
