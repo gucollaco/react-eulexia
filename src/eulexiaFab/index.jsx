@@ -10,15 +10,26 @@ import { Toggle, StylesToggle } from '../toggle/index.jsx'
 import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
-    .eulexia-font-size-header {
-        ${props => (props.headerFontSize ? `font-size: ${props.headerFontSize}px !important;` : '')}
-    }
-    .eulexia-font-size-text {
-        ${props => (props.textFontSize ? `font-size: ${props.textFontSize}px !important;` : '')}
-    }
-    .eulexia-font-family {
-        ${props => (props.fontFamily ? `font-family: ${props.fontFamily} !important` : '')}
-    }
+    ${props => (props.fontSizeEnabled ? `
+        ${props.headerFontSize ? `
+            ${props.htmlHeaders} {
+                font-size: ${props.headerFontSize}px !important;
+            }
+        ` : ''}
+        ${props.textFontSize ? `
+            ${props.htmlTexts} {
+                font-size: ${props.textFontSize}px !important;
+            }
+        ` : ''}
+    ` : '')}
+
+    ${props => (props.fontFamilyEnabled ? `
+        ${props.fontFamily ? `
+            ${props.htmlHeaders} ${props.htmlTexts} {
+                font-family: ${props.fontFamily};
+            }
+        ` : ''}
+    ` : '')}
 `
 
 const Styles = styled.div`
@@ -61,9 +72,6 @@ const Styles = styled.div`
 `
 
 const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
-    // const storageFontSizeEnabled = window.localStorage.getItem('fontSizeEnabled') ? true : false
-    // const storageFontFamilyEnabled = window.localStorage.getItem('fontFamilyEnabled') ? true : false
-
     const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
     const [headerFontSize, setHeaderFontSize] = useState(0)
     const [textFontSize, setTextFontSize] = useState(0)
@@ -88,38 +96,20 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     })
 
     useEffect(() => {
-        if (window.localStorage.getItem('headerFontSizeValue')) {
-            setHeaderFontSize(window.localStorage.getItem('headerFontSizeValue'))
-            addClass(getHtmlHeaders(), 'eulexia-font-size-header')
-        }
-        if (window.localStorage.getItem('textFontSizeValue')) {
-            setTextFontSize(window.localStorage.getItem('textFontSizeValue'))
-            addClass(getHtmlTexts(), 'eulexia-font-size-text')
-        }
+        if (window.localStorage.getItem('headerFontSizeValue')) setHeaderFontSize(window.localStorage.getItem('headerFontSizeValue'))
+        if (window.localStorage.getItem('textFontSizeValue')) setTextFontSize(window.localStorage.getItem('textFontSizeValue'))
     }, [fontSizeEnabled])
 
     useEffect(() => {
-        if (window.localStorage.getItem('fontFamilyValue')) {
-            setFontFamily(window.localStorage.getItem('fontFamilyValue'))
-            addClass(getHtmlHeaders(), 'eulexia-font-family')
-            addClass(getHtmlTexts(), 'eulexia-font-family')
-        }
+        if (window.localStorage.getItem('fontFamilyValue')) setFontFamily(window.localStorage.getItem('fontFamilyValue'))
     }, [fontFamilyEnabled])
-
-    const addClass = (elements, className) => {
-        for(const element of elements) element.classList.add(className)
-    }
-
-    const removeClass = (elements, className) => {
-        for(const element of elements) element.classList.remove(className)
-    }
 
     const getHtmlHeaders = () => {
         const textTags = ['h1','h2','h3','h4','h5','h6']
         const exceptTags = [':not(.eulexia-test)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
-        return document.querySelectorAll(textTagsJoined)
+        return textTagsJoined
     }
 
     const getHtmlTexts = () => {
@@ -127,7 +117,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
         const exceptTags = [':not(.eulexia-test)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
-        return document.querySelectorAll(textTagsJoined)
+        return textTagsJoined
     }
 
     const fontOptions = [
@@ -140,9 +130,15 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
     return (
         <>
             <GlobalStyle
+                fontSizeEnabled={fontSizeEnabled}
                 headerFontSize={headerFontSize}
                 textFontSize={textFontSize}
+
+                fontFamilyEnabled={fontFamilyEnabled}
                 fontFamily={fontFamily}
+
+                htmlHeaders={getHtmlHeaders()}
+                htmlTexts={getHtmlTexts()}
             />
             <StylesDropdown />
             <StylesToggle />
@@ -174,32 +170,29 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
                 </Action>
                 <Styles>
+                    
                     <ReactTooltip
                         id='fontSize'
                         place='right'
                         type='light'
                         effect='solid'
-                        className='hoverVisible'
+                        className='hoverVisible eulexiaTooltip'
                         delayHide={200}
                     >
                         <div className="wrapper column">
                             <div className="item title row">
-                                <strong className="item eulexia-test">Font size</strong>
+                                <strong className="item">Font size</strong>
                                 <div className="item-text-right">
                                     <Toggle
                                         checked={fontSizeEnabled}
                                         onChange={e => {
                                             setFontSizeEnabled(e.target.checked)
                                             if(e.target.checked) {
-                                                addClass(getHtmlHeaders(), 'eulexia-font-size-header')
-                                                addClass(getHtmlTexts(), 'eulexia-font-size-text')
                                                 window.localStorage.setItem('fontSizeEnabled', 1)
                                                 return
                                             }
                                             setHeaderFontSize(0)
                                             setTextFontSize(0)
-                                            removeClass(getHtmlHeaders(), 'eulexia-font-size-header')
-                                            removeClass(getHtmlTexts(), 'eulexia-font-size-text')
                                             window.localStorage.removeItem('fontSizeEnabled')
                                             window.localStorage.removeItem('headerFontSizeValue')
                                             window.localStorage.removeItem('textFontSizeValue')
@@ -209,7 +202,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 </div>
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexia-test">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
+                                <span className="item eulexia-text">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
                                 <div className="item">
                                     <Slider
                                         min={8}
@@ -226,7 +219,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                                 </div>
                             </div>
                             <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexia-test">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
+                                <span className="item eulexia-text">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
                                 <div className="item">
                                     <Slider
                                         min={8}
@@ -249,26 +242,22 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                         place='right'
                         type='light'
                         effect='solid'
-                        className='hoverVisible'
+                        className='hoverVisible eulexiaTooltip'
                         delayHide={200}
                     >
                         <div className="wrapper column">
                             <div className="item title row">
-                                <strong className="item eulexia-test">Font family</strong>
+                                <strong className="item">Font family</strong>
                                 <div className="item-text-right">
                                     <Toggle
                                         checked={fontFamilyEnabled}
                                         onChange={e => {
                                             setFontFamilyEnabled(e.target.checked)
                                             if(e.target.checked) {
-                                                addClass(getHtmlHeaders(), 'eulexia-font-family')
-                                                addClass(getHtmlTexts(), 'eulexia-font-family')
                                                 window.localStorage.setItem('fontFamilyEnabled', 1)
                                                 return
                                             }
                                             setFontFamily(null)
-                                            removeClass(getHtmlHeaders(), 'eulexia-font-family')
-                                            removeClass(getHtmlTexts(), 'eulexia-font-family')
                                             window.localStorage.removeItem('fontFamilyEnabled')
                                             window.localStorage.removeItem('fontFamilyValue')
                                         }} 
