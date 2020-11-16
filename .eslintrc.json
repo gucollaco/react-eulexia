@@ -40,7 +40,7 @@
         ],
         "max-len": [
             "error",
-            { "code": 80 }
+            { "code": 150 }
         ]
     },
     "settings": {

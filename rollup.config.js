@@ -5,7 +5,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-scss'
 import { terser } from 'rollup-plugin-terser'
 import { uglify } from 'rollup-plugin-uglify'
- 
+
 const config = [
     {
         input: 'src/index.js',
