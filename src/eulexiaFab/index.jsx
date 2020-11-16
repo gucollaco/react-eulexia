@@ -30,9 +30,7 @@ const GlobalStyle = createGlobalStyle`
             }
         ` : ''}
     ` : '')}
-`
 
-const Styles = styled.div`
     .wrapper {
         padding: 10px 0px 15px 0px;
         font-size: 18px !important;
@@ -71,7 +69,7 @@ const Styles = styled.div`
     }
 `
 
-const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
+const EulexiaFab = ({ event='hover', icon='', className }) => {
     const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
     const [headerFontSize, setHeaderFontSize] = useState(0)
     const [textFontSize, setTextFontSize] = useState(0)
@@ -106,7 +104,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     const getHtmlHeaders = () => {
         const textTags = ['h1','h2','h3','h4','h5','h6']
-        const exceptTags = [':not(.eulexia-test)']
+        const exceptTags = [':not(.eulexia-text)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
         return textTagsJoined
@@ -114,7 +112,7 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
 
     const getHtmlTexts = () => {
         const textTags = ['p','li','span']
-        const exceptTags = [':not(.eulexia-test)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
+        const exceptTags = [':not(.eulexia-text)', ':not(.rtf--ab__c)', ':not(.rtf--mb__c)', ':not(.rtf--ab)', ':not(.rtf--mb)']
         const exceptTagsJoined = exceptTags.join('')
         const textTagsJoined = textTags.join(exceptTagsJoined.concat(',')).concat(exceptTagsJoined)
         return textTagsJoined
@@ -133,10 +131,8 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                 fontSizeEnabled={fontSizeEnabled}
                 headerFontSize={headerFontSize}
                 textFontSize={textFontSize}
-
                 fontFamilyEnabled={fontFamilyEnabled}
                 fontFamily={fontFamily}
-
                 htmlHeaders={getHtmlHeaders()}
                 htmlTexts={getHtmlTexts()}
             />
@@ -169,119 +165,116 @@ const EulexiaFab = ({ event='hover', icon='', className, ...props }) => {
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M5.889 16H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.889l5.294-4.332a.5.5 0 0 1 .817.387v15.89a.5.5 0 0 1-.817.387L5.89 16zm13.517 4.134l-1.416-1.416A8.978 8.978 0 0 0 21 12a8.982 8.982 0 0 0-3.304-6.968l1.42-1.42A10.976 10.976 0 0 1 23 12c0 3.223-1.386 6.122-3.594 8.134zm-3.543-3.543l-1.422-1.422A3.993 3.993 0 0 0 16 12c0-1.43-.75-2.685-1.88-3.392l1.439-1.439A5.991 5.991 0 0 1 18 12c0 1.842-.83 3.49-2.137 4.591z"/></svg>
                 </Action>
-                <Styles>
-                    
-                    <ReactTooltip
-                        id='fontSize'
-                        place='right'
-                        type='light'
-                        effect='solid'
-                        className='hoverVisible eulexiaTooltip'
-                        delayHide={200}
-                    >
-                        <div className="wrapper column">
-                            <div className="item title row">
-                                <strong className="item">Font size</strong>
-                                <div className="item-text-right">
-                                    <Toggle
-                                        checked={fontSizeEnabled}
-                                        onChange={e => {
-                                            setFontSizeEnabled(e.target.checked)
-                                            if(e.target.checked) {
-                                                window.localStorage.setItem('fontSizeEnabled', 1)
-                                                return
-                                            }
-                                            setHeaderFontSize(0)
-                                            setTextFontSize(0)
-                                            window.localStorage.removeItem('fontSizeEnabled')
-                                            window.localStorage.removeItem('headerFontSizeValue')
-                                            window.localStorage.removeItem('textFontSizeValue')
-                                        }} 
-                                        icons={false}
-                                    />
-                                </div>
-                            </div>
-                            <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexia-text">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
-                                <div className="item">
-                                    <Slider
-                                        min={8}
-                                        max={72}
-                                        step={2}
-                                        tooltip={false}
-                                        value={headerFontSize}
-                                        onChange={value => {
-                                            if(!fontSizeEnabled) return
-                                            setHeaderFontSize(value)
-                                            window.localStorage.setItem('headerFontSizeValue', value)
-                                        }}
-                                    />
-                                </div>
-                            </div>
-                            <div className="item column" style={{ marginTop: 28 }}>
-                                <span className="item eulexia-text">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
-                                <div className="item">
-                                    <Slider
-                                        min={8}
-                                        max={72}
-                                        step={2}
-                                        tooltip={false}
-                                        value={textFontSize}
-                                        onChange={value => {
-                                            if(!fontSizeEnabled) return
-                                            setTextFontSize(value)
-                                            window.localStorage.setItem('textFontSizeValue', value)
-                                        }}
-                                    />
-                                </div>
+                <ReactTooltip
+                    id='fontSize'
+                    place='right'
+                    type='light'
+                    effect='solid'
+                    className='hoverVisible eulexiaTooltip'
+                    delayHide={200}
+                >
+                    <div className="wrapper column">
+                        <div className="item title row">
+                            <strong className="item">Font size</strong>
+                            <div className="item-text-right">
+                                <Toggle
+                                    checked={fontSizeEnabled}
+                                    onChange={e => {
+                                        setFontSizeEnabled(e.target.checked)
+                                        if(e.target.checked) {
+                                            window.localStorage.setItem('fontSizeEnabled', 1)
+                                            return
+                                        }
+                                        setHeaderFontSize(0)
+                                        setTextFontSize(0)
+                                        window.localStorage.removeItem('fontSizeEnabled')
+                                        window.localStorage.removeItem('headerFontSizeValue')
+                                        window.localStorage.removeItem('textFontSizeValue')
+                                    }} 
+                                    icons={false}
+                                />
                             </div>
                         </div>
-                    </ReactTooltip>
-                    <ReactTooltip
-                        id='fontFamily'
-                        place='right'
-                        type='light'
-                        effect='solid'
-                        className='hoverVisible eulexiaTooltip'
-                        delayHide={200}
-                    >
-                        <div className="wrapper column">
-                            <div className="item title row">
-                                <strong className="item">Font family</strong>
-                                <div className="item-text-right">
-                                    <Toggle
-                                        checked={fontFamilyEnabled}
-                                        onChange={e => {
-                                            setFontFamilyEnabled(e.target.checked)
-                                            if(e.target.checked) {
-                                                window.localStorage.setItem('fontFamilyEnabled', 1)
-                                                return
-                                            }
-                                            setFontFamily(null)
-                                            window.localStorage.removeItem('fontFamilyEnabled')
-                                            window.localStorage.removeItem('fontFamilyValue')
-                                        }} 
-                                        icons={false}
-                                    />
-                                </div>
-                            </div>
-                            <div className="item column" style={{ marginTop: 28 }}>
-                                <div className="item">
-                                    <Dropdown
-                                        options={fontOptions}
-                                        onChange={(obj) => {
-                                            setFontFamily(obj.value)
-                                            window.localStorage.setItem('fontFamilyValue', obj.value)
-                                        }}
-                                        value={fontFamily}
-                                        placeholder="Font family..."
-                                        disabled={!fontFamilyEnabled}
-                                    />
-                                </div>
+                        <div className="item column" style={{ marginTop: 28 }}>
+                            <span className="item eulexia-text">{headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}</span>
+                            <div className="item">
+                                <Slider
+                                    min={8}
+                                    max={72}
+                                    step={2}
+                                    tooltip={false}
+                                    value={headerFontSize}
+                                    onChange={value => {
+                                        if(!fontSizeEnabled) return
+                                        setHeaderFontSize(value)
+                                        window.localStorage.setItem('headerFontSizeValue', value)
+                                    }}
+                                />
                             </div>
                         </div>
-                    </ReactTooltip>
-                </Styles>
+                        <div className="item column" style={{ marginTop: 28 }}>
+                            <span className="item eulexia-text">{textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}</span>
+                            <div className="item">
+                                <Slider
+                                    min={8}
+                                    max={72}
+                                    step={2}
+                                    tooltip={false}
+                                    value={textFontSize}
+                                    onChange={value => {
+                                        if(!fontSizeEnabled) return
+                                        setTextFontSize(value)
+                                        window.localStorage.setItem('textFontSizeValue', value)
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </ReactTooltip>
+                <ReactTooltip
+                    id='fontFamily'
+                    place='right'
+                    type='light'
+                    effect='solid'
+                    className='hoverVisible eulexiaTooltip'
+                    delayHide={200}
+                >
+                    <div className="wrapper column">
+                        <div className="item title row">
+                            <strong className="item">Font family</strong>
+                            <div className="item-text-right">
+                                <Toggle
+                                    checked={fontFamilyEnabled}
+                                    onChange={e => {
+                                        setFontFamilyEnabled(e.target.checked)
+                                        if(e.target.checked) {
+                                            window.localStorage.setItem('fontFamilyEnabled', 1)
+                                            return
+                                        }
+                                        setFontFamily(null)
+                                        window.localStorage.removeItem('fontFamilyEnabled')
+                                        window.localStorage.removeItem('fontFamilyValue')
+                                    }} 
+                                    icons={false}
+                                />
+                            </div>
+                        </div>
+                        <div className="item column" style={{ marginTop: 28 }}>
+                            <div className="item">
+                                <Dropdown
+                                    options={fontOptions}
+                                    onChange={(obj) => {
+                                        setFontFamily(obj.value)
+                                        window.localStorage.setItem('fontFamilyValue', obj.value)
+                                    }}
+                                    value={fontFamily}
+                                    placeholder="Font family..."
+                                    disabled={!fontFamilyEnabled}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </ReactTooltip>
             </Fab>
         </>
     )
