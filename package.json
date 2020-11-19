@@ -8,12 +8,28 @@
   "scripts": {
     "build": "rollup --config",
     "watch": "rollup --config --watch",
-    "lint": "eslint src/**/*.js src/**/*.jsx",
-    "fix": "eslint src/**/*.js src/**/*.jsx --fix"
+    "prettier": "prettier \"src/**/*.{js,jsx,css,json}\"",
+    "format": "yarn prettier --write",
+    "lint": "eslint \"src/**/*.{js,jsx,css,json}\"",
+    "lint:fix": "yarn lint --fix",
+    "validate": "yarn prettier --list-different && yarn lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,css}": [
+      "yarn format",
+      "yarn lint:fix",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
+    "@babel/core": "^7.12.3",
+    "@babel/eslint-parser": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
@@ -23,8 +39,14 @@
     "@rollup/plugin-node-resolve": "^10.0.0",
     "babel-plugin-styled-components": "^1.11.1",
     "clsx": "^1.1.1",
-    "eslint": "^7.12.1",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
+    "prettier": "^2.1.2",
     "react": "^17.0.1",
     "react-dropdown": "^1.9.0",
     "react-rangeslider": "^2.2.0",
