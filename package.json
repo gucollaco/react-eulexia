@@ -9,10 +9,10 @@
     "build": "rollup --config",
     "watch": "rollup --config --watch",
     "prettier": "prettier \"src/**/*.{js,jsx,css,json}\"",
-    "format": "yarn prettier --write",
+    "prettier:format": "yarn prettier --write",
     "lint": "eslint \"src/**/*.{js,jsx,css,json}\"",
     "lint:fix": "yarn lint --fix",
-    "validate": "yarn prettier --list-different && yarn lint"
+    "fix": "yarn prettier:format && yarn lint:fix"
   },
   "husky": {
     "hooks": {
@@ -21,8 +21,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,css}": [
-      "yarn format",
-      "yarn lint:fix",
+      "yarn fix",
       "git add"
     ]
   },
