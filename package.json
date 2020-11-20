@@ -22,8 +22,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,css}": [
-      "yarn fix",
-      "git add"
+      "yarn fix"
     ]
   },
   "devDependencies": {

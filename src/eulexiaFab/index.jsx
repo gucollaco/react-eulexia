@@ -54,8 +54,11 @@ const styledFontFamily = ({
 
   return fontFamily
     ? `
-      ${htmlHeaders} ${htmlTexts} {
-        font-family: ${fontFamily};
+      ${htmlHeaders} {
+        font-family: ${fontFamily} !important;
+      }
+      ${htmlTexts} {
+        font-family: ${fontFamily} !important;
       }
     `
     : ''
