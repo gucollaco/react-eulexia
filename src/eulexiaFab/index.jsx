@@ -21,7 +21,7 @@ const RulerTop = style.div.attrs((props) => ({
     height: props.rulerPosition - props.rulerSize / 2,
   },
 }))`
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   width: 100%;
   top: 0;
   left: 0;
@@ -33,7 +33,7 @@ const RulerBot = style.div.attrs((props) => ({
     top: props.rulerPosition + props.rulerSize / 2,
   },
 }))`
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
   width: 100%;
   bottom: 0;
   left: 0;
@@ -444,7 +444,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </span>
               <div className="item">
                 <Slider
-                  min={10}
+                  min={50}
                   max={400}
                   step={5}
                   tooltip={false}
