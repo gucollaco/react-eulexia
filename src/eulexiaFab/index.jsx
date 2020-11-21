@@ -130,7 +130,7 @@ const GlobalStyle = createGlobalStyle`
     }
     @media (max-width: 600px) {
         .wrapper {
-            width: 160px;
+            width: 180px;
         }
     }
     .hoverVisible {
