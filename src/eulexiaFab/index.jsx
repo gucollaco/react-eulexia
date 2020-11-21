@@ -16,15 +16,49 @@ import {
 
 import style, { createGlobalStyle } from 'styled-components'
 
-const RulerPageOverlay = style.div`
-  opacity:0.2;
-  filter: alpha(opacity=20);
-  background-color:#000; 
-  width:100%; 
-  height:100%; 
-  top:0; 
-  left:0; 
-  position:fixed; 
+// const RulerPageOverlay = style.div`
+//   opacity:0.2;
+//   filter: alpha(opacity=20);
+//   background-color:#000;
+//   width:100%;
+//   height:100%;
+//   top:0;
+//   left:0;
+//   position:fixed;
+// `
+// const RulerLine = style.div.attrs((props) => ({
+//   style: {
+//     top: props.rulerPosition - props.rulerSize / 2,
+//     height: props.rulerSize,
+//   },
+// }))`
+//   background-color: rgba(0,0,0,0.4);
+//   width: 100%;
+//   position: absolute;
+// `
+
+const RulerTop = style.div.attrs((props) => ({
+  style: {
+    height: props.rulerPosition - props.rulerSize / 2,
+  },
+}))`
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+`
+
+const RulerBot = style.div.attrs((props) => ({
+  style: {
+    top: props.rulerPosition + props.rulerSize / 2,
+  },
+}))`
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: fixed;
 `
 
 const RulerLine = style.div.attrs((props) => ({
@@ -33,11 +67,9 @@ const RulerLine = style.div.attrs((props) => ({
     height: props.rulerSize,
   },
 }))`
-  opacity: 0.3;
-  filter: alpha(opacity=20);
-  background-color: #000;
+  background-color: rgba(0,0,0,0.4);
   width: 100%;
-  position: absolute;
+  position: fixed;
 `
 
 const styledHeaderFontSize = ({
@@ -142,6 +174,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerEnabled, setRulerEnabled] = useState(false)
   const [rulerSize, setRulerSize] = useState(0)
   const [rulerPosition, setRulerPosition] = useState(0)
+  const [rulerInverted, setRulerInverted] = useState(false)
 
   useEffect(() => {
     const head = document.head
@@ -160,6 +193,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
       setFontFamilyEnabled(true)
     if (window.localStorage.getItem('rulerEnabled') == true)
       setRulerEnabled(true)
+    if (window.localStorage.getItem('rulerInverted') == true)
+      setRulerInverted(true)
 
     return () => {
       head.removeChild(link)
@@ -189,7 +224,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
 
   useEffect(() => {
     const rulerPositionUpdate = (e) =>
-      rulerEnabled ? setRulerPosition(e.pageY) : {}
+      rulerEnabled ? setRulerPosition(e.clientY) : {}
 
     document.addEventListener('mousemove', rulerPositionUpdate, false)
     return () => {
@@ -244,10 +279,17 @@ const EulexiaFab = ({ event = 'hover' }) => {
       <StylesDropdown />
       <StylesToggle />
       <StylesSlider />
-      {rulerEnabled && (
-        <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
+      {rulerEnabled && !rulerInverted && (
+        <div style={{ position: 'relative' }}>
+          <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
+        </div>
       )}
-      {rulerEnabled && <RulerPageOverlay />}
+      {rulerEnabled && rulerInverted && (
+        <div style={{ position: 'relative' }}>
+          <RulerTop rulerPosition={rulerPosition} rulerSize={rulerSize} />
+          <RulerBot rulerPosition={rulerPosition} rulerSize={rulerSize} />
+        </div>
+      )}
       <Fab
         id="eulexiaFab"
         mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
@@ -404,11 +446,14 @@ const EulexiaFab = ({ event = 'hover' }) => {
                       setRulerSize(100)
                       window.localStorage.setItem('rulerEnabled', 1)
                       window.localStorage.setItem('rulerSizeValue', 100)
+                      window.localStorage.setItem('rulerInverted', 0)
                       return
                     }
                     setRulerSize(0)
+                    setRulerInverted(false)
                     window.localStorage.removeItem('rulerEnabled')
                     window.localStorage.removeItem('rulerSizeValue')
+                    window.localStorage.removeItem('rulerInverted')
                   }}
                   icons={false}
                 />
@@ -430,6 +475,24 @@ const EulexiaFab = ({ event = 'hover' }) => {
                     setRulerSize(value)
                     window.localStorage.setItem('rulerSizeValue', value)
                   }}
+                />
+              </div>
+            </div>
+            <div className="item row" style={{ marginTop: 28 }}>
+              <span className="item eulexia-text">Inverted mode</span>
+              <div className="item">
+                <Toggle
+                  disabled={!rulerEnabled}
+                  checked={rulerInverted}
+                  onChange={(e) => {
+                    setRulerInverted(e.target.checked)
+                    if (e.target.checked) {
+                      window.localStorage.setItem('rulerInverted', 1)
+                      return
+                    }
+                    window.localStorage.removeItem('rulerInverted')
+                  }}
+                  icons={false}
                 />
               </div>
             </div>
