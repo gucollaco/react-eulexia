@@ -16,27 +16,6 @@ import {
 
 import style, { createGlobalStyle } from 'styled-components'
 
-// const RulerPageOverlay = style.div`
-//   opacity:0.2;
-//   filter: alpha(opacity=20);
-//   background-color:#000;
-//   width:100%;
-//   height:100%;
-//   top:0;
-//   left:0;
-//   position:fixed;
-// `
-// const RulerLine = style.div.attrs((props) => ({
-//   style: {
-//     top: props.rulerPosition - props.rulerSize / 2,
-//     height: props.rulerSize,
-//   },
-// }))`
-//   background-color: rgba(0,0,0,0.4);
-//   width: 100%;
-//   position: absolute;
-// `
-
 const RulerTop = style.div.attrs((props) => ({
   style: {
     height: props.rulerPosition - props.rulerSize / 2,
