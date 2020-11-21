@@ -466,7 +466,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
               <div className="item">
                 <Slider
                   min={10}
-                  max={600}
+                  max={400}
                   step={5}
                   tooltip={false}
                   value={rulerSize}
