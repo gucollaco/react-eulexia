@@ -14,7 +14,31 @@ import {
   IconTextToSpeech,
 } from '../icons/index.jsx'
 
-import { createGlobalStyle } from 'styled-components'
+import style, { createGlobalStyle } from 'styled-components'
+
+const RulerPageOverlay = style.div`
+  opacity:0.2;
+  filter: alpha(opacity=20);
+  background-color:#000; 
+  width:100%; 
+  height:100%; 
+  top:0; 
+  left:0; 
+  position:fixed; 
+`
+
+const RulerLine = style.div.attrs((props) => ({
+  style: {
+    top: props.rulerPosition - props.rulerSize / 2,
+    height: props.rulerSize,
+  },
+}))`
+  opacity: 0.3;
+  filter: alpha(opacity=20);
+  background-color: #000;
+  width: 100%;
+  position: absolute;
+`
 
 const styledHeaderFontSize = ({
   fontSizeEnabled,
@@ -115,6 +139,10 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
   const [fontFamily, setFontFamily] = useState('')
 
+  const [rulerEnabled, setRulerEnabled] = useState(false)
+  const [rulerSize, setRulerSize] = useState(0)
+  const [rulerPosition, setRulerPosition] = useState(0)
+
   useEffect(() => {
     const head = document.head
     const link = document.createElement('link')
@@ -130,6 +158,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
       setFontSizeEnabled(true)
     if (window.localStorage.getItem('fontFamilyEnabled') == true)
       setFontFamilyEnabled(true)
+    if (window.localStorage.getItem('rulerEnabled') == true)
+      setRulerEnabled(true)
 
     return () => {
       head.removeChild(link)
@@ -138,15 +168,34 @@ const EulexiaFab = ({ event = 'hover' }) => {
 
   useEffect(() => {
     if (window.localStorage.getItem('headerFontSizeValue'))
-      setHeaderFontSize(window.localStorage.getItem('headerFontSizeValue'))
+      setHeaderFontSize(
+        parseInt(window.localStorage.getItem('headerFontSizeValue'))
+      )
     if (window.localStorage.getItem('textFontSizeValue'))
-      setTextFontSize(window.localStorage.getItem('textFontSizeValue'))
+      setTextFontSize(
+        parseInt(window.localStorage.getItem('textFontSizeValue'))
+      )
   }, [fontSizeEnabled])
 
   useEffect(() => {
     if (window.localStorage.getItem('fontFamilyValue'))
       setFontFamily(window.localStorage.getItem('fontFamilyValue'))
   }, [fontFamilyEnabled])
+
+  useEffect(() => {
+    if (window.localStorage.getItem('rulerSizeValue'))
+      setRulerSize(parseInt(window.localStorage.getItem('rulerSizeValue')))
+  }, [rulerEnabled])
+
+  useEffect(() => {
+    const rulerPositionUpdate = (e) =>
+      rulerEnabled ? setRulerPosition(e.pageY) : {}
+
+    document.addEventListener('mousemove', rulerPositionUpdate, false)
+    return () => {
+      document.removeEventListener('mousemove', rulerPositionUpdate, false)
+    }
+  })
 
   const getHtmlHeaders = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
@@ -195,6 +244,10 @@ const EulexiaFab = ({ event = 'hover' }) => {
       <StylesDropdown />
       <StylesToggle />
       <StylesSlider />
+      {rulerEnabled && (
+        <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
+      )}
+      {rulerEnabled && <RulerPageOverlay />}
       <Fab
         id="eulexiaFab"
         mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
@@ -208,10 +261,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
         <Action data-tip data-for="fontFamily">
           <IconFontFamily />
         </Action>
-        <Action
-          onMouseEnter={() => console.log('onmousenter RULER')}
-          onMouseLeave={() => console.log('onmouseleave RULER')}
-        >
+        <Action data-tip data-for="readingRuler">
           <IconRuler />
         </Action>
         <Action
@@ -329,6 +379,57 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   value={fontFamily}
                   placeholder="Font family..."
                   disabled={!fontFamilyEnabled}
+                />
+              </div>
+            </div>
+          </div>
+        </ReactTooltip>
+        <ReactTooltip
+          id="readingRuler"
+          place="right"
+          type="light"
+          effect="solid"
+          className="hoverVisible eulexiaTooltip"
+          delayHide={200}
+        >
+          <div className="wrapper column">
+            <div className="item title row">
+              <strong className="item">Reading ruler</strong>
+              <div className="item-text-right">
+                <Toggle
+                  checked={rulerEnabled}
+                  onChange={(e) => {
+                    setRulerEnabled(e.target.checked)
+                    if (e.target.checked) {
+                      setRulerSize(100)
+                      window.localStorage.setItem('rulerEnabled', 1)
+                      window.localStorage.setItem('rulerSizeValue', 100)
+                      return
+                    }
+                    setRulerSize(0)
+                    window.localStorage.removeItem('rulerEnabled')
+                    window.localStorage.removeItem('rulerSizeValue')
+                  }}
+                  icons={false}
+                />
+              </div>
+            </div>
+            <div className="item column" style={{ marginTop: 28 }}>
+              <span className="item eulexia-text">
+                {rulerSize ? `Size (${rulerSize} px)` : 'Size'}
+              </span>
+              <div className="item">
+                <Slider
+                  min={10}
+                  max={600}
+                  step={5}
+                  tooltip={false}
+                  value={rulerSize}
+                  onChange={(value) => {
+                    if (!rulerEnabled) return
+                    setRulerSize(value)
+                    window.localStorage.setItem('rulerSizeValue', value)
+                  }}
                 />
               </div>
             </div>
