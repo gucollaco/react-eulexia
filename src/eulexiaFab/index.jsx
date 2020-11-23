@@ -49,6 +49,7 @@ const RulerLine = style.div.attrs((props) => ({
   background-color: rgba(0,0,0,0.4);
   width: 100%;
   position: fixed;
+  pointer-events: none;
 `
 
 const styledHeaderFontSize = ({
