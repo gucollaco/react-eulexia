@@ -9,5 +9,5 @@ export {
   IconFontFamily,
   IconFontSize,
   IconRuler,
-  IconTextToSpeech,
+  IconTextToSpeech
 }
