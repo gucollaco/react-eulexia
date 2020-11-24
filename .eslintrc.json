@@ -4,7 +4,15 @@
     "es2021": true
   },
   "parser": "@babel/eslint-parser",
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "plugin:react-hooks/recommended", "prettier"],
+  "extends": [
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:json/recommended",
+    "prettier",
+    "standard",
+    "standard-jsx",
+    "standard-react"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -12,15 +20,8 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
   "rules": {
-    "react/prop-types": ["error", { "skipUndeclared": true }],
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "never"],
-    "object-curly-spacing": ["error", "always"],
-    "max-len": ["error", { "code": 100, "ignoreUrls": true }]
+    "react/prop-types": ["error", { "skipUndeclared": true }]
   },
   "settings": {
     "react": {

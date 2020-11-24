@@ -11,15 +11,15 @@ import {
   IconFontFamily,
   IconFontSize,
   IconRuler,
-  IconTextToSpeech,
+  IconTextToSpeech
 } from '../icons/index.jsx'
 
 import style, { createGlobalStyle } from 'styled-components'
 
 const RulerTop = style.div.attrs((props) => ({
   style: {
-    height: props.rulerPosition - props.rulerSize / 2,
-  },
+    height: props.rulerPosition - props.rulerSize / 2
+  }
 }))`
   background-color: rgba(0,0,0,0.7);
   width: 100%;
@@ -30,8 +30,8 @@ const RulerTop = style.div.attrs((props) => ({
 
 const RulerBot = style.div.attrs((props) => ({
   style: {
-    top: props.rulerPosition + props.rulerSize / 2,
-  },
+    top: props.rulerPosition + props.rulerSize / 2
+  }
 }))`
   background-color: rgba(0,0,0,0.7);
   width: 100%;
@@ -43,8 +43,8 @@ const RulerBot = style.div.attrs((props) => ({
 const RulerLine = style.div.attrs((props) => ({
   style: {
     top: props.rulerPosition - props.rulerSize / 2,
-    height: props.rulerSize,
-  },
+    height: props.rulerSize
+  }
 }))`
   background-color: rgba(0,0,0,0.4);
   width: 100%;
@@ -55,7 +55,7 @@ const RulerLine = style.div.attrs((props) => ({
 const styledHeaderFontSize = ({
   fontSizeEnabled,
   headerFontSize,
-  htmlHeaders,
+  htmlHeaders
 }) => {
   if (!fontSizeEnabled) return ''
 
@@ -84,7 +84,7 @@ const styledFontFamily = ({
   fontFamilyEnabled,
   fontFamily,
   htmlHeaders,
-  htmlTexts,
+  htmlTexts
 }) => {
   if (!fontFamilyEnabled) return ''
 
@@ -167,14 +167,18 @@ const EulexiaFab = ({ event = 'hover' }) => {
 
     head.appendChild(link)
 
-    if (window.localStorage.getItem('fontSizeEnabled') == true)
+    if (parseInt(window.localStorage.getItem('fontSizeEnabled'))) {
       setFontSizeEnabled(true)
-    if (window.localStorage.getItem('fontFamilyEnabled') == true)
+    }
+    if (parseInt(window.localStorage.getItem('fontFamilyEnabled'))) {
       setFontFamilyEnabled(true)
-    if (window.localStorage.getItem('rulerEnabled') == true)
+    }
+    if (parseInt(window.localStorage.getItem('rulerEnabled'))) {
       setRulerEnabled(true)
-    if (window.localStorage.getItem('rulerInverted') == true)
+    }
+    if (parseInt(window.localStorage.getItem('rulerInverted'))) {
       setRulerInverted(true)
+    }
 
     return () => {
       head.removeChild(link)
@@ -182,24 +186,28 @@ const EulexiaFab = ({ event = 'hover' }) => {
   }, [])
 
   useEffect(() => {
-    if (window.localStorage.getItem('headerFontSizeValue'))
+    if (window.localStorage.getItem('headerFontSizeValue')) {
       setHeaderFontSize(
         parseInt(window.localStorage.getItem('headerFontSizeValue'))
       )
-    if (window.localStorage.getItem('textFontSizeValue'))
+    }
+    if (window.localStorage.getItem('textFontSizeValue')) {
       setTextFontSize(
         parseInt(window.localStorage.getItem('textFontSizeValue'))
       )
+    }
   }, [fontSizeEnabled])
 
   useEffect(() => {
-    if (window.localStorage.getItem('fontFamilyValue'))
+    if (window.localStorage.getItem('fontFamilyValue')) {
       setFontFamily(window.localStorage.getItem('fontFamilyValue'))
+    }
   }, [fontFamilyEnabled])
 
   useEffect(() => {
-    if (window.localStorage.getItem('rulerSizeValue'))
+    if (window.localStorage.getItem('rulerSizeValue')) {
       setRulerSize(parseInt(window.localStorage.getItem('rulerSizeValue')))
+    }
   }, [rulerEnabled])
 
   useEffect(() => {
@@ -229,7 +237,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
       ':not(.rtf--ab__c)',
       ':not(.rtf--mb__c)',
       ':not(.rtf--ab)',
-      ':not(.rtf--mb)',
+      ':not(.rtf--mb)'
     ]
     const exceptTagsJoined = exceptTags.join('')
     const textTagsJoined = textTags
@@ -242,7 +250,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
     { value: 'Courier', label: 'Courier' },
     { value: 'Open Sans, sans-serif', label: 'Open Sans' },
     { value: 'Roboto', label: 'Roboto' },
-    { value: 'Roboto Mono, monospace', label: 'Roboto Mono' },
+    { value: 'Roboto Mono, monospace', label: 'Roboto Mono' }
   ]
 
   return (
@@ -271,19 +279,19 @@ const EulexiaFab = ({ event = 'hover' }) => {
         </div>
       )}
       <Fab
-        id="eulexiaFab"
+        id='eulexiaFab'
         mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
         style={{ left: 20, bottom: 20 }}
         icon={<IconConfig />}
         event={event}
       >
-        <Action data-tip data-for="fontSize">
+        <Action data-tip data-for='fontSize'>
           <IconFontSize />
         </Action>
-        <Action data-tip data-for="fontFamily">
+        <Action data-tip data-for='fontFamily'>
           <IconFontFamily />
         </Action>
-        <Action data-tip data-for="readingRuler">
+        <Action data-tip data-for='readingRuler'>
           <IconRuler />
         </Action>
         <Action
@@ -293,17 +301,17 @@ const EulexiaFab = ({ event = 'hover' }) => {
           <IconTextToSpeech />
         </Action>
         <ReactTooltip
-          id="fontSize"
-          place="right"
-          type="light"
-          effect="solid"
-          className="hoverVisible eulexiaTooltip"
+          id='fontSize'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className="wrapper column">
-            <div className="item title row">
-              <strong className="item">Font size</strong>
-              <div className="item-text-right">
+          <div className='wrapper column'>
+            <div className='item title row'>
+              <strong className='item'>Font size</strong>
+              <div className='item-text-right'>
                 <Toggle
                   checked={fontSizeEnabled}
                   onChange={(e) => {
@@ -322,11 +330,11 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className="item column" style={{ marginTop: 28 }}>
-              <span className="item eulexia-text">
+            <div className='item column' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>
                 {headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}
               </span>
-              <div className="item">
+              <div className='item'>
                 <Slider
                   min={8}
                   max={72}
@@ -341,11 +349,11 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className="item column" style={{ marginTop: 28 }}>
-              <span className="item eulexia-text">
+            <div className='item column' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>
                 {textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}
               </span>
-              <div className="item">
+              <div className='item'>
                 <Slider
                   min={8}
                   max={72}
@@ -363,17 +371,17 @@ const EulexiaFab = ({ event = 'hover' }) => {
           </div>
         </ReactTooltip>
         <ReactTooltip
-          id="fontFamily"
-          place="right"
-          type="light"
-          effect="solid"
-          className="hoverVisible eulexiaTooltip"
+          id='fontFamily'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className="wrapper column">
-            <div className="item title row">
-              <strong className="item">Font family</strong>
-              <div className="item-text-right">
+          <div className='wrapper column'>
+            <div className='item title row'>
+              <strong className='item'>Font family</strong>
+              <div className='item-text-right'>
                 <Toggle
                   checked={fontFamilyEnabled}
                   onChange={(e) => {
@@ -390,8 +398,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className="item column" style={{ marginTop: 28 }}>
-              <div className="item">
+            <div className='item column' style={{ marginTop: 28 }}>
+              <div className='item'>
                 <Dropdown
                   options={fontOptions}
                   onChange={(obj) => {
@@ -399,7 +407,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                     window.localStorage.setItem('fontFamilyValue', obj.value)
                   }}
                   value={fontFamily}
-                  placeholder="Font family..."
+                  placeholder='Font family...'
                   disabled={!fontFamilyEnabled}
                 />
               </div>
@@ -407,17 +415,17 @@ const EulexiaFab = ({ event = 'hover' }) => {
           </div>
         </ReactTooltip>
         <ReactTooltip
-          id="readingRuler"
-          place="right"
-          type="light"
-          effect="solid"
-          className="hoverVisible eulexiaTooltip"
+          id='readingRuler'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className="wrapper column">
-            <div className="item title row">
-              <strong className="item">Reading ruler</strong>
-              <div className="item-text-right">
+          <div className='wrapper column'>
+            <div className='item title row'>
+              <strong className='item'>Reading ruler</strong>
+              <div className='item-text-right'>
                 <Toggle
                   checked={rulerEnabled}
                   onChange={(e) => {
@@ -439,11 +447,11 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className="item column" style={{ marginTop: 28 }}>
-              <span className="item eulexia-text">
+            <div className='item column' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>
                 {rulerSize ? `Size (${rulerSize} px)` : 'Size'}
               </span>
-              <div className="item">
+              <div className='item'>
                 <Slider
                   min={50}
                   max={400}
@@ -458,9 +466,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className="item row" style={{ marginTop: 28 }}>
-              <span className="item eulexia-text">Inverted mode</span>
-              <div className="item">
+            <div className='item row' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Inverted mode</span>
+              <div className='item'>
                 <Toggle
                   disabled={!rulerEnabled}
                   checked={rulerInverted}

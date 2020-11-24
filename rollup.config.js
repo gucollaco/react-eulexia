@@ -11,37 +11,37 @@ const config = [
     input: 'src/index.js',
     output: {
       file: 'dist/index.js',
-      format: 'cjs',
+      format: 'cjs'
     },
     external: [/@babel\/runtime/],
     plugins: [
       external(),
       resolve(),
       commonjs({
-        include: ['node_modules/**'],
+        include: ['node_modules/**']
       }),
       babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
       scss(),
-      uglify(),
-    ],
+      uglify()
+    ]
   },
   {
     input: 'src/index.js',
     output: {
       file: 'dist/index.modern.js',
-      format: 'es',
+      format: 'es'
     },
     external: [/@babel\/runtime/],
     plugins: [
       external(),
       resolve(),
       commonjs({
-        include: ['node_modules/**'],
+        include: ['node_modules/**']
       }),
       babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
       scss(),
-      terser(),
-    ],
+      terser()
+    ]
   },
   {
     input: 'src/index.js',
@@ -56,21 +56,21 @@ const config = [
         'react-tooltip': 'ReactTolltip',
         'react-rangeslider': 'Slider',
         'react-toggle': 'Toggle',
-        'react-dropdown': 'Dropdown',
+        'react-dropdown': 'Dropdown'
       },
-      format: 'umd',
+      format: 'umd'
     },
     plugins: [
       external(),
       resolve(),
       commonjs({
-        include: ['node_modules/**'],
+        include: ['node_modules/**']
       }),
       babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
       scss(),
-      terser(),
-    ],
-  },
+      terser()
+    ]
+  }
 ]
 
 export default config
