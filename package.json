@@ -78,6 +78,18 @@
     "react-tooltip": "^4.2.10",
     "styled-components": "^5.2.1"
   },
+  "keywords": [
+    "dyslexia",
+    "accessibility",
+    "react",
+    "components",
+    "customize",
+    "ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gucollaco/react-eulexia.git"
+  },
   "author": "Gustavo Collaço",
   "license": "MIT"
 }
