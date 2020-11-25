@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
+import { useSpeechSynthesis } from 'react-speech-kit'
 
 import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
 import { Slider, StylesSlider } from '../slider/index.jsx'
@@ -156,6 +157,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
+  // const [speechText, setSpeechText] = useState('')
+  const { speak, voices } = useSpeechSynthesis()
+
   useEffect(() => {
     const head = document.head
     const link = document.createElement('link')
@@ -220,6 +224,11 @@ const EulexiaFab = ({ event = 'hover' }) => {
     }
   })
 
+  useEffect(() => {
+    // if(!voices.length) return
+    console.log(voices)
+  }, [voices])
+
   const getHtmlHeaders = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
     const exceptTags = [':not(.eulexia-text)']
@@ -244,6 +253,14 @@ const EulexiaFab = ({ event = 'hover' }) => {
       .join(exceptTagsJoined.concat(','))
       .concat(exceptTagsJoined)
     return textTagsJoined
+  }
+
+  const getSelectedText = () => {
+    return window.getSelection
+      ? window.getSelection().toString()
+      : document.selection && document.selection.type !== 'Control'
+        ? document.selection.createRange().text
+        : ''
   }
 
   const fontOptions = [
@@ -294,10 +311,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
         <Action data-tip data-for='readingRuler'>
           <IconRuler />
         </Action>
-        <Action
-          onMouseEnter={() => console.log('onmousenter LISTEN')}
-          onMouseLeave={() => console.log('onmouseleave LISTEN')}
-        >
+        <Action data-tip data-for='textToSpeech'>
           <IconTextToSpeech />
         </Action>
         <ReactTooltip
@@ -484,6 +498,42 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
+          </div>
+        </ReactTooltip>
+        <ReactTooltip
+          id='textToSpeech'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
+          delayHide={200}
+        >
+          <div className='wrapper column'>
+            <div className='item title row'>
+              <strong className='item'>Text to speech</strong>
+            </div>
+            <div className='item row' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Read selected</span>
+              <div className='item'>
+                <button
+                  onClick={() =>
+                    speak({
+                      text: getSelectedText(),
+                      voice: voices[1]
+                    })}
+                >
+                  Play
+                </button>
+                <button>Cancel</button>
+              </div>
+            </div>
+            {/* <div className='item row' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Read page</span>
+              <div className='item'>
+                <button>Play</button>
+                <button>Cancel</button>
+              </div>
+            </div> */}
           </div>
         </ReactTooltip>
       </Fab>

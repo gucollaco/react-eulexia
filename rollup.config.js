@@ -56,7 +56,8 @@ const config = [
         'react-tooltip': 'ReactTolltip',
         'react-rangeslider': 'Slider',
         'react-toggle': 'Toggle',
-        'react-dropdown': 'Dropdown'
+        'react-dropdown': 'Dropdown',
+        'react-speech-kit': 'reactSpeechKit'
       },
       format: 'umd'
     },
