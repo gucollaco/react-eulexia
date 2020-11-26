@@ -157,8 +157,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
-  // const [speechText, setSpeechText] = useState('')
-  const { speak, voices } = useSpeechSynthesis()
+  const { speak, voices, cancel } = useSpeechSynthesis()
 
   useEffect(() => {
     const head = document.head
@@ -225,7 +224,6 @@ const EulexiaFab = ({ event = 'hover' }) => {
   })
 
   useEffect(() => {
-    // if(!voices.length) return
     console.log(voices)
   }, [voices])
 
@@ -262,6 +260,11 @@ const EulexiaFab = ({ event = 'hover' }) => {
         ? document.selection.createRange().text
         : ''
   }
+
+  const getPageLang = () =>
+    document.documentElement.lang.toLowerCase() ||
+    document.head.lang.toLowerCase() ||
+    'en-us'
 
   const fontOptions = [
     { value: 'Courier', label: 'Courier' },
@@ -516,24 +519,23 @@ const EulexiaFab = ({ event = 'hover' }) => {
               <span className='item eulexia-text'>Read selected</span>
               <div className='item'>
                 <button
-                  onClick={() =>
-                    speak({
-                      text: getSelectedText(),
-                      voice: voices[1]
-                    })}
+                  onClick={() => {
+                    if (!voices.length) {
+                      return alert('No language options found on the browser')
+                    }
+                    const text = getSelectedText()
+                    const voice = voices.find((voice) =>
+                      voice.lang.toLowerCase().includes(getPageLang())
+                    )
+                    if (!text) return
+                    speak({ text, voice })
+                  }}
                 >
                   Play
                 </button>
-                <button>Cancel</button>
+                <button onClick={() => cancel()}>Cancel</button>
               </div>
             </div>
-            {/* <div className='item row' style={{ marginTop: 28 }}>
-              <span className='item eulexia-text'>Read page</span>
-              <div className='item'>
-                <button>Play</button>
-                <button>Cancel</button>
-              </div>
-            </div> */}
           </div>
         </ReactTooltip>
       </Fab>
