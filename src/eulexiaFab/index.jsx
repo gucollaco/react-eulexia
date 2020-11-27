@@ -12,7 +12,9 @@ import {
   IconFontFamily,
   IconFontSize,
   IconRuler,
-  IconTextToSpeech
+  IconTextToSpeech,
+  IconStart,
+  IconStop
 } from '../icons/index.jsx'
 
 import style, { createGlobalStyle } from 'styled-components'
@@ -526,10 +528,16 @@ const EulexiaFab = ({ event = 'hover' }) => {
                     if (!text) return
                     speak({ text, voice })
                   }}
+                  style={{ borderRadius: '5px 0px 0px 5px' }}
                 >
-                  Play
+                  <IconStart />
                 </button>
-                <button onClick={() => cancel()}>Cancel</button>
+                <button
+                  onClick={() => cancel()}
+                  style={{ borderRadius: '0px 5px 5px 0px' }}
+                >
+                  <IconStop />
+                </button>
               </div>
             </div>
           </div>
