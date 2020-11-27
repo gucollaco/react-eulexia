@@ -21,7 +21,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,css}": [
+    "**/*.{js,jsx,css,json}": [
       "yarn fix"
     ]
   },
@@ -73,6 +73,7 @@
     "react": ">=16.8.0",
     "react-dropdown": "^1.9.0",
     "react-rangeslider": "^2.2.0",
+    "react-speech-kit": "^3.0.1",
     "react-tiny-fab": "^4.0.2",
     "react-toggle": "^4.1.1",
     "react-tooltip": "^4.2.10",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
+import { useSpeechSynthesis } from 'react-speech-kit'
 
 import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
 import { Slider, StylesSlider } from '../slider/index.jsx'
@@ -11,7 +12,9 @@ import {
   IconFontFamily,
   IconFontSize,
   IconRuler,
-  IconTextToSpeech
+  IconTextToSpeech,
+  IconStart,
+  IconStop
 } from '../icons/index.jsx'
 
 import style, { createGlobalStyle } from 'styled-components'
@@ -156,6 +159,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
+  const { speak, voices, cancel } = useSpeechSynthesis()
+
   useEffect(() => {
     const head = document.head
     const link = document.createElement('link')
@@ -246,6 +251,19 @@ const EulexiaFab = ({ event = 'hover' }) => {
     return textTagsJoined
   }
 
+  const getSelectedText = () => {
+    return window.getSelection
+      ? window.getSelection().toString()
+      : document.selection && document.selection.type !== 'Control'
+        ? document.selection.createRange().text
+        : ''
+  }
+
+  const getPageLang = () =>
+    document.documentElement.lang.toLowerCase() ||
+    document.head.lang.toLowerCase() ||
+    'en-us'
+
   const fontOptions = [
     { value: 'Courier', label: 'Courier' },
     { value: 'Open Sans, sans-serif', label: 'Open Sans' },
@@ -294,10 +312,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
         <Action data-tip data-for='readingRuler'>
           <IconRuler />
         </Action>
-        <Action
-          onMouseEnter={() => console.log('onmousenter LISTEN')}
-          onMouseLeave={() => console.log('onmouseleave LISTEN')}
-        >
+        <Action data-tip data-for='textToSpeech'>
           <IconTextToSpeech />
         </Action>
         <ReactTooltip
@@ -482,6 +497,47 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   }}
                   icons={false}
                 />
+              </div>
+            </div>
+          </div>
+        </ReactTooltip>
+        <ReactTooltip
+          id='textToSpeech'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
+          delayHide={200}
+        >
+          <div className='wrapper column'>
+            <div className='item title row'>
+              <strong className='item'>Text to speech</strong>
+            </div>
+            <div className='item row' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Read selected</span>
+              <div className='item'>
+                <button
+                  onClick={() => {
+                    if (!voices.length) {
+                      return alert('No language options found on the browser')
+                    }
+                    const text = getSelectedText()
+                    const voice = voices.find((voice) =>
+                      voice.lang.toLowerCase().includes(getPageLang())
+                    )
+                    if (!text) return
+                    speak({ text, voice })
+                  }}
+                  style={{ borderRadius: '5px 0px 0px 5px' }}
+                >
+                  <IconStart />
+                </button>
+                <button
+                  onClick={() => cancel()}
+                  style={{ borderRadius: '0px 5px 5px 0px' }}
+                >
+                  <IconStop />
+                </button>
               </div>
             </div>
           </div>
