@@ -8,6 +8,7 @@ import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
 import { Slider, StylesSlider } from '../slider/index.jsx'
 import { Toggle, StylesToggle } from '../toggle/index.jsx'
 import {
+  IconColor,
   IconConfig,
   IconFontFamily,
   IconFontSize,
@@ -159,6 +160,12 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
+  const [colorModificationEnabled, setColorModificationEnabled] = useState(
+    false
+  )
+  // const [textNewColor, setTextNewColor] = useState('')
+  // const [backgroundNewColor, setBackgroundNewColor] = useState('')
+
   const { speak, voices, cancel } = useSpeechSynthesis()
 
   useEffect(() => {
@@ -183,6 +190,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
     }
     if (parseInt(window.localStorage.getItem('rulerInverted'))) {
       setRulerInverted(true)
+    }
+    if (parseInt(window.localStorage.getItem('colorModificationEnabled'))) {
+      setColorModificationEnabled(true)
     }
 
     return () => {
@@ -214,6 +224,15 @@ const EulexiaFab = ({ event = 'hover' }) => {
       setRulerSize(parseInt(window.localStorage.getItem('rulerSizeValue')))
     }
   }, [rulerEnabled])
+
+  useEffect(() => {
+    if (window.localStorage.getItem('textNewColor')) {
+      setFontFamily(window.localStorage.getItem('textNewColor'))
+    }
+    if (window.localStorage.getItem('backgroundNewColor')) {
+      setFontFamily(window.localStorage.getItem('backgroundNewColor'))
+    }
+  }, [colorModificationEnabled])
 
   useEffect(() => {
     const rulerPositionUpdate = (e) =>
@@ -308,6 +327,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
         </Action>
         <Action data-tip data-for='fontFamily'>
           <IconFontFamily />
+        </Action>
+        <Action data-tip data-for='colorChange'>
+          <IconColor />
         </Action>
         <Action data-tip data-for='readingRuler'>
           <IconRuler />
