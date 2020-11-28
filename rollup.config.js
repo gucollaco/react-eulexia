@@ -52,12 +52,13 @@ const config = [
         react: 'React',
         'styled-components': 'styled',
         clsx: 'PropTypes',
-        'react-tiny-fab': 'reactTinyFab',
-        'react-tooltip': 'ReactTolltip',
-        'react-rangeslider': 'Slider',
-        'react-toggle': 'Toggle',
+        'react-color': 'reactColor',
         'react-dropdown': 'Dropdown',
-        'react-speech-kit': 'reactSpeechKit'
+        'react-speech-kit': 'reactSpeechKit',
+        'react-rangeslider': 'Slider',
+        'react-tiny-fab': 'reactTinyFab',
+        'react-toggle': 'Toggle',
+        'react-tooltip': 'ReactTolltip'
       },
       format: 'umd'
     },
