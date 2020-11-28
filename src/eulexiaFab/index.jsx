@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
 import { useSpeechSynthesis } from 'react-speech-kit'
+import { CirclePicker } from 'react-color'
 
 import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
 import { Slider, StylesSlider } from '../slider/index.jsx'
 import { Toggle, StylesToggle } from '../toggle/index.jsx'
 import {
+  IconColor,
   IconConfig,
   IconFontFamily,
   IconFontSize,
@@ -103,47 +105,84 @@ const styledFontFamily = ({
     : ''
 }
 
-const GlobalStyle = createGlobalStyle`
-    ${(props) => styledHeaderFontSize(props)}
-    ${(props) => styledTextFontSize(props)}
-    ${(props) => styledFontFamily(props)}
+const styledBackgroundColorChange = ({
+  colorChangeEnabled,
+  newBackgroundColor
+}) => {
+  if (!colorChangeEnabled) return ''
 
+  return newBackgroundColor
+    ? `
+      html, body, body:not(input), body:not(button) {
+        background-color: ${newBackgroundColor} !important;
+      }
+    `
+    : ''
+}
+
+const styledTextColorChange = ({
+  colorChangeEnabled,
+  newTextColor,
+  htmlHeaders,
+  htmlTexts
+}) => {
+  if (!colorChangeEnabled) return ''
+
+  return newTextColor
+    ? `
+      ${htmlHeaders} {
+        color: ${newTextColor} !important;
+      }
+      ${htmlTexts} {
+        color: ${newTextColor} !important;
+      }
+    `
+    : ''
+}
+
+const GlobalStyle = createGlobalStyle`
+  ${(props) => styledHeaderFontSize(props)}
+  ${(props) => styledTextFontSize(props)}
+  ${(props) => styledFontFamily(props)}
+  ${(props) => styledBackgroundColorChange(props)}
+  ${(props) => styledTextColorChange(props)}
+
+  .wrapper {
+    padding: 10px 0px 15px 0px;
+    font-size: 18px !important;
+    width: 280px;
+  }
+  .title {
+    font-size 21px !important;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    flex: 1;
+    text-align: left;
+  }
+  .item-text-right {
+    flex: 1;
+    text-align: right;
+  }
+  @media (max-width: 600px) {
     .wrapper {
-        padding: 10px 0px 15px 0px;
-        font-size: 18px !important;
-        width: 280px;
+        width: 180px;
     }
-    .title {
-        font-size 21px !important;
+  }
+  .hoverVisible {
+    pointer-events: auto !important;
+    &:hover {
+      visibility: visible !important;
+      opacity: 1 !important;
     }
-    .row {
-        display: flex;
-        flex-direction: row;
-    }
-    .column {
-        display: flex;
-        flex-direction: column;
-    }
-    .item {
-        flex: 1;
-        text-align: left;
-    }
-    .item-text-right {
-        flex: 1;
-        text-align: right;
-    }
-    @media (max-width: 600px) {
-        .wrapper {
-            width: 180px;
-        }
-    }
-    .hoverVisible {
-        pointer-events: auto !important;
-        &:hover {
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-    }
+  }
 `
 
 const EulexiaFab = ({ event = 'hover' }) => {
@@ -158,6 +197,10 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [rulerSize, setRulerSize] = useState(0)
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
+
+  const [colorChangeEnabled, setColorChangeEnabled] = useState(false)
+  const [newTextColor, setNewTextColor] = useState('')
+  const [newBackgroundColor, setNewBackgroundColor] = useState('')
 
   const { speak, voices, cancel } = useSpeechSynthesis()
 
@@ -183,6 +226,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
     }
     if (parseInt(window.localStorage.getItem('rulerInverted'))) {
       setRulerInverted(true)
+    }
+    if (parseInt(window.localStorage.getItem('colorChangeEnabled'))) {
+      setColorChangeEnabled(true)
     }
 
     return () => {
@@ -214,6 +260,15 @@ const EulexiaFab = ({ event = 'hover' }) => {
       setRulerSize(parseInt(window.localStorage.getItem('rulerSizeValue')))
     }
   }, [rulerEnabled])
+
+  useEffect(() => {
+    if (window.localStorage.getItem('newTextColor')) {
+      setNewTextColor(window.localStorage.getItem('newTextColor'))
+    }
+    if (window.localStorage.getItem('newBackgroundColor')) {
+      setNewBackgroundColor(window.localStorage.getItem('newBackgroundColor'))
+    }
+  }, [colorChangeEnabled])
 
   useEffect(() => {
     const rulerPositionUpdate = (e) =>
@@ -279,6 +334,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
         textFontSize={textFontSize}
         fontFamilyEnabled={fontFamilyEnabled}
         fontFamily={fontFamily}
+        colorChangeEnabled={colorChangeEnabled}
+        newBackgroundColor={newBackgroundColor}
+        newTextColor={newTextColor}
         htmlHeaders={getHtmlHeaders()}
         htmlTexts={getHtmlTexts()}
       />
@@ -309,6 +367,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
         <Action data-tip data-for='fontFamily'>
           <IconFontFamily />
         </Action>
+        <Action data-tip data-for='colorChange'>
+          <IconColor />
+        </Action>
         <Action data-tip data-for='readingRuler'>
           <IconRuler />
         </Action>
@@ -324,7 +385,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
           delayHide={200}
         >
           <div className='wrapper column'>
-            <div className='item title row'>
+            <div className='item title row eulexia'>
               <strong className='item'>Font size</strong>
               <div className='item-text-right'>
                 <Toggle
@@ -393,7 +454,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
           className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className='wrapper column'>
+          <div className='wrapper column eulexia'>
             <div className='item title row'>
               <strong className='item'>Font family</strong>
               <div className='item-text-right'>
@@ -424,6 +485,72 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   value={fontFamily}
                   placeholder='Font family...'
                   disabled={!fontFamilyEnabled}
+                />
+              </div>
+            </div>
+          </div>
+        </ReactTooltip>
+        <ReactTooltip
+          id='colorChange'
+          place='right'
+          type='light'
+          effect='solid'
+          className='hoverVisible eulexiaTooltip'
+          delayHide={200}
+        >
+          <div className='wrapper column eulexia'>
+            <div className='item title row eulexia'>
+              <strong className='item'>Change color</strong>
+              <div className='item-text-right eulexia'>
+                <Toggle
+                  checked={colorChangeEnabled}
+                  onChange={(e) => {
+                    setColorChangeEnabled(e.target.checked)
+                    if (e.target.checked) {
+                      window.localStorage.setItem('colorChangeEnabled', 1)
+                      return
+                    }
+                    setNewTextColor('')
+                    setNewBackgroundColor('')
+                    window.localStorage.removeItem('colorChangeEnabled')
+                    window.localStorage.removeItem('newTextColor')
+                    window.localStorage.removeItem('newBackgroundColor')
+                  }}
+                  icons={false}
+                />
+              </div>
+            </div>
+            <div className='item column' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Text</span>
+              <div className='item' style={{ marginTop: 16 }}>
+                <CirclePicker
+                  width='276'
+                  circleSize={32}
+                  circleSpacing={16}
+                  color={newTextColor}
+                  colors={['#000000', '#191970', '#00008B', '#40E0D0']}
+                  onChangeComplete={({ hex }) => {
+                    if (!colorChangeEnabled) return
+                    setNewTextColor(hex)
+                    window.localStorage.setItem('newTextColor', hex)
+                  }}
+                />
+              </div>
+            </div>
+            <div className='item column' style={{ marginTop: 28 }}>
+              <span className='item eulexia-text'>Background</span>
+              <div className='item' style={{ marginTop: 16 }}>
+                <CirclePicker
+                  width='276'
+                  circleSize={32}
+                  circleSpacing={16}
+                  color={newBackgroundColor}
+                  colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#000000']}
+                  onChangeComplete={({ hex }) => {
+                    if (!colorChangeEnabled) return
+                    setNewBackgroundColor(hex)
+                    window.localStorage.setItem('newBackgroundColor', hex)
+                  }}
                 />
               </div>
             </div>
