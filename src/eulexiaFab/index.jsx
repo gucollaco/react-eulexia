@@ -105,47 +105,84 @@ const styledFontFamily = ({
     : ''
 }
 
-const GlobalStyle = createGlobalStyle`
-    ${(props) => styledHeaderFontSize(props)}
-    ${(props) => styledTextFontSize(props)}
-    ${(props) => styledFontFamily(props)}
+const styledBackgroundColorChange = ({
+  colorChangeEnabled,
+  newBackgroundColor
+}) => {
+  if (!colorChangeEnabled) return ''
 
+  return newBackgroundColor
+    ? `
+      html, body, body:not(input), body:not(button) {
+        background-color: ${newBackgroundColor} !important;
+      }
+    `
+    : ''
+}
+
+const styledTextColorChange = ({
+  colorChangeEnabled,
+  newTextColor,
+  htmlHeaders,
+  htmlTexts
+}) => {
+  if (!colorChangeEnabled) return ''
+
+  return newTextColor
+    ? `
+      ${htmlHeaders} {
+        color: ${newTextColor} !important;
+      }
+      ${htmlTexts} {
+        color: ${newTextColor} !important;
+      }
+    `
+    : ''
+}
+
+const GlobalStyle = createGlobalStyle`
+  ${(props) => styledHeaderFontSize(props)}
+  ${(props) => styledTextFontSize(props)}
+  ${(props) => styledFontFamily(props)}
+  ${(props) => styledBackgroundColorChange(props)}
+  ${(props) => styledTextColorChange(props)}
+
+  .wrapper {
+    padding: 10px 0px 15px 0px;
+    font-size: 18px !important;
+    width: 280px;
+  }
+  .title {
+    font-size 21px !important;
+  }
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    flex: 1;
+    text-align: left;
+  }
+  .item-text-right {
+    flex: 1;
+    text-align: right;
+  }
+  @media (max-width: 600px) {
     .wrapper {
-        padding: 10px 0px 15px 0px;
-        font-size: 18px !important;
-        width: 280px;
+        width: 180px;
     }
-    .title {
-        font-size 21px !important;
+  }
+  .hoverVisible {
+    pointer-events: auto !important;
+    &:hover {
+      visibility: visible !important;
+      opacity: 1 !important;
     }
-    .row {
-        display: flex;
-        flex-direction: row;
-    }
-    .column {
-        display: flex;
-        flex-direction: column;
-    }
-    .item {
-        flex: 1;
-        text-align: left;
-    }
-    .item-text-right {
-        flex: 1;
-        text-align: right;
-    }
-    @media (max-width: 600px) {
-        .wrapper {
-            width: 180px;
-        }
-    }
-    .hoverVisible {
-        pointer-events: auto !important;
-        &:hover {
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-    }
+  }
 `
 
 const EulexiaFab = ({ event = 'hover' }) => {
@@ -297,6 +334,9 @@ const EulexiaFab = ({ event = 'hover' }) => {
         textFontSize={textFontSize}
         fontFamilyEnabled={fontFamilyEnabled}
         fontFamily={fontFamily}
+        colorChangeEnabled={colorChangeEnabled}
+        newBackgroundColor={newBackgroundColor}
+        newTextColor={newTextColor}
         htmlHeaders={getHtmlHeaders()}
         htmlTexts={getHtmlTexts()}
       />
@@ -345,7 +385,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
           delayHide={200}
         >
           <div className='wrapper column'>
-            <div className='item title row'>
+            <div className='item title row eulexia'>
               <strong className='item'>Font size</strong>
               <div className='item-text-right'>
                 <Toggle
@@ -414,7 +454,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
           className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className='wrapper column'>
+          <div className='wrapper column eulexia'>
             <div className='item title row'>
               <strong className='item'>Font family</strong>
               <div className='item-text-right'>
@@ -458,10 +498,10 @@ const EulexiaFab = ({ event = 'hover' }) => {
           className='hoverVisible eulexiaTooltip'
           delayHide={200}
         >
-          <div className='wrapper column'>
-            <div className='item title row'>
+          <div className='wrapper column eulexia'>
+            <div className='item title row eulexia'>
               <strong className='item'>Change color</strong>
-              <div className='item-text-right'>
+              <div className='item-text-right eulexia'>
                 <Toggle
                   checked={colorChangeEnabled}
                   onChange={(e) => {
@@ -470,8 +510,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
                       window.localStorage.setItem('colorChangeEnabled', 1)
                       return
                     }
-                    setNewTextColor(null)
-                    setNewBackgroundColor(null)
+                    setNewTextColor('')
+                    setNewBackgroundColor('')
                     window.localStorage.removeItem('colorChangeEnabled')
                     window.localStorage.removeItem('newTextColor')
                     window.localStorage.removeItem('newBackgroundColor')
@@ -488,6 +528,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   circleSize={32}
                   circleSpacing={16}
                   color={newTextColor}
+                  colors={['#000000', '#191970', '#00008B', '#40E0D0']}
                   onChangeComplete={({ hex }) => {
                     if (!colorChangeEnabled) return
                     setNewTextColor(hex)
@@ -504,7 +545,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   circleSize={32}
                   circleSpacing={16}
                   color={newBackgroundColor}
-                  // colors={["#f44336", "#e91e63", "#9c27b0", "#673ab7", "#3f51b5", "#2196f3", "#03a9f4", "#00bcd4", "#009688", "#4caf50", "#8bc34a", "#cddc39", "#ffeb3b", "#ffc107", "#ff9800", "#ff5722", "#795548", "#607d8b"]}
+                  colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#000000']}
                   onChangeComplete={({ hex }) => {
                     if (!colorChangeEnabled) return
                     setNewBackgroundColor(hex)
