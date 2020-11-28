@@ -58,7 +58,7 @@ const config = [
         'react-rangeslider': 'Slider',
         'react-tiny-fab': 'reactTinyFab',
         'react-toggle': 'Toggle',
-        'react-tooltip': 'ReactTolltip'
+        'react-tooltip': 'ReactTooltip'
       },
       format: 'umd'
     },
