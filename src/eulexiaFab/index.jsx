@@ -575,7 +575,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                       window.localStorage.setItem('rulerInverted', 0)
                       return
                     }
-                    setRulerSize(0)
+                    setRulerSize(50)
                     setRulerInverted(false)
                     window.localStorage.removeItem('rulerEnabled')
                     window.localStorage.removeItem('rulerSizeValue')
@@ -587,7 +587,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
             </div>
             <div className='item column' style={{ marginTop: 28 }}>
               <span className='item eulexia-text'>
-                {rulerSize ? `Size (${rulerSize} px)` : 'Size'}
+                {rulerEnabled && rulerSize ? `Size (${rulerSize} px)` : 'Size'}
               </span>
               <div className='item'>
                 <Slider
