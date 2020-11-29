@@ -1,8 +1,11 @@
+import React from 'react'
 import Dropdown from 'react-dropdown'
 import styled from 'styled-components'
 
-const StyledDropdown = styled(Dropdown)`
-  position: relative;
+const Styles = styled.div`
+  .Dropdown-root {
+    position: relative;
+  }
 
   .Dropdown-control {
     position: relative;
@@ -94,5 +97,11 @@ const StyledDropdown = styled(Dropdown)`
     padding: 8px 10px;
   }
 `
+
+const StyledDropdown = ({ className, ...props }) => (
+  <Styles>
+    <Dropdown className={className} {...props} />
+  </Styles>
+)
 
 export default StyledDropdown
