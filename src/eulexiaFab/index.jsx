@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import { useSpeechSynthesis } from 'react-speech-kit'
 import { CirclePicker } from 'react-color'
 
-import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
+import Dropdown from '../dropdown/index.jsx'
 import Slider from '../slider/index.jsx'
 import { Toggle, StylesToggle } from '../toggle/index.jsx'
 import {
@@ -340,7 +340,6 @@ const EulexiaFab = ({ event = 'hover' }) => {
         htmlHeaders={getHtmlHeaders()}
         htmlTexts={getHtmlTexts()}
       />
-      <StylesDropdown />
       <StylesToggle />
       {rulerEnabled && !rulerInverted && (
         <div style={{ position: 'relative' }}>
