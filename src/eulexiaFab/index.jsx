@@ -32,6 +32,7 @@ const RulerTop = styled.div.attrs((props) => ({
   top: 0;
   left: 0;
   position: fixed;
+  pointer-events: none;
 `
 
 const RulerBot = styled.div.attrs((props) => ({
@@ -44,6 +45,7 @@ const RulerBot = styled.div.attrs((props) => ({
   bottom: 0;
   left: 0;
   position: fixed;
+  pointer-events: none;
 `
 
 const RulerLine = styled.div.attrs((props) => ({
