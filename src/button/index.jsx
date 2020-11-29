@@ -1,8 +1,4 @@
-import React from 'react'
-import clsx from 'clsx'
+import PlayButton from './play.jsx'
+import StopButton from './stop.jsx'
 
-const Button = ({ className, ...props }) => {
-  return <button className={clsx(className, 'lexia')} {...props} />
-}
-
-export default Button
+export { PlayButton, StopButton }

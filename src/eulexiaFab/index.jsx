@@ -8,6 +8,7 @@ import { CirclePicker } from 'react-color'
 import Dropdown from '../dropdown/index.jsx'
 import Slider from '../slider/index.jsx'
 import Toggle from '../toggle/index.jsx'
+import { PlayButton, StopButton } from '../button/index.jsx'
 import {
   IconColor,
   IconConfig,
@@ -634,32 +635,35 @@ const EulexiaFab = ({ event = 'hover' }) => {
             <div className='item title row'>
               <strong className='item'>Text to speech</strong>
             </div>
-            <div className='item row' style={{ marginTop: 28 }}>
-              <span className='item eulexia-text'>Read selected</span>
-              <div className='item'>
-                <button
-                  onClick={() => {
-                    if (!voices.length) {
-                      return alert('No language options found on the browser')
-                    }
-                    const text = getSelectedText()
-                    const voice = voices.find((voice) =>
-                      voice.lang.toLowerCase().includes(getPageLang())
-                    )
-                    if (!text) return
-                    speak({ text, voice })
-                  }}
-                  style={{ borderRadius: '5px 0px 0px 5px' }}
-                >
-                  <IconStart />
-                </button>
-                <button
-                  onClick={() => cancel()}
-                  style={{ borderRadius: '0px 5px 5px 0px' }}
-                >
-                  <IconStop />
-                </button>
-              </div>
+            <div
+              className='item row'
+              style={{ marginTop: 28, alignItems: 'center' }}
+            >
+              {!voices.length && (
+                <span className='item eulexia-text'>Browser not supported</span>
+              )}
+              {voices.length > 0 && (
+                <>
+                  <span className='item eulexia-text'>Read selected</span>
+                  <div className='item'>
+                    <PlayButton
+                      onClick={() => {
+                        const text = getSelectedText()
+                        const voice = voices.find((voice) =>
+                          voice.lang.toLowerCase().includes(getPageLang())
+                        )
+                        if (!text) return
+                        speak({ text, voice })
+                      }}
+                    >
+                      <IconStart />
+                    </PlayButton>
+                    <StopButton onClick={() => cancel()}>
+                      <IconStop />
+                    </StopButton>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </ReactTooltip>
