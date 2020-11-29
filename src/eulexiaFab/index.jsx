@@ -7,7 +7,7 @@ import { CirclePicker } from 'react-color'
 
 import Dropdown from '../dropdown/index.jsx'
 import Slider from '../slider/index.jsx'
-import { Toggle, StylesToggle } from '../toggle/index.jsx'
+import Toggle from '../toggle/index.jsx'
 import {
   IconColor,
   IconConfig,
@@ -340,7 +340,6 @@ const EulexiaFab = ({ event = 'hover' }) => {
         htmlHeaders={getHtmlHeaders()}
         htmlTexts={getHtmlTexts()}
       />
-      <StylesToggle />
       {rulerEnabled && !rulerInverted && (
         <div style={{ position: 'relative' }}>
           <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
