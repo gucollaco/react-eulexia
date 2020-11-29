@@ -6,7 +6,7 @@ import { useSpeechSynthesis } from 'react-speech-kit'
 import { CirclePicker } from 'react-color'
 
 import { Dropdown, StylesDropdown } from '../dropdown/index.jsx'
-import { Slider, StylesSlider } from '../slider/index.jsx'
+import Slider from '../slider/index.jsx'
 import { Toggle, StylesToggle } from '../toggle/index.jsx'
 import {
   IconColor,
@@ -19,39 +19,39 @@ import {
   IconStop
 } from '../icons/index.jsx'
 
-import style, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
-const RulerTop = style.div.attrs((props) => ({
+const RulerTop = styled.div.attrs((props) => ({
   style: {
     height: props.rulerPosition - props.rulerSize / 2
   }
 }))`
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
   top: 0;
   left: 0;
   position: fixed;
 `
 
-const RulerBot = style.div.attrs((props) => ({
+const RulerBot = styled.div.attrs((props) => ({
   style: {
     top: props.rulerPosition + props.rulerSize / 2
   }
 }))`
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100%;
   bottom: 0;
   left: 0;
   position: fixed;
 `
 
-const RulerLine = style.div.attrs((props) => ({
+const RulerLine = styled.div.attrs((props) => ({
   style: {
     top: props.rulerPosition - props.rulerSize / 2,
     height: props.rulerSize
   }
 }))`
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   position: fixed;
   pointer-events: none;
@@ -194,7 +194,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
   const [fontFamily, setFontFamily] = useState('')
 
   const [rulerEnabled, setRulerEnabled] = useState(false)
-  const [rulerSize, setRulerSize] = useState(0)
+  const [rulerSize, setRulerSize] = useState(50)
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
@@ -342,7 +342,6 @@ const EulexiaFab = ({ event = 'hover' }) => {
       />
       <StylesDropdown />
       <StylesToggle />
-      <StylesSlider />
       {rulerEnabled && !rulerInverted && (
         <div style={{ position: 'relative' }}>
           <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
@@ -412,15 +411,14 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </span>
               <div className='item'>
                 <Slider
-                  min={8}
+                  disabled={!fontSizeEnabled}
+                  step={1}
+                  min={0}
                   max={72}
-                  step={2}
-                  tooltip={false}
-                  value={headerFontSize}
-                  onChange={(value) => {
-                    if (!fontSizeEnabled) return
-                    setHeaderFontSize(value)
-                    window.localStorage.setItem('headerFontSizeValue', value)
+                  values={[headerFontSize]}
+                  onChange={([values]) => {
+                    setHeaderFontSize(values)
+                    window.localStorage.setItem('setHeaderFontSize', values)
                   }}
                 />
               </div>
@@ -431,15 +429,14 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </span>
               <div className='item'>
                 <Slider
-                  min={8}
+                  disabled={!fontSizeEnabled}
+                  step={1}
+                  min={0}
                   max={72}
-                  step={2}
-                  tooltip={false}
-                  value={textFontSize}
-                  onChange={(value) => {
-                    if (!fontSizeEnabled) return
-                    setTextFontSize(value)
-                    window.localStorage.setItem('textFontSizeValue', value)
+                  values={[textFontSize]}
+                  onChange={([values]) => {
+                    setTextFontSize(values)
+                    window.localStorage.setItem('textFontSizeValue', values)
                   }}
                 />
               </div>
@@ -595,15 +592,14 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </span>
               <div className='item'>
                 <Slider
+                  disabled={!rulerEnabled}
+                  step={5}
                   min={50}
                   max={400}
-                  step={5}
-                  tooltip={false}
-                  value={rulerSize}
-                  onChange={(value) => {
-                    if (!rulerEnabled) return
-                    setRulerSize(value)
-                    window.localStorage.setItem('rulerSizeValue', value)
+                  values={[rulerSize]}
+                  onChange={([values]) => {
+                    setRulerSize(values)
+                    window.localStorage.setItem('rulerSizeValue', values)
                   }}
                 />
               </div>

@@ -54,8 +54,8 @@ const config = [
         clsx: 'PropTypes',
         'react-color': 'reactColor',
         'react-dropdown': 'Dropdown',
+        'react-range': 'reactRange',
         'react-speech-kit': 'reactSpeechKit',
-        'react-rangeslider': 'Slider',
         'react-tiny-fab': 'reactTinyFab',
         'react-toggle': 'Toggle',
         'react-tooltip': 'ReactTooltip'
