@@ -526,7 +526,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   circleSize={32}
                   circleSpacing={16}
                   color={newTextColor}
-                  colors={['#000000', '#191970', '#00008B', '#40E0D0']}
+                  colors={['#030303', '#191970', '#00008B', '#40E0D0']}
                   onChangeComplete={({ hex }) => {
                     if (!colorChangeEnabled) return
                     setNewTextColor(hex)
@@ -543,7 +543,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   circleSize={32}
                   circleSpacing={16}
                   color={newBackgroundColor}
-                  colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#000000']}
+                  colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
                   onChangeComplete={({ hex }) => {
                     if (!colorChangeEnabled) return
                     setNewBackgroundColor(hex)
