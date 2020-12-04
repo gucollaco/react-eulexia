@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
-import { Fab, Action } from 'react-tiny-fab'
 import ReactTooltip from 'react-tooltip'
 import { useSpeechSynthesis } from 'react-speech-kit'
 import { CirclePicker } from 'react-color'
 
+import Fab from '../Fab/Fab.jsx'
+import Action from '../Action/Action.jsx'
 import Dropdown from '../dropdown/index.jsx'
 import Slider from '../slider/index.jsx'
 import Toggle from '../toggle/index.jsx'
-import { PlayButton, StopButton } from '../button/index.jsx'
+import { PlayButton, StopButton } from '../Button/index.jsx'
 import {
-  IconColor,
-  IconConfig,
-  IconFontFamily,
-  IconFontSize,
-  IconRuler,
-  IconTextToSpeech,
-  IconStart,
-  IconStop
-} from '../icons/index.jsx'
+  ColorChangeIcon,
+  FontFamilyIcon,
+  FontSizeIcon,
+  RulerIcon,
+  TextToSpeechIcon
+} from '../Icon/index.jsx'
 
 import styled, { createGlobalStyle } from 'styled-components'
 
@@ -354,27 +352,21 @@ const EulexiaFab = ({ event = 'hover' }) => {
           <RulerBot rulerPosition={rulerPosition} rulerSize={rulerSize} />
         </div>
       )}
-      <Fab
-        id='eulexiaFab'
-        mainButtonStyles={{ backgroundColor: '#A7C5E6' }}
-        style={{ left: 20, bottom: 20 }}
-        icon={<IconConfig />}
-        event={event}
-      >
+      <Fab>
         <Action data-tip data-for='fontSize'>
-          <IconFontSize />
+          <FontSizeIcon />
         </Action>
         <Action data-tip data-for='fontFamily'>
-          <IconFontFamily />
+          <FontFamilyIcon />
         </Action>
         <Action data-tip data-for='colorChange'>
-          <IconColor />
+          <ColorChangeIcon />
         </Action>
         <Action data-tip data-for='readingRuler'>
-          <IconRuler />
+          <RulerIcon />
         </Action>
         <Action data-tip data-for='textToSpeech'>
-          <IconTextToSpeech />
+          <TextToSpeechIcon />
         </Action>
         <ReactTooltip
           id='fontSize'
@@ -657,12 +649,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
                         if (!text) return
                         speak({ text, voice })
                       }}
-                    >
-                      <IconStart />
-                    </PlayButton>
-                    <StopButton onClick={() => cancel()}>
-                      <IconStop />
-                    </StopButton>
+                    />
+                    <StopButton onClick={() => cancel()} />
                   </div>
                 </>
               )}

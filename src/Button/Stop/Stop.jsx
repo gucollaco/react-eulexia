@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { StopIcon } from '../../Icon/index.jsx'
 
 const StyledButton = styled.button`
   height: 32px;
@@ -11,9 +12,9 @@ const StyledButton = styled.button`
   cursor: pointer;
 `
 
-const StopButton = ({ children, className, ...props }) => (
+const StopButton = ({ className, ...props }) => (
   <StyledButton className={className} {...props}>
-    {children}
+    <StopIcon />
   </StyledButton>
 )
 

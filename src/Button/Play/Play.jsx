@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { StartIcon } from '../../Icon/index.jsx'
 
 const StyledButton = styled.button`
   height: 32px;
@@ -11,9 +12,9 @@ const StyledButton = styled.button`
   cursor: pointer;
 `
 
-const PlayButton = ({ children, className, ...props }) => (
+const PlayButton = ({ className, ...props }) => (
   <StyledButton className={className} {...props}>
-    {children}
+    <StartIcon />
   </StyledButton>
 )
 
