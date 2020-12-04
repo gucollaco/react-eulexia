@@ -419,7 +419,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                   values={[headerFontSize]}
                   onChange={([values]) => {
                     setHeaderFontSize(values)
-                    window.localStorage.setItem('setHeaderFontSize', values)
+                    window.localStorage.setItem('headerFontSizeValue', values)
                   }}
                 />
               </div>
