@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import ReactTooltip from 'react-tooltip'
 import { useSpeechSynthesis } from 'react-speech-kit'
 import { CirclePicker } from 'react-color'
 
@@ -9,6 +8,7 @@ import Action from '../Action/Action.jsx'
 import Dropdown from '../Dropdown/Dropdown.jsx'
 import Slider from '../Slider/Slider.jsx'
 import Toggle from '../Toggle/Toggle.jsx'
+import Tooltip from '../Tooltip/Tooltip.jsx'
 import { PlayButton, StopButton } from '../Button/index.jsx'
 import {
   ColorChangeIcon,
@@ -164,6 +164,15 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+  .tall-margin-top {
+    margin-top: 28px;
+  }
+  .medium-margin-top {
+    margin-top: 16px;
+  }
+  .align-center {
+    align-items: center;
+  }
   .item {
     flex: 1;
     text-align: left;
@@ -175,13 +184,6 @@ const GlobalStyle = createGlobalStyle`
   @media (max-width: 600px) {
     .wrapper {
         width: 180px;
-    }
-  }
-  .hoverVisible {
-    pointer-events: auto !important;
-    &:hover {
-      visibility: visible !important;
-      opacity: 1 !important;
     }
   }
 `
@@ -368,14 +370,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
         <Action data-tip data-for='textToSpeech'>
           <TextToSpeechIcon />
         </Action>
-        <ReactTooltip
-          id='fontSize'
-          place='right'
-          type='light'
-          effect='solid'
-          className='hoverVisible eulexiaTooltip'
-          delayHide={200}
-        >
+        <Tooltip id='fontSize'>
           <div className='wrapper column'>
             <div className='item title row eulexia'>
               <strong className='item'>Font size</strong>
@@ -398,7 +393,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <span className='item eulexia-text'>
                 {headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}
               </span>
@@ -416,7 +411,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <span className='item eulexia-text'>
                 {textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}
               </span>
@@ -435,15 +430,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </div>
             </div>
           </div>
-        </ReactTooltip>
-        <ReactTooltip
-          id='fontFamily'
-          place='right'
-          type='light'
-          effect='solid'
-          className='hoverVisible eulexiaTooltip'
-          delayHide={200}
-        >
+        </Tooltip>
+        <Tooltip id='fontFamily'>
           <div className='wrapper column eulexia'>
             <div className='item title row'>
               <strong className='item'>Font family</strong>
@@ -464,7 +452,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <div className='item'>
                 <Dropdown
                   options={fontOptions}
@@ -479,15 +467,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </div>
             </div>
           </div>
-        </ReactTooltip>
-        <ReactTooltip
-          id='colorChange'
-          place='right'
-          type='light'
-          effect='solid'
-          className='hoverVisible eulexiaTooltip'
-          delayHide={200}
-        >
+        </Tooltip>
+        <Tooltip id='colorChange'>
           <div className='wrapper column eulexia'>
             <div className='item title row eulexia'>
               <strong className='item'>Change color</strong>
@@ -510,7 +491,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <span className='item eulexia-text'>Text</span>
               <div className='item' style={{ marginTop: 16 }}>
                 <CirclePicker
@@ -527,7 +508,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <span className='item eulexia-text'>Background</span>
               <div className='item' style={{ marginTop: 16 }}>
                 <CirclePicker
@@ -545,15 +526,8 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </div>
             </div>
           </div>
-        </ReactTooltip>
-        <ReactTooltip
-          id='readingRuler'
-          place='right'
-          type='light'
-          effect='solid'
-          className='hoverVisible eulexiaTooltip'
-          delayHide={200}
-        >
+        </Tooltip>
+        <Tooltip id='readingRuler'>
           <div className='wrapper column'>
             <div className='item title row'>
               <strong className='item'>Reading ruler</strong>
@@ -579,7 +553,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item column' style={{ marginTop: 28 }}>
+            <div className='item column tall-margin-top'>
               <span className='item eulexia-text'>
                 {rulerEnabled && rulerSize ? `Size (${rulerSize} px)` : 'Size'}
               </span>
@@ -597,7 +571,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
                 />
               </div>
             </div>
-            <div className='item row' style={{ marginTop: 28 }}>
+            <div className='item row tall-margin-top'>
               <span className='item eulexia-text'>Inverted mode</span>
               <div className='item'>
                 <Toggle
@@ -616,23 +590,13 @@ const EulexiaFab = ({ event = 'hover' }) => {
               </div>
             </div>
           </div>
-        </ReactTooltip>
-        <ReactTooltip
-          id='textToSpeech'
-          place='right'
-          type='light'
-          effect='solid'
-          className='hoverVisible eulexiaTooltip'
-          delayHide={200}
-        >
+        </Tooltip>
+        <Tooltip id='textToSpeech'>
           <div className='wrapper column'>
             <div className='item title row'>
               <strong className='item'>Text to speech</strong>
             </div>
-            <div
-              className='item row'
-              style={{ marginTop: 28, alignItems: 'center' }}
-            >
+            <div className='item row tall-margin-top align-center'>
               {!voices.length && (
                 <span className='item eulexia-text'>Browser not supported</span>
               )}
@@ -656,7 +620,7 @@ const EulexiaFab = ({ event = 'hover' }) => {
               )}
             </div>
           </div>
-        </ReactTooltip>
+        </Tooltip>
       </Fab>
     </>
   )
