@@ -6,9 +6,9 @@ import { CirclePicker } from 'react-color'
 
 import Fab from '../Fab/Fab.jsx'
 import Action from '../Action/Action.jsx'
-import Dropdown from '../dropdown/index.jsx'
-import Slider from '../slider/index.jsx'
-import Toggle from '../toggle/index.jsx'
+import Dropdown from '../Dropdown/Dropdown.jsx'
+import Slider from '../Slider/Slider.jsx'
+import Toggle from '../Toggle/Toggle.jsx'
 import { PlayButton, StopButton } from '../Button/index.jsx'
 import {
   ColorChangeIcon,
