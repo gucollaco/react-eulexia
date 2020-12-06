@@ -16,9 +16,15 @@ const EulexiaContextProvider = ({ children }) => {
   const [newTextColor, setNewTextColor] = useState('')
   const [newBackgroundColor, setNewBackgroundColor] = useState('')
 
+  const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
+  const [fontFamily, setFontFamily] = useState('')
+
   useEffect(() => {
     if (parseInt(window.localStorage.getItem('fontSizeEnabled'))) {
       setFontSizeEnabled(true)
+    }
+    if (parseInt(window.localStorage.getItem('fontFamilyEnabled'))) {
+      setFontFamilyEnabled(true)
     }
     if (parseInt(window.localStorage.getItem('colorChangeEnabled'))) {
       setColorChangeEnabled(true)
@@ -45,6 +51,12 @@ const EulexiaContextProvider = ({ children }) => {
   }, [fontSizeEnabled])
 
   useEffect(() => {
+    if (window.localStorage.getItem('fontFamilyValue')) {
+      setFontFamily(window.localStorage.getItem('fontFamilyValue'))
+    }
+  }, [fontFamilyEnabled])
+
+  useEffect(() => {
     if (window.localStorage.getItem('newTextColor')) {
       setNewTextColor(window.localStorage.getItem('newTextColor'))
     }
@@ -69,6 +81,24 @@ const EulexiaContextProvider = ({ children }) => {
     }
   })
 
+  useEffect(() => {
+    if (!fontFamilyEnabled) return
+
+    const head = document.head
+    const link = document.createElement('link')
+
+    link.type = 'text/css'
+    link.rel = 'stylesheet'
+    link.href =
+      'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
+
+    head.appendChild(link)
+
+    return () => {
+      head.removeChild(link)
+    }
+  }, [fontFamilyEnabled])
+
   const values = {
     rulerEnabled,
     setRulerEnabled,
@@ -91,7 +121,12 @@ const EulexiaContextProvider = ({ children }) => {
     newTextColor,
     setNewTextColor,
     newBackgroundColor,
-    setNewBackgroundColor
+    setNewBackgroundColor,
+
+    fontFamilyEnabled,
+    setFontFamilyEnabled,
+    fontFamily,
+    setFontFamily
   }
 
   return (

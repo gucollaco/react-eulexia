@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
+import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+
 import Action from '../../Action/Action.jsx'
 import Dropdown from '../../Dropdown/Dropdown.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
@@ -7,8 +10,12 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontFamilyIcon } from '../../Icon/index.jsx'
 
 const FontFamilyAction = () => {
-  const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
-  const [fontFamily, setFontFamily] = useState('')
+  const {
+    fontFamilyEnabled,
+    setFontFamilyEnabled,
+    fontFamily,
+    setFontFamily
+  } = useContext(EulexiaContext)
 
   const fontOptions = [
     { value: 'Courier', label: 'Courier' },
@@ -16,32 +23,6 @@ const FontFamilyAction = () => {
     { value: 'Roboto', label: 'Roboto' },
     { value: 'Roboto Mono, monospace', label: 'Roboto Mono' }
   ]
-
-  useEffect(() => {
-    const head = document.head
-    const link = document.createElement('link')
-
-    link.type = 'text/css'
-    link.rel = 'stylesheet'
-    link.href =
-      'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
-
-    head.appendChild(link)
-
-    if (parseInt(window.localStorage.getItem('fontFamilyEnabled'))) {
-      setFontFamilyEnabled(true)
-    }
-
-    return () => {
-      head.removeChild(link)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (window.localStorage.getItem('fontFamilyValue')) {
-      setFontFamily(window.localStorage.getItem('fontFamilyValue'))
-    }
-  }, [fontFamilyEnabled])
 
   const getHtmlTexts = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'span']
