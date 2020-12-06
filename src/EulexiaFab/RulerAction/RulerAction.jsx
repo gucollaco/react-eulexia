@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
+
+import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+
 import Action from '../../Action/Action.jsx'
 import Slider from '../../Slider/Slider.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { RulerIcon } from '../../Icon/index.jsx'
-import { RulerContext } from '../ruler-context.jsx'
 
 const RulerAction = () => {
   const {
@@ -12,35 +14,9 @@ const RulerAction = () => {
     setRulerEnabled,
     rulerSize,
     setRulerSize,
-    setRulerPosition,
     rulerInverted,
     setRulerInverted
-  } = useContext(RulerContext)
-
-  useEffect(() => {
-    if (parseInt(window.localStorage.getItem('rulerEnabled'))) {
-      setRulerEnabled(true)
-    }
-    if (parseInt(window.localStorage.getItem('rulerInverted'))) {
-      setRulerInverted(true)
-    }
-  }, [setRulerEnabled, setRulerInverted])
-
-  useEffect(() => {
-    if (window.localStorage.getItem('rulerSizeValue')) {
-      setRulerSize(parseInt(window.localStorage.getItem('rulerSizeValue')))
-    }
-  }, [rulerEnabled, setRulerSize])
-
-  useEffect(() => {
-    const rulerPositionUpdate = (e) =>
-      rulerEnabled ? setRulerPosition(e.clientY) : {}
-
-    document.addEventListener('mousemove', rulerPositionUpdate, false)
-    return () => {
-      document.removeEventListener('mousemove', rulerPositionUpdate, false)
-    }
-  })
+  } = useContext(EulexiaContext)
 
   return (
     <>

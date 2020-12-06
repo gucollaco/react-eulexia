@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
+import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+
 import Action from '../../Action/Action.jsx'
 import Slider from '../../Slider/Slider.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
@@ -7,28 +10,14 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontSizeIcon } from '../../Icon/index.jsx'
 
 const FontSizeAction = () => {
-  const [fontSizeEnabled, setFontSizeEnabled] = useState(false)
-  const [headerFontSize, setHeaderFontSize] = useState(0)
-  const [textFontSize, setTextFontSize] = useState(0)
-
-  useEffect(() => {
-    if (parseInt(window.localStorage.getItem('fontSizeEnabled'))) {
-      setFontSizeEnabled(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (window.localStorage.getItem('headerFontSizeValue')) {
-      setHeaderFontSize(
-        parseInt(window.localStorage.getItem('headerFontSizeValue'))
-      )
-    }
-    if (window.localStorage.getItem('textFontSizeValue')) {
-      setTextFontSize(
-        parseInt(window.localStorage.getItem('textFontSizeValue'))
-      )
-    }
-  }, [fontSizeEnabled])
+  const {
+    fontSizeEnabled,
+    setFontSizeEnabled,
+    headerFontSize,
+    setHeaderFontSize,
+    textFontSize,
+    setTextFontSize
+  } = useContext(EulexiaContext)
 
   const getHtmlHeaders = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
