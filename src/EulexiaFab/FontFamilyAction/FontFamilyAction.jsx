@@ -1,0 +1,113 @@
+import React, { useEffect, useState } from 'react'
+import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
+import Action from '../../Action/Action.jsx'
+import Dropdown from '../../Dropdown/Dropdown.jsx'
+import Toggle from '../../Toggle/Toggle.jsx'
+import Tooltip from '../../Tooltip/Tooltip.jsx'
+import { FontFamilyIcon } from '../../Icon/index.jsx'
+
+const FontFamilyAction = () => {
+  const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
+  const [fontFamily, setFontFamily] = useState('')
+
+  const fontOptions = [
+    { value: 'Courier', label: 'Courier' },
+    { value: 'Open Sans, sans-serif', label: 'Open Sans' },
+    { value: 'Roboto', label: 'Roboto' },
+    { value: 'Roboto Mono, monospace', label: 'Roboto Mono' }
+  ]
+
+  useEffect(() => {
+    const head = document.head
+    const link = document.createElement('link')
+
+    link.type = 'text/css'
+    link.rel = 'stylesheet'
+    link.href =
+      'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
+
+    head.appendChild(link)
+
+    if (parseInt(window.localStorage.getItem('fontFamilyEnabled'))) {
+      setFontFamilyEnabled(true)
+    }
+
+    return () => {
+      head.removeChild(link)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (window.localStorage.getItem('fontFamilyValue')) {
+      setFontFamily(window.localStorage.getItem('fontFamilyValue'))
+    }
+  }, [fontFamilyEnabled])
+
+  const getHtmlTexts = () => {
+    const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'span']
+    const exceptTags = [
+      ':not(.eulexia-text)',
+      ':not(.rtf--ab__c)',
+      ':not(.rtf--mb__c)',
+      ':not(.rtf--ab)',
+      ':not(.rtf--mb)'
+    ]
+    const exceptTagsJoined = exceptTags.join('')
+    const textTagsJoined = textTags
+      .join(exceptTagsJoined.concat(','))
+      .concat(exceptTagsJoined)
+    return textTagsJoined
+  }
+
+  return (
+    <>
+      <GlobalStyle
+        fontFamilyEnabled={fontFamilyEnabled}
+        fontFamily={fontFamily}
+        htmlTexts={getHtmlTexts()}
+      />
+      <Action data-tip data-for='fontFamily'>
+        <FontFamilyIcon />
+      </Action>
+      <Tooltip id='fontFamily'>
+        <div className='wrapper column eulexia'>
+          <div className='item title row'>
+            <strong className='item'>Font family</strong>
+            <div className='item-text-right'>
+              <Toggle
+                checked={fontFamilyEnabled}
+                onChange={(e) => {
+                  setFontFamilyEnabled(e.target.checked)
+                  if (e.target.checked) {
+                    window.localStorage.setItem('fontFamilyEnabled', 1)
+                    return
+                  }
+                  setFontFamily(null)
+                  window.localStorage.removeItem('fontFamilyEnabled')
+                  window.localStorage.removeItem('fontFamilyValue')
+                }}
+                icons={false}
+              />
+            </div>
+          </div>
+          <div className='item column tall-margin-top'>
+            <div className='item'>
+              <Dropdown
+                options={fontOptions}
+                onChange={(obj) => {
+                  setFontFamily(obj.value)
+                  window.localStorage.setItem('fontFamilyValue', obj.value)
+                }}
+                value={fontFamily}
+                placeholder='Font family...'
+                disabled={!fontFamilyEnabled}
+              />
+            </div>
+          </div>
+        </div>
+      </Tooltip>
+    </>
+  )
+}
+
+export default FontFamilyAction
