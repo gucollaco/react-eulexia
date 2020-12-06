@@ -89,7 +89,7 @@ const FontSizeAction = () => {
             <div className='item'>
               <Slider
                 disabled={!fontSizeEnabled}
-                step={1}
+                step={2}
                 min={0}
                 max={72}
                 values={[headerFontSize]}
@@ -107,7 +107,7 @@ const FontSizeAction = () => {
             <div className='item'>
               <Slider
                 disabled={!fontSizeEnabled}
-                step={1}
+                step={2}
                 min={0}
                 max={72}
                 values={[textFontSize]}
