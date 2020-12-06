@@ -1,7 +1,7 @@
 import React from 'react'
 import { Action } from 'react-tiny-fab'
 
-const EulexiaAction = ({ className, children, ...props }) => (
+const EulexiaAction = ({ children, ...props }) => (
   <Action {...props}>{children}</Action>
 )
 

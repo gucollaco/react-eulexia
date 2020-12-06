@@ -50,9 +50,9 @@ const ColorChangeAction = () => {
       </Action>
       <Tooltip id='colorChange'>
         <div className='wrapper column eulexia'>
-          <div className='item title row eulexia'>
+          <div className='item title row'>
             <strong className='item'>Change color</strong>
-            <div className='item-text-right eulexia'>
+            <div className='item-text-right'>
               <Toggle
                 checked={colorChangeEnabled}
                 onChange={(e) => {

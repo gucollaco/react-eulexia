@@ -27,7 +27,7 @@ const TextToSpeechAction = () => {
         <TextToSpeechIcon />
       </Action>
       <Tooltip id='textToSpeech'>
-        <div className='wrapper column'>
+        <div className='wrapper column eulexia'>
           <div className='item title row'>
             <strong className='item'>Text to speech</strong>
           </div>

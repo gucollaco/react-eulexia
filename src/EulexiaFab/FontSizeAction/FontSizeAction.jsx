@@ -60,8 +60,8 @@ const FontSizeAction = () => {
         <FontSizeIcon />
       </Action>
       <Tooltip id='fontSize'>
-        <div className='wrapper column'>
-          <div className='item title row eulexia'>
+        <div className='wrapper column eulexia'>
+          <div className='item title row'>
             <strong className='item'>Font size</strong>
             <div className='item-text-right'>
               <Toggle

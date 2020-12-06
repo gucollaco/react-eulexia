@@ -26,7 +26,7 @@ const RulerAction = () => {
         <RulerIcon />
       </Action>
       <Tooltip id='readingRuler'>
-        <div className='wrapper column'>
+        <div className='wrapper column eulexia'>
           <div className='item title row'>
             <strong className='item'>Reading ruler</strong>
             <div className='item-text-right'>
