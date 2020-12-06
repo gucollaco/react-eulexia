@@ -10,12 +10,14 @@ import { RulerIcon } from '../../Icon/index.jsx'
 
 const RulerAction = () => {
   const {
-    rulerEnabled,
-    setRulerEnabled,
-    rulerSize,
-    setRulerSize,
-    rulerInverted,
-    setRulerInverted
+    ruler: {
+      rulerEnabled,
+      setRulerEnabled,
+      rulerSize,
+      setRulerSize,
+      rulerInverted,
+      setRulerInverted
+    }
   } = useContext(EulexiaContext)
 
   return (

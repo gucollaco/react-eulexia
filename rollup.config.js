@@ -50,15 +50,13 @@ const config = [
       file: 'dist/index.umd.js',
       globals: {
         react: 'React',
-        'styled-components': 'styled',
-        clsx: 'PropTypes',
         'react-color': 'reactColor',
         'react-dropdown': 'Dropdown',
-        'react-range': 'reactRange',
         'react-speech-kit': 'reactSpeechKit',
         'react-tiny-fab': 'reactTinyFab',
         'react-toggle': 'Toggle',
-        'react-tooltip': 'ReactTooltip'
+        'react-tooltip': 'ReactTooltip',
+        'styled-components': 'styled'
       },
       format: 'umd'
     },

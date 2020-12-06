@@ -11,10 +11,12 @@ import { FontFamilyIcon } from '../../Icon/index.jsx'
 
 const FontFamilyAction = () => {
   const {
-    fontFamilyEnabled,
-    setFontFamilyEnabled,
-    fontFamily,
-    setFontFamily
+    fontFamily: {
+      fontFamilyEnabled,
+      setFontFamilyEnabled,
+      fontFamily,
+      setFontFamily
+    }
   } = useContext(EulexiaContext)
 
   const fontOptions = [

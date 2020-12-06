@@ -100,33 +100,38 @@ const EulexiaContextProvider = ({ children }) => {
   }, [fontFamilyEnabled])
 
   const values = {
-    rulerEnabled,
-    setRulerEnabled,
-    rulerSize,
-    setRulerSize,
-    rulerPosition,
-    setRulerPosition,
-    rulerInverted,
-    setRulerInverted,
-
-    fontSizeEnabled,
-    setFontSizeEnabled,
-    headerFontSize,
-    setHeaderFontSize,
-    textFontSize,
-    setTextFontSize,
-
-    colorChangeEnabled,
-    setColorChangeEnabled,
-    newTextColor,
-    setNewTextColor,
-    newBackgroundColor,
-    setNewBackgroundColor,
-
-    fontFamilyEnabled,
-    setFontFamilyEnabled,
-    fontFamily,
-    setFontFamily
+    ruler: {
+      rulerEnabled,
+      setRulerEnabled,
+      rulerSize,
+      setRulerSize,
+      rulerPosition,
+      setRulerPosition,
+      rulerInverted,
+      setRulerInverted
+    },
+    fontSize: {
+      fontSizeEnabled,
+      setFontSizeEnabled,
+      headerFontSize,
+      setHeaderFontSize,
+      textFontSize,
+      setTextFontSize
+    },
+    colorChange: {
+      colorChangeEnabled,
+      setColorChangeEnabled,
+      newTextColor,
+      setNewTextColor,
+      newBackgroundColor,
+      setNewBackgroundColor
+    },
+    fontFamily: {
+      fontFamilyEnabled,
+      setFontFamilyEnabled,
+      fontFamily,
+      setFontFamily
+    }
   }
 
   return (

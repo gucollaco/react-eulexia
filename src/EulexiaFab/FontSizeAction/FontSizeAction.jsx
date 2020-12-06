@@ -11,12 +11,14 @@ import { FontSizeIcon } from '../../Icon/index.jsx'
 
 const FontSizeAction = () => {
   const {
-    fontSizeEnabled,
-    setFontSizeEnabled,
-    headerFontSize,
-    setHeaderFontSize,
-    textFontSize,
-    setTextFontSize
+    fontSize: {
+      fontSizeEnabled,
+      setFontSizeEnabled,
+      headerFontSize,
+      setHeaderFontSize,
+      textFontSize,
+      setTextFontSize
+    }
   } = useContext(EulexiaContext)
 
   const getHtmlHeaders = () => {

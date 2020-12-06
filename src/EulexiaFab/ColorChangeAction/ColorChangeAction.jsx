@@ -11,12 +11,14 @@ import { CirclePicker } from 'react-color'
 
 const ColorChangeAction = () => {
   const {
-    colorChangeEnabled,
-    setColorChangeEnabled,
-    newTextColor,
-    setNewTextColor,
-    newBackgroundColor,
-    setNewBackgroundColor
+    colorChange: {
+      colorChangeEnabled,
+      setColorChangeEnabled,
+      newTextColor,
+      setNewTextColor,
+      newBackgroundColor,
+      setNewBackgroundColor
+    }
   } = useContext(EulexiaContext)
 
   const getHtmlTexts = () => {

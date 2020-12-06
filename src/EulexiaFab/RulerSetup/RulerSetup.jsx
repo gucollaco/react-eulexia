@@ -7,9 +7,9 @@ import RulerTop from './RulerTop/RulerTop.jsx'
 import RulerLine from './RulerLine/RulerLine.jsx'
 
 const RulerSetup = () => {
-  const { rulerEnabled, rulerSize, rulerPosition, rulerInverted } = useContext(
-    EulexiaContext
-  )
+  const {
+    ruler: { rulerEnabled, rulerSize, rulerPosition, rulerInverted }
+  } = useContext(EulexiaContext)
 
   return (
     <>
