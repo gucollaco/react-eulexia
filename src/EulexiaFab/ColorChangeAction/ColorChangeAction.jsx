@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
+import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+
 import Action from '../../Action/Action.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
@@ -7,24 +10,14 @@ import { ColorChangeIcon } from '../../Icon/index.jsx'
 import { CirclePicker } from 'react-color'
 
 const ColorChangeAction = () => {
-  const [colorChangeEnabled, setColorChangeEnabled] = useState(false)
-  const [newTextColor, setNewTextColor] = useState('')
-  const [newBackgroundColor, setNewBackgroundColor] = useState('')
-
-  useEffect(() => {
-    if (parseInt(window.localStorage.getItem('colorChangeEnabled'))) {
-      setColorChangeEnabled(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (window.localStorage.getItem('newTextColor')) {
-      setNewTextColor(window.localStorage.getItem('newTextColor'))
-    }
-    if (window.localStorage.getItem('newBackgroundColor')) {
-      setNewBackgroundColor(window.localStorage.getItem('newBackgroundColor'))
-    }
-  }, [colorChangeEnabled])
+  const {
+    colorChangeEnabled,
+    setColorChangeEnabled,
+    newTextColor,
+    setNewTextColor,
+    newBackgroundColor,
+    setNewBackgroundColor
+  } = useContext(EulexiaContext)
 
   const getHtmlTexts = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'span']

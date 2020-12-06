@@ -12,9 +12,16 @@ const EulexiaContextProvider = ({ children }) => {
   const [headerFontSize, setHeaderFontSize] = useState(0)
   const [textFontSize, setTextFontSize] = useState(0)
 
+  const [colorChangeEnabled, setColorChangeEnabled] = useState(false)
+  const [newTextColor, setNewTextColor] = useState('')
+  const [newBackgroundColor, setNewBackgroundColor] = useState('')
+
   useEffect(() => {
     if (parseInt(window.localStorage.getItem('fontSizeEnabled'))) {
       setFontSizeEnabled(true)
+    }
+    if (parseInt(window.localStorage.getItem('colorChangeEnabled'))) {
+      setColorChangeEnabled(true)
     }
     if (parseInt(window.localStorage.getItem('rulerEnabled'))) {
       setRulerEnabled(true)
@@ -36,6 +43,15 @@ const EulexiaContextProvider = ({ children }) => {
       )
     }
   }, [fontSizeEnabled])
+
+  useEffect(() => {
+    if (window.localStorage.getItem('newTextColor')) {
+      setNewTextColor(window.localStorage.getItem('newTextColor'))
+    }
+    if (window.localStorage.getItem('newBackgroundColor')) {
+      setNewBackgroundColor(window.localStorage.getItem('newBackgroundColor'))
+    }
+  }, [colorChangeEnabled])
 
   useEffect(() => {
     if (window.localStorage.getItem('rulerSizeValue')) {
@@ -68,7 +84,14 @@ const EulexiaContextProvider = ({ children }) => {
     headerFontSize,
     setHeaderFontSize,
     textFontSize,
-    setTextFontSize
+    setTextFontSize,
+
+    colorChangeEnabled,
+    setColorChangeEnabled,
+    newTextColor,
+    setNewTextColor,
+    newBackgroundColor,
+    setNewBackgroundColor
   }
 
   return (
