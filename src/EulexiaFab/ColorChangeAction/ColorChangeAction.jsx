@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
-import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+import { useEulexia } from '../../Context/eulexia-context.jsx'
 
 import Action from '../../Action/Action.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
@@ -19,7 +19,7 @@ const ColorChangeAction = () => {
       newBackgroundColor,
       setNewBackgroundColor
     }
-  } = useContext(EulexiaContext)
+  } = useEulexia()
 
   const getHtmlTexts = () => {
     const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'span']

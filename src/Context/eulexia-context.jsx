@@ -1,6 +1,8 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 const EulexiaContext = createContext(null)
+
+const useEulexia = () => useContext(EulexiaContext)
 
 const EulexiaContextProvider = ({ children }) => {
   const [rulerEnabled, setRulerEnabled] = useState(false)
@@ -139,4 +141,4 @@ const EulexiaContextProvider = ({ children }) => {
   )
 }
 
-export { EulexiaContext, EulexiaContextProvider }
+export { EulexiaContextProvider, useEulexia }

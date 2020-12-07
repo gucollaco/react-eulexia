@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
-import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+import { useEulexia } from '../../Context/eulexia-context.jsx'
 
 import Action from '../../Action/Action.jsx'
 import Dropdown from '../../Dropdown/Dropdown.jsx'
@@ -17,7 +17,7 @@ const FontFamilyAction = () => {
       fontFamily,
       setFontFamily
     }
-  } = useContext(EulexiaContext)
+  } = useEulexia()
 
   const fontOptions = [
     { value: 'Courier', label: 'Courier' },

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+import { useEulexia } from '../../Context/eulexia-context.jsx'
 
 import Action from '../../Action/Action.jsx'
 import Slider from '../../Slider/Slider.jsx'
@@ -18,7 +18,7 @@ const RulerAction = () => {
       rulerInverted,
       setRulerInverted
     }
-  } = useContext(EulexiaContext)
+  } = useEulexia()
 
   return (
     <>

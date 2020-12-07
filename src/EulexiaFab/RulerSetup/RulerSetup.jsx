@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
-import { EulexiaContext } from '../../Context/eulexia-context.jsx'
+import { useEulexia } from '../../Context/eulexia-context.jsx'
 
 import RulerBot from './RulerBot/RulerBot.jsx'
 import RulerTop from './RulerTop/RulerTop.jsx'
@@ -9,7 +9,7 @@ import RulerLine from './RulerLine/RulerLine.jsx'
 const RulerSetup = () => {
   const {
     ruler: { rulerEnabled, rulerSize, rulerPosition, rulerInverted }
-  } = useContext(EulexiaContext)
+  } = useEulexia()
 
   return (
     <>
