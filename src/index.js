@@ -1,5 +1,3 @@
-import Input from './input/index.jsx'
-import EulexiaFab from './eulexiaFab/index.jsx'
-import EulexiaAction from './eulexiaAction/index.jsx'
+import EulexiaFab from './EulexiaFab/index.jsx'
 
-export { Input, EulexiaFab, EulexiaAction }
+export { EulexiaFab }
