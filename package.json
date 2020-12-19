@@ -68,14 +68,7 @@
     "styled-components": "^5.2.1"
   },
   "peerDependencies": {
-    "clsx": "^1.1.1",
     "react": ">=16.8.0",
-    "react-color": "^2.19.3",
-    "react-dropdown": "^1.9.0",
-    "react-speech-kit": "^3.0.1",
-    "react-tiny-fab": "^4.0.2",
-    "react-toggle": "^4.1.1",
-    "react-tooltip": "^4.2.10",
     "styled-components": "^5.2.1"
   },
   "keywords": [
@@ -93,6 +86,12 @@
   "author": "Gustavo Collaço",
   "license": "MIT",
   "dependencies": {
-    "react-range": "^1.8.3"
+    "react-color": "^2.19.3",
+    "react-dropdown": "^1.9.0",
+    "react-range": "^1.8.3",
+    "react-speech-kit": "^3.0.1",
+    "react-tiny-fab": "^4.0.2",
+    "react-toggle": "^4.1.1",
+    "react-tooltip": "^4.2.10"
   }
 }

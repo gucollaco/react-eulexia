@@ -16,7 +16,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
-      resolve(),
+      resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
       }),
@@ -34,7 +34,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
-      resolve(),
+      resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
       }),
@@ -50,19 +50,14 @@ const config = [
       file: 'dist/index.umd.js',
       globals: {
         react: 'React',
-        'react-color': 'reactColor',
-        'react-dropdown': 'Dropdown',
-        'react-speech-kit': 'reactSpeechKit',
-        'react-tiny-fab': 'reactTinyFab',
-        'react-toggle': 'Toggle',
-        'react-tooltip': 'ReactTooltip',
-        'styled-components': 'styled'
+        'styled-components': 'styled',
+        crypto: 'crypto'
       },
       format: 'umd'
     },
     plugins: [
       external(),
-      resolve(),
+      resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
       }),
