@@ -11,7 +11,10 @@
     "prettier",
     "standard",
     "standard-jsx",
-    "standard-react"
+    "standard-react",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
