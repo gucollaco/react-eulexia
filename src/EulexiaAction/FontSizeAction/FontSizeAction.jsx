@@ -110,6 +110,7 @@ const FontSizeAction = () => {
                 step={2}
                 min={0}
                 max={72}
+                aa='oii'
                 values={[textFontSize]}
                 onChange={([values]) => {
                   setTextFontSize(values)
