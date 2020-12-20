@@ -26,13 +26,13 @@ describe('FontSizeAction', () => {
     )
 
     const headerFontSizeSlider = screen.getByTestId('header-font-size-slider')
-    expect(headerFontSizeSlider).toHaveValue('0')
+    expect(headerFontSizeSlider).toHaveAttribute('value', '0')
     headerFontSizeSlider.firstChild.focus()
     fireEvent.keyDown(headerFontSizeSlider.firstChild, {
       key: 'ArrowUp',
       code: 38
     })
-    expect(headerFontSizeSlider).not.toHaveValue('2')
+    expect(headerFontSizeSlider).not.toHaveAttribute('value', '2')
   })
 
   test('Switching toggle button to on, changing the text size values and switching back off', () => {
@@ -48,22 +48,22 @@ describe('FontSizeAction', () => {
     expect(fontSizeToggle.checked).toEqual(true)
 
     const headerFontSizeSlider = screen.getByTestId('header-font-size-slider')
-    expect(headerFontSizeSlider).toHaveValue('0')
+    expect(headerFontSizeSlider).toHaveAttribute('value', '0')
     headerFontSizeSlider.firstChild.focus()
     fireEvent.keyDown(headerFontSizeSlider.firstChild, {
       key: 'ArrowUp',
       code: 38
     })
-    expect(headerFontSizeSlider).toHaveValue('2')
+    expect(headerFontSizeSlider).toHaveAttribute('value', '2')
 
     const textFontSizeSlider = screen.getByTestId('text-font-size-slider')
-    expect(textFontSizeSlider).toHaveValue('0')
+    expect(textFontSizeSlider).toHaveAttribute('value', '0')
     textFontSizeSlider.firstChild.focus()
     fireEvent.keyDown(textFontSizeSlider.firstChild, {
       key: 'ArrowUp',
       code: 38
     })
-    expect(textFontSizeSlider).toHaveValue('2')
+    expect(textFontSizeSlider).toHaveAttribute('value', '2')
 
     fireEvent.click(fontSizeToggle)
     expect(fontSizeToggle.checked).toEqual(false)
