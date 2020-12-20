@@ -31,17 +31,17 @@ const RulerAction = () => {
             <strong className='item'>Reading ruler</strong>
             <div className='item-text-right'>
               <Toggle
+                data-testid='ruler-toggle'
                 checked={rulerEnabled}
                 onChange={(e) => {
                   setRulerEnabled(e.target.checked)
                   if (e.target.checked) {
-                    setRulerSize(100)
                     window.localStorage.setItem('rulerEnabled', 1)
                     window.localStorage.setItem('rulerSizeValue', 100)
                     window.localStorage.setItem('rulerInverted', 0)
                     return
                   }
-                  setRulerSize(50)
+                  setRulerSize(100)
                   setRulerInverted(false)
                   window.localStorage.removeItem('rulerEnabled')
                   window.localStorage.removeItem('rulerSizeValue')
@@ -57,9 +57,10 @@ const RulerAction = () => {
             </span>
             <div className='item'>
               <Slider
+                data-testid='ruler-size-slider'
                 disabled={!rulerEnabled}
                 step={5}
-                min={50}
+                min={100}
                 max={400}
                 values={[rulerSize]}
                 onChange={([values]) => {
@@ -73,6 +74,7 @@ const RulerAction = () => {
             <span className='item eulexia-text'>Inverted mode</span>
             <div className='item'>
               <Toggle
+                data-testid='inverted-mode-toggle'
                 disabled={!rulerEnabled}
                 checked={rulerInverted}
                 onChange={(e) => {
