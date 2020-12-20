@@ -24,13 +24,19 @@ const TrackInternalDiv = styled.div`
     })}`}
 `
 
-const Track = ({ props, children, value, min, max }) => (
+const Track = ({ props, children, value, min, max, dataTestId = 'slider' }) => (
   <TrackExternalDiv
     onMouseDown={props.onMouseDown}
     onTouchStart={props.onTouchStart}
     propsStyle={props.style}
   >
-    <TrackInternalDiv ref={props.ref} value={value} min={min} max={max}>
+    <TrackInternalDiv
+      data-testid={dataTestId}
+      ref={props.ref}
+      value={value}
+      min={min}
+      max={max}
+    >
       {children}
     </TrackInternalDiv>
   </TrackExternalDiv>
@@ -55,11 +61,12 @@ const Slider = ({ className, ...props }) => {
   const value = [props.values]
   const min = props.min
   const max = props.max
+  const dataTestId = props['data-testid']
 
   return (
     <Range
       renderTrack={({ props, children }) =>
-        Track({ props, children, value, min, max })}
+        Track({ props, children, value, min, max, dataTestId })}
       renderThumb={Thumb}
       className={className}
       {...props}
