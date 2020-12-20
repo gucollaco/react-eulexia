@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { ColorChangeIcon } from 'Icon/index.jsx'
 
 describe('ColorChangeIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<ColorChangeIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

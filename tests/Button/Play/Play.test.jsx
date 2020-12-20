@@ -9,7 +9,7 @@ describe('Play', () => {
     render(<Play />)
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<Play />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

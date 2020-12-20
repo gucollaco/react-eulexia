@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { ConfigIcon } from 'Icon/index.jsx'
 
 describe('Config', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<ConfigIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })
