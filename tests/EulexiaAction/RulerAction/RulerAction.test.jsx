@@ -5,26 +5,28 @@ import '@testing-library/jest-dom'
 import EulexiaFab from 'EulexiaFab/EulexiaFab.jsx'
 import RulerAction from 'EulexiaAction/RulerAction/RulerAction.jsx'
 
+const resetRulerAction = () => {
+  const rulerToggle = screen.getByTestId('ruler-toggle')
+  if (rulerToggle.checked) fireEvent.click(rulerToggle)
+}
+
 describe('RulerAction', () => {
-  test('Checking the texts shown on the Action', () => {
+  beforeEach(() => {
     render(
       <EulexiaFab>
         <RulerAction />
       </EulexiaFab>
     )
+    resetRulerAction()
+  })
 
+  test('Checking the texts shown on the Action', () => {
     expect(screen.getByText('Reading ruler')).toBeInTheDocument()
     expect(screen.getByText('Size')).toBeInTheDocument()
     expect(screen.getByText('Inverted mode')).toBeInTheDocument()
   })
 
   test('Trying to edit slider value before activating toggle', () => {
-    render(
-      <EulexiaFab>
-        <RulerAction />
-      </EulexiaFab>
-    )
-
     const rulerSizeSlider = screen.getByTestId('ruler-size-slider')
     expect(rulerSizeSlider).toHaveAttribute('value', '100')
     rulerSizeSlider.firstChild.focus()
@@ -36,12 +38,6 @@ describe('RulerAction', () => {
   })
 
   test('Switching activation toggle button to on, changing the ruler size values and switching back off', () => {
-    render(
-      <EulexiaFab>
-        <RulerAction />
-      </EulexiaFab>
-    )
-
     const rulerToggle = screen.getByTestId('ruler-toggle')
     expect(rulerToggle.checked).toEqual(false)
     fireEvent.click(rulerToggle)
@@ -61,23 +57,11 @@ describe('RulerAction', () => {
   })
 
   test('Checking if inverted mode toggle button starts disabled', () => {
-    render(
-      <EulexiaFab>
-        <RulerAction />
-      </EulexiaFab>
-    )
-
     const invertedModeToggle = screen.getByTestId('inverted-mode-toggle')
     expect(invertedModeToggle).toBeDisabled()
   })
 
   test('Switching activation toggle button to on, switching the inverted mode toggle button to on and off sequentially, and finally switching activation toggle button back off', () => {
-    render(
-      <EulexiaFab>
-        <RulerAction />
-      </EulexiaFab>
-    )
-
     const rulerToggle = screen.getByTestId('ruler-toggle')
     expect(rulerToggle.checked).toEqual(false)
     fireEvent.click(rulerToggle)
