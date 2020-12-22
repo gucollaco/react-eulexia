@@ -10,33 +10,36 @@ describe('Dropdown', () => {
     expect(screen.getByText('Font family...')).toBeInTheDocument()
   })
   test('Checks if the dropdown classes match the react-dropdown expected classes', () => {
-    const { container } = render(<Dropdown placeholder='Font family...' />)
-    expect(container.firstChild).toHaveClass('Dropdown-root')
-    expect(container.firstChild.firstChild).toHaveClass('Dropdown-control')
-    expect(container.firstChild.firstChild.firstChild).toHaveClass(
-      'Dropdown-placeholder'
+    render(<Dropdown placeholder='Font family...' />)
+    const placeholderDiv = screen.getByText('Font family...')
+    expect(placeholderDiv.parentElement.parentElement).toHaveClass(
+      'Dropdown-root'
     )
-    expect(container.firstChild.firstChild.lastChild).toHaveClass(
+    expect(placeholderDiv.parentElement).toHaveClass('Dropdown-control')
+    expect(placeholderDiv).toHaveClass('Dropdown-placeholder')
+    expect(placeholderDiv.parentElement.lastChild).toHaveClass(
       'Dropdown-arrow-wrapper'
     )
-    expect(container.firstChild.firstChild.lastChild.firstChild).toHaveClass(
+    expect(placeholderDiv.parentElement.lastChild.firstChild).toHaveClass(
       'Dropdown-arrow'
     )
   })
   test('Checks if a non disabled dropdown has the expected classes', () => {
-    const { container } = render(<Dropdown placeholder='Font family...' />)
-    expect(container.firstChild).toHaveClass('Dropdown-root')
-    expect(container.firstChild.firstChild).toHaveClass('Dropdown-control')
-    expect(container.firstChild.firstChild).not.toHaveClass(
-      'Dropdown-disabled'
+    render(<Dropdown placeholder='Font family...' />)
+    const placeholderDiv = screen.getByText('Font family...')
+    expect(placeholderDiv.parentElement.parentElement).toHaveClass(
+      'Dropdown-root'
     )
+    expect(placeholderDiv.parentElement).toHaveClass('Dropdown-control')
+    expect(placeholderDiv.parentElement).not.toHaveClass('Dropdown-disabled')
   })
   test('Checks if a disabled dropdown has the expected classes', () => {
-    const { container } = render(
-      <Dropdown placeholder='Font family...' disabled />
+    render(<Dropdown placeholder='Font family...' disabled />)
+    const placeholderDiv = screen.getByText('Font family...')
+    expect(placeholderDiv.parentElement.parentElement).toHaveClass(
+      'Dropdown-root'
     )
-    expect(container.firstChild).toHaveClass('Dropdown-root')
-    expect(container.firstChild.firstChild).toHaveClass('Dropdown-control')
-    expect(container.firstChild.firstChild).toHaveClass('Dropdown-disabled')
+    expect(placeholderDiv.parentElement).toHaveClass('Dropdown-control')
+    expect(placeholderDiv.parentElement).toHaveClass('Dropdown-disabled')
   })
 })
