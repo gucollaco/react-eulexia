@@ -54,6 +54,7 @@ const ColorChangeAction = () => {
             <strong className='item'>Change color</strong>
             <div className='item-text-right'>
               <Toggle
+                data-testid='color-change-toggle'
                 checked={colorChangeEnabled}
                 onChange={(e) => {
                   setColorChangeEnabled(e.target.checked)
