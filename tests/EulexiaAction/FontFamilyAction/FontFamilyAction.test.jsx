@@ -10,7 +10,7 @@ const resetFontFamilyAction = () => {
   if (fontFamilyToggle.checked) fireEvent.click(fontFamilyToggle)
 }
 
-describe('FontSizeAction', () => {
+describe('FontFamilyAction', () => {
   beforeEach(() => {
     render(
       <EulexiaFab>
