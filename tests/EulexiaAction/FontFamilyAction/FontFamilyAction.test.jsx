@@ -1,13 +1,14 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import userEvent from '@testing-library/user-event'
 
 import EulexiaFab from 'EulexiaFab/EulexiaFab.jsx'
 import FontFamilyAction from 'EulexiaAction/FontFamilyAction/FontFamilyAction.jsx'
 
 const resetFontFamilyAction = () => {
   const fontFamilyToggle = screen.getByTestId('font-family-toggle')
-  if (fontFamilyToggle.checked) fireEvent.click(fontFamilyToggle)
+  if (fontFamilyToggle.checked) userEvent.click(fontFamilyToggle)
 }
 
 describe('FontFamilyAction', () => {
@@ -35,33 +36,31 @@ describe('FontFamilyAction', () => {
 
     const fontFamilyToggle = screen.getByTestId('font-family-toggle')
     expect(fontFamilyToggle.checked).toEqual(false)
-    fireEvent.click(fontFamilyToggle)
+    userEvent.click(fontFamilyToggle)
     expect(fontFamilyToggle.checked).toEqual(true)
 
     expect(fontFamilyDiv.parentElement).not.toHaveClass('Dropdown-disabled')
 
-    fireEvent.mouseDown(fontFamilyDiv)
-    fireEvent.mouseUp(fontFamilyDiv)
+    userEvent.click(fontFamilyDiv)
     expect(screen.getAllByRole('option').length).toBeGreaterThan(2)
 
-    fireEvent.click(screen.getByText('Open Sans'))
+    userEvent.click(screen.getByText('Open Sans'))
     expect(screen.getByText('Open Sans')).toBeInTheDocument()
   })
 
   test('Enables the functionality, selects a font family, checks if it was selected, then disabled functionality', () => {
     const fontFamilyToggle = screen.getByTestId('font-family-toggle')
     expect(fontFamilyToggle.checked).toEqual(false)
-    fireEvent.click(fontFamilyToggle)
+    userEvent.click(fontFamilyToggle)
     expect(fontFamilyToggle.checked).toEqual(true)
 
-    fireEvent.mouseDown(screen.getByText('Font family...'))
-    fireEvent.mouseUp(screen.getByText('Font family...'))
+    userEvent.click(screen.getByText('Font family...'))
     expect(screen.getAllByRole('option').length).toBeGreaterThan(2)
 
-    fireEvent.click(screen.getByText('Open Sans'))
+    userEvent.click(screen.getByText('Open Sans'))
     expect(screen.getByText('Open Sans')).toBeInTheDocument()
 
-    fireEvent.click(fontFamilyToggle)
+    userEvent.click(fontFamilyToggle)
     expect(fontFamilyToggle.checked).toEqual(false)
     expect(screen.getByText('Font family...')).toBeInTheDocument()
   })
