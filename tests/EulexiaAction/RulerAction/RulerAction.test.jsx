@@ -9,6 +9,7 @@ import RulerAction from 'EulexiaAction/RulerAction/RulerAction.jsx'
 const resetRulerAction = () => {
   const rulerToggle = screen.getByTestId('ruler-toggle')
   if (rulerToggle.checked) userEvent.click(rulerToggle)
+  expect(rulerToggle.checked).toEqual(false)
 }
 
 describe('RulerAction', () => {

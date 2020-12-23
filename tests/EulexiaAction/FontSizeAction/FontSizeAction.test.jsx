@@ -9,6 +9,7 @@ import FontSizeAction from 'EulexiaAction/FontSizeAction/FontSizeAction.jsx'
 const resetFontSizeAction = () => {
   const fontSizeToggle = screen.getByTestId('font-size-toggle')
   if (fontSizeToggle.checked) userEvent.click(fontSizeToggle)
+  expect(fontSizeToggle.checked).toEqual(false)
 }
 
 describe('FontSizeAction', () => {

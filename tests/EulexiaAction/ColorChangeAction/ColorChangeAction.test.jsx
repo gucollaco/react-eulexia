@@ -9,6 +9,7 @@ import ColorChangeAction from 'EulexiaAction/ColorChangeAction/ColorChangeAction
 const resetColorChangeAction = () => {
   const colorChangeToggle = screen.getByTestId('color-change-toggle')
   if (colorChangeToggle.checked) userEvent.click(colorChangeToggle)
+  expect(colorChangeToggle.checked).toEqual(false)
 }
 
 describe('ColorChangeAction', () => {

@@ -9,6 +9,7 @@ import FontFamilyAction from 'EulexiaAction/FontFamilyAction/FontFamilyAction.js
 const resetFontFamilyAction = () => {
   const fontFamilyToggle = screen.getByTestId('font-family-toggle')
   if (fontFamilyToggle.checked) userEvent.click(fontFamilyToggle)
+  expect(fontFamilyToggle.checked).toEqual(false)
 }
 
 describe('FontFamilyAction', () => {
