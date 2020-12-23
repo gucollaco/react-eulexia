@@ -6,7 +6,21 @@ import { PlayButton, StopButton } from '../../Button/index.jsx'
 import { TextToSpeechIcon } from '../../Icon/index.jsx'
 
 const TextToSpeechAction = () => {
-  const { speak, voices, cancel } = useSpeechSynthesis()
+  const { speak, voices: browserVoices, cancel } = useSpeechSynthesis()
+  const voices = [].concat(
+    browserVoices,
+    process.env.TEST
+      ? [
+          {
+            default: true,
+            lang: 'en-AU',
+            localService: true,
+            name: 'Karen',
+            voiceURI: 'Karen'
+          }
+        ]
+      : []
+  )
 
   const getSelectedText = () => {
     return window.getSelection
@@ -40,6 +54,7 @@ const TextToSpeechAction = () => {
                 <span className='item eulexia-text'>Read selected</span>
                 <div className='item'>
                   <PlayButton
+                    data-testid='play-button'
                     onClick={() => {
                       const text = getSelectedText()
                       const voice = voices.find((voice) =>
@@ -49,7 +64,10 @@ const TextToSpeechAction = () => {
                       speak({ text, voice })
                     }}
                   />
-                  <StopButton onClick={() => cancel()} />
+                  <StopButton
+                    data-testid='stop-button'
+                    onClick={() => cancel()}
+                  />
                 </div>
               </>
             )}
