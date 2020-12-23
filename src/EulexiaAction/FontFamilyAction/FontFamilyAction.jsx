@@ -58,6 +58,7 @@ const FontFamilyAction = () => {
             <strong className='item'>Font family</strong>
             <div className='item-text-right'>
               <Toggle
+                data-testid='font-family-toggle'
                 checked={fontFamilyEnabled}
                 onChange={(e) => {
                   setFontFamilyEnabled(e.target.checked)
