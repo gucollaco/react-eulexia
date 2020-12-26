@@ -1413,7 +1413,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@testing-library/dom@^7.28.1":
+"@testing-library/dom@^7.28.1", "@testing-library/dom@^7.29.0":
   version "7.29.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.0.tgz#60b18065bab50a5cde21fe80275a47a43024d9cc"
   integrity sha512-0hhuJSmw/zLc6ewR9cVm84TehuTd7tbqBX9pRNSp8znJ9gTmSgesdbiGZtt8R6dL+2rgaPFp9Yjr7IU1HWm49w==
@@ -1448,6 +1448,13 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@testing-library/dom" "^7.28.1"
+
+"@testing-library/user-event@^12.6.0":
+  version "12.6.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.6.0.tgz#2d0229e399eb5a0c6c112e848611432356cac886"
+  integrity sha512-FNEH/HLmOk5GO70I52tKjs7WvGYckeE/SrnLX/ip7z2IGbffyd5zOUM1tZ10vsTphqm+VbDFI0oaXu0wcfQsAQ==
+  dependencies:
+    "@babel/runtime" "^7.12.5"
 
 "@types/aria-query@^4.2.0":
   version "4.2.0"

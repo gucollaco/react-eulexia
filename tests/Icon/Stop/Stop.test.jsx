@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { StopIcon } from 'Icon/index.jsx'
 
 describe('StopIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<StopIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

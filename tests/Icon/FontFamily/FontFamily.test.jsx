@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { FontFamilyIcon } from 'Icon/index.jsx'
 
 describe('FontFamilyIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<FontFamilyIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

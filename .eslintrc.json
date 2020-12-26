@@ -12,10 +12,10 @@
     "standard",
     "standard-jsx",
     "standard-react",
-    "plugin:jest-dom/recommended",
     "plugin:testing-library/react",
     "plugin:jest/recommended"
   ],
+  "plugins": ["jest-dom"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -24,7 +24,18 @@
     "sourceType": "module"
   },
   "rules": {
-    "react/prop-types": ["error", { "skipUndeclared": true }]
+    "react/prop-types": ["error", { "skipUndeclared": true }],
+    "jest-dom/prefer-checked": "error",
+    "jest-dom/prefer-empty": "error",
+    "jest-dom/prefer-enabled-disabled": "error",
+    "jest-dom/prefer-focus": "error",
+    "jest-dom/prefer-in-document": "error",
+    "jest-dom/prefer-required": "error",
+    "jest-dom/prefer-to-have-attribute": "error",
+    "jest-dom/prefer-to-have-class": "error",
+    "jest-dom/prefer-to-have-style": "error",
+    "jest-dom/prefer-to-have-text-content": "error",
+    "jest-dom/prefer-to-have-value": "off"
   },
   "settings": {
     "react": {

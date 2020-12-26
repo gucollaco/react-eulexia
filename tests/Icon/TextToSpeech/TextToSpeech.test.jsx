@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { TextToSpeechIcon } from 'Icon/index.jsx'
 
 describe('TextToSpeechIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<TextToSpeechIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

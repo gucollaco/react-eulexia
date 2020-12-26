@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { FontSizeIcon } from 'Icon/index.jsx'
 
 describe('FontSizeIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<FontSizeIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

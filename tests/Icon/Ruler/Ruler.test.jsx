@@ -5,7 +5,7 @@ import '@testing-library/jest-dom'
 import { RulerIcon } from 'Icon/index.jsx'
 
 describe('RulerIcon', () => {
-  test('Checks if an image role is found on the document', () => {
+  test('Checks if an img role is found on the document', () => {
     render(<RulerIcon />)
     expect(screen.getByRole('img')).toBeInTheDocument()
   })

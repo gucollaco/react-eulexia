@@ -56,15 +56,16 @@ const FontSizeAction = () => {
         htmlHeaders={getHtmlHeaders()}
         htmlTexts={getHtmlTexts()}
       />
-      <Action data-tip data-for='fontSize'>
+      <Action data-tip data-for='font-size'>
         <FontSizeIcon />
       </Action>
-      <Tooltip id='fontSize'>
+      <Tooltip id='font-size'>
         <div className='wrapper column eulexia'>
           <div className='item title row'>
             <strong className='item'>Font size</strong>
             <div className='item-text-right'>
               <Toggle
+                data-testid='font-size-toggle'
                 checked={fontSizeEnabled}
                 onChange={(e) => {
                   setFontSizeEnabled(e.target.checked)
@@ -88,6 +89,7 @@ const FontSizeAction = () => {
             </span>
             <div className='item'>
               <Slider
+                data-testid='header-font-size-slider'
                 disabled={!fontSizeEnabled}
                 step={2}
                 min={0}
@@ -106,6 +108,7 @@ const FontSizeAction = () => {
             </span>
             <div className='item'>
               <Slider
+                data-testid='text-font-size-slider'
                 disabled={!fontSizeEnabled}
                 step={2}
                 min={0}

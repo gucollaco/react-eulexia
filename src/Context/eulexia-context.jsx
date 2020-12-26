@@ -6,7 +6,7 @@ const useEulexia = () => useContext(EulexiaContext)
 
 const EulexiaContextProvider = ({ children }) => {
   const [rulerEnabled, setRulerEnabled] = useState(false)
-  const [rulerSize, setRulerSize] = useState(50)
+  const [rulerSize, setRulerSize] = useState(100)
   const [rulerPosition, setRulerPosition] = useState(0)
   const [rulerInverted, setRulerInverted] = useState(false)
 
