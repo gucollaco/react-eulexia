@@ -1,17 +1,32 @@
-version: 2
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.1.3
 jobs:
- build:
-  docker:
-   - image: alpine:3.7
-  steps:
-    - checkout
-    - run:
-       name: The First Step
-       command: |
-         echo 'Hello World!'
-         echo 'This is the delivery pipeline'
-    - run:
-        name: Code has arrived
-        command: |
-          ls -al
-          echo '^^^That should look familiar^^^'
+  code-arrival:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code arrival
+          command: |
+            ls -al
+            echo 'This is the code that has arrived'
+  lib-testing:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: Install and run tests
+          command: |
+            yarn install && yarn test
+
+workflows:
+ version: 2
+ my-workflow:
+   jobs:
+     - code-arrival
+     - lib-testing:
+         requires:
+           - code-arrival
