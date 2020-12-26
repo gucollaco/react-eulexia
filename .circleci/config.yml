@@ -1,8 +1,20 @@
 version: 2
 jobs:
-  build:
-    docker:  
-      - image: circleci/node:12
-    steps:  
-      - checkout  
-      - run: echo "A first hello"
+  init:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Pre run
+          command: |
+            echo 'This is the delivery pipeline'
+  i-have-code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^Should have the code^^^'
