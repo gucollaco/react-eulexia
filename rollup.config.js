@@ -17,7 +17,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
-      builtins(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
@@ -36,7 +36,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
-      builtins(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
@@ -60,7 +60,7 @@ const config = [
     },
     plugins: [
       external(),
-      builtins(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
