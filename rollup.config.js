@@ -7,76 +7,65 @@ import { terser } from 'rollup-plugin-terser'
 import { uglify } from 'rollup-plugin-uglify'
 
 const config = [
-    {
-        input: 'src/index.js',
-        output: {
-            file: 'dist/index.js',
-            format: 'cjs'
-        },
-        external: [/@babel\/runtime/],
-        plugins: [
-            external(),
-            resolve(),
-            commonjs({
-                include: [
-                    'node_modules/**'
-                ]
-            }),
-            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
-            scss(),
-            uglify()
-        ]
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/index.js',
+      format: 'cjs'
     },
-    {
-        input: 'src/index.js',
-        output: {
-            file: 'dist/index.modern.js',
-            format: 'es'
-        },
-        external: [/@babel\/runtime/],
-        plugins: [
-            external(),
-            resolve(),
-            commonjs({
-                include: [
-                    'node_modules/**'
-                ]
-            }),
-            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
-            scss(),
-            terser()
-        ]
+    external: [/@babel\/runtime/],
+    plugins: [
+      external(),
+      resolve({ browser: true }),
+      commonjs({
+        include: ['node_modules/**']
+      }),
+      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      scss(),
+      uglify()
+    ]
+  },
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/index.modern.js',
+      format: 'es'
     },
-    {
-        input: 'src/index.js',
-        output: {
-            name: 'ReactEulexia',
-            file: 'dist/index.umd.js',
-            globals: {
-                react: 'React',
-                'styled-components': 'styled',
-                'clsx': 'PropTypes',
-                'react-tiny-fab': 'reactTinyFab',
-                'react-tooltip': 'ReactTolltip',
-                'react-rangeslider': 'Slider',
-                'react-toggle': 'Toggle',
-                'react-dropdown': 'Dropdown'
-            },
-            format: 'umd'
-        },
-        plugins: [
-            external(),
-            resolve(),
-            commonjs({
-                include: [
-                    'node_modules/**'
-                ]
-            }),
-            babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
-            scss(),
-            terser()
-        ]
-    }
+    external: [/@babel\/runtime/],
+    plugins: [
+      external(),
+      resolve({ browser: true }),
+      commonjs({
+        include: ['node_modules/**']
+      }),
+      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      scss(),
+      terser()
+    ]
+  },
+  {
+    input: 'src/index.js',
+    output: {
+      name: 'ReactEulexia',
+      file: 'dist/index.umd.js',
+      globals: {
+        react: 'React',
+        'styled-components': 'styled',
+        crypto: 'crypto'
+      },
+      format: 'umd'
+    },
+    plugins: [
+      external(),
+      resolve({ browser: true }),
+      commonjs({
+        include: ['node_modules/**']
+      }),
+      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      scss(),
+      terser()
+    ]
+  }
 ]
 
 export default config
