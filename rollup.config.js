@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-scss'
+import builtins from 'rollup-plugin-node-builtins'
 import { terser } from 'rollup-plugin-terser'
 import { uglify } from 'rollup-plugin-uglify'
 
@@ -16,6 +17,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
@@ -34,6 +36,7 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
@@ -57,6 +60,7 @@ const config = [
     },
     plugins: [
       external(),
+      builtins({ crypto: true }),
       resolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
