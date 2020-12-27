@@ -17,6 +17,7 @@ const config = [
     },
     external: builtins,
     plugins: [
+      external(),
       nodeResolve(),
       commonjs(),
       babel({
