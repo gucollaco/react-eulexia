@@ -1,11 +1,12 @@
 import babel from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-scss'
-import builtins from 'rollup-plugin-node-builtins'
+// import builtins from 'rollup-plugin-node-builtins'
 import { terser } from 'rollup-plugin-terser'
-import { uglify } from 'rollup-plugin-uglify'
+// import { uglify } from 'rollup-plugin-uglify'
+import builtins from 'builtin-modules'
 
 const config = [
   {
@@ -14,17 +15,15 @@ const config = [
       file: 'dist/index.js',
       format: 'cjs'
     },
-    external: [/@babel\/runtime/],
+    external: builtins,
     plugins: [
-      external(),
-      builtins({ crypto: true }),
-      resolve({ browser: true }),
-      commonjs({
-        include: ['node_modules/**']
-      }),
-      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
-      scss(),
-      uglify()
+      nodeResolve(),
+      commonjs(),
+      babel({
+        exclude: 'node_modules/**',
+        babelHelpers: 'runtime',
+        skipPreflightCheck: true
+      })
     ]
   },
   {
@@ -36,12 +35,15 @@ const config = [
     external: [/@babel\/runtime/],
     plugins: [
       external(),
-      builtins({ crypto: true }),
-      resolve({ browser: true }),
+      nodeResolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
       }),
-      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      babel({
+        exclude: 'node_modules/**',
+        babelHelpers: 'runtime',
+        skipPreflightCheck: true
+      }),
       scss(),
       terser()
     ]
@@ -60,12 +62,15 @@ const config = [
     },
     plugins: [
       external(),
-      builtins({ crypto: true }),
-      resolve({ browser: true }),
+      nodeResolve({ browser: true }),
       commonjs({
         include: ['node_modules/**']
       }),
-      babel({ exclude: 'node_modules/**', babelHelpers: 'bundled' }),
+      babel({
+        exclude: 'node_modules/**',
+        babelHelpers: 'runtime',
+        skipPreflightCheck: true
+      }),
       scss(),
       terser()
     ]
