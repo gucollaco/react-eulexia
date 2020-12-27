@@ -5,7 +5,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import scss from 'rollup-plugin-scss'
 // import builtins from 'rollup-plugin-node-builtins'
 import { terser } from 'rollup-plugin-terser'
-// import { uglify } from 'rollup-plugin-uglify'
+import { uglify } from 'rollup-plugin-uglify'
 import builtins from 'builtin-modules'
 
 const config = [
@@ -19,12 +19,16 @@ const config = [
     plugins: [
       external(),
       nodeResolve(),
-      commonjs(),
+      commonjs({
+        include: ['node_modules/**']
+      }),
       babel({
         exclude: 'node_modules/**',
         babelHelpers: 'runtime',
         skipPreflightCheck: true
-      })
+      }),
+      scss(),
+      uglify()
     ]
   },
   {
