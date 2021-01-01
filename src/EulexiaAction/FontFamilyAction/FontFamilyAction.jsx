@@ -53,10 +53,10 @@ const FontFamilyAction = () => {
         <FontFamilyIcon />
       </Action>
       <Tooltip id='fontFamily'>
-        <div className='wrapper column eulexia'>
-          <div className='item title row'>
-            <strong className='item'>Font family</strong>
-            <div className='item-text-right'>
+        <div className='eulexia-wrapper eulexia-column eulexia-eulexia'>
+          <div className='eulexia-item eulexia-title eulexia-row'>
+            <strong className='eulexia-item'>Font family</strong>
+            <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='font-family-toggle'
                 checked={fontFamilyEnabled}
@@ -74,8 +74,8 @@ const FontFamilyAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <div className='item'>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <div className='eulexia-item'>
               <Dropdown
                 options={fontOptions}
                 onChange={(obj) => {

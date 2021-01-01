@@ -60,10 +60,10 @@ const FontSizeAction = () => {
         <FontSizeIcon />
       </Action>
       <Tooltip id='font-size'>
-        <div className='wrapper column eulexia'>
-          <div className='item title row'>
-            <strong className='item'>Font size</strong>
-            <div className='item-text-right'>
+        <div className='eulexia-wrapper eulexia-column eulexia'>
+          <div className='eulexia-item eulexia-title eulexia-row'>
+            <strong className='eulexia-item'>Font size</strong>
+            <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='font-size-toggle'
                 checked={fontSizeEnabled}
@@ -83,11 +83,11 @@ const FontSizeAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <span className='item eulexia-text'>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>
               {headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}
             </span>
-            <div className='item'>
+            <div className='eulexia-item'>
               <Slider
                 data-testid='header-font-size-slider'
                 disabled={!fontSizeEnabled}
@@ -102,11 +102,11 @@ const FontSizeAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <span className='item eulexia-text'>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>
               {textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}
             </span>
-            <div className='item'>
+            <div className='eulexia-item'>
               <Slider
                 data-testid='text-font-size-slider'
                 disabled={!fontSizeEnabled}

@@ -26,10 +26,10 @@ const RulerAction = () => {
         <RulerIcon />
       </Action>
       <Tooltip id='readingRuler'>
-        <div className='wrapper column eulexia'>
-          <div className='item title row'>
-            <strong className='item'>Reading ruler</strong>
-            <div className='item-text-right'>
+        <div className='eulexia-wrapper eulexia-column eulexia'>
+          <div className='eulexia-item eulexia-title eulexia-row'>
+            <strong className='eulexia-item'>Reading ruler</strong>
+            <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='ruler-toggle'
                 checked={rulerEnabled}
@@ -51,11 +51,11 @@ const RulerAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <span className='item eulexia-text'>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>
               {rulerEnabled && rulerSize ? `Size (${rulerSize} px)` : 'Size'}
             </span>
-            <div className='item'>
+            <div className='eulexia-item'>
               <Slider
                 data-testid='ruler-size-slider'
                 disabled={!rulerEnabled}
@@ -70,9 +70,9 @@ const RulerAction = () => {
               />
             </div>
           </div>
-          <div className='item row tall-margin-top'>
-            <span className='item eulexia-text'>Inverted mode</span>
-            <div className='item'>
+          <div className='eulexia-item eulexia-row eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>Inverted mode</span>
+            <div className='eulexia-item'>
               <Toggle
                 data-testid='inverted-mode-toggle'
                 disabled={!rulerEnabled}
