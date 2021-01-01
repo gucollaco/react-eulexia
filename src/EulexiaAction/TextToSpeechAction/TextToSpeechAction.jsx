@@ -41,18 +41,20 @@ const TextToSpeechAction = () => {
         <TextToSpeechIcon />
       </Action>
       <Tooltip id='textToSpeech'>
-        <div className='wrapper column eulexia'>
-          <div className='item title row'>
-            <strong className='item'>Text to speech</strong>
+        <div className='eulexia-wrapper eulexia-column eulexia'>
+          <div className='eulexia-item title row'>
+            <strong className='eulexia-item'>Text to speech</strong>
           </div>
-          <div className='item row tall-margin-top align-center'>
+          <div className='eulexia-item eulexia-row eulexia-tall-margin-top eulexia-align-center'>
             {!voices.length && (
-              <span className='item eulexia-text'>Browser not supported</span>
+              <span className='eulexia-item eulexia-text'>
+                Browser not supported
+              </span>
             )}
             {voices.length > 0 && (
               <>
-                <span className='item eulexia-text'>Read selected</span>
-                <div className='item'>
+                <span className='eulexia-item eulexia-text'>Read selected</span>
+                <div className='eulexia-item'>
                   <PlayButton
                     data-testid='play-button'
                     onClick={() => {
