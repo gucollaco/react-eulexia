@@ -49,10 +49,10 @@ const ColorChangeAction = () => {
         <ColorChangeIcon />
       </Action>
       <Tooltip id='colorChange'>
-        <div className='wrapper column eulexia'>
-          <div className='item title row'>
-            <strong className='item'>Change color</strong>
-            <div className='item-text-right'>
+        <div className='eulexia-wrapper eulexia-column eulexia'>
+          <div className='eulexia-item eulexia-title eulexia-row'>
+            <strong className='eulexia-item'>Change color</strong>
+            <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='color-change-toggle'
                 checked={colorChangeEnabled}
@@ -72,9 +72,9 @@ const ColorChangeAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <span className='item eulexia-text'>Text</span>
-            <div className='item' style={{ marginTop: 16 }}>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>Text</span>
+            <div className='eulexia-item' style={{ marginTop: 16 }}>
               <CirclePicker
                 width='276'
                 circleSize={32}
@@ -89,9 +89,9 @@ const ColorChangeAction = () => {
               />
             </div>
           </div>
-          <div className='item column tall-margin-top'>
-            <span className='item eulexia-text'>Background</span>
-            <div className='item' style={{ marginTop: 16 }}>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>Background</span>
+            <div className='eulexia-item' style={{ marginTop: 16 }}>
               <CirclePicker
                 width='276'
                 circleSize={32}
