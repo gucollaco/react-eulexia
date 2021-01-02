@@ -15,13 +15,25 @@ const RulerSetup = () => {
     <>
       {rulerEnabled && !rulerInverted && (
         <div style={{ position: 'relative' }}>
-          <RulerLine rulerPosition={rulerPosition} rulerSize={rulerSize} />
+          <RulerLine
+            rulerPosition={rulerPosition}
+            rulerSize={rulerSize}
+            className='eulexia-ruler'
+          />
         </div>
       )}
       {rulerEnabled && rulerInverted && (
         <div style={{ position: 'relative' }}>
-          <RulerTop rulerPosition={rulerPosition} rulerSize={rulerSize} />
-          <RulerBot rulerPosition={rulerPosition} rulerSize={rulerSize} />
+          <RulerTop
+            rulerPosition={rulerPosition}
+            rulerSize={rulerSize}
+            className='eulexia-ruler'
+          />
+          <RulerBot
+            rulerPosition={rulerPosition}
+            rulerSize={rulerSize}
+            className='eulexia-ruler'
+          />
         </div>
       )}
     </>
