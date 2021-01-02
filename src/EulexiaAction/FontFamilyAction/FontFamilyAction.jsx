@@ -53,7 +53,7 @@ const FontFamilyAction = () => {
         <FontFamilyIcon />
       </Action>
       <Tooltip id='fontFamily'>
-        <div className='eulexia-wrapper eulexia-column eulexia-eulexia'>
+        <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>Font family</strong>
             <div className='eulexia-item-text-right'>
