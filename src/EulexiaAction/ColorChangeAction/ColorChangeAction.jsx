@@ -82,6 +82,7 @@ const ColorChangeAction = () => {
                 }}
                 colors={['#030303', '#191970', '#00008B', '#40E0D0']}
                 disabled={!colorChangeEnabled}
+                testTag='text'
               />
             </div>
           </div>
@@ -96,6 +97,7 @@ const ColorChangeAction = () => {
                 }}
                 colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
                 disabled={!colorChangeEnabled}
+                testTag='background'
               />
             </div>
           </div>

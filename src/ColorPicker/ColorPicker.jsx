@@ -29,19 +29,23 @@ const PickerButton = styled.button`
 `
 
 const ColorPicker = ({
-  disabled,
+  disabled = false,
   color: colorValue,
   onChange,
-  colors = []
+  colors = [],
+  testTag = ''
 }) => (
   <WrapperDiv>
     <InvisibleDiv>
       <HexColorPicker color={colorValue} onChange={onChange} />
     </InvisibleDiv>
     <PickerExternal>
-      {colors.map((color) => (
+      {colors.map((color, index) => (
         <PickerButton
           key={color}
+          data-testid={`picker-button-${
+            testTag ? `${testTag}-${index}` : `${index}`
+          }`}
           style={{
             background: colorValue === color ? 'white' : color,
             borderColor: color

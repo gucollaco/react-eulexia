@@ -34,20 +34,20 @@ describe('ColorChangeAction', () => {
     userEvent.click(colorChangeToggle)
     expect(colorChangeToggle.checked).toEqual(true)
 
-    expect(screen.getByTitle(/#00008b/i)).toHaveStyle(
-      'box-shadow: inset 0 0 0 17px #00008B'
+    expect(screen.getByTestId('picker-button-text-0')).not.toHaveStyle(
+      'background: white'
     )
-    userEvent.click(screen.getByTitle(/#00008b/i))
-    expect(screen.getByTitle(/#00008b/i)).not.toHaveStyle(
-      'box-shadow: inset 0 0 0 17px #00008B'
+    userEvent.click(screen.getByTestId('picker-button-text-0'))
+    expect(screen.getByTestId('picker-button-text-0')).toHaveStyle(
+      'background: white'
     )
 
-    expect(screen.getByTitle(/#ebe3e1/i)).toHaveStyle(
-      'box-shadow: inset 0 0 0 17px #EBE3E1'
+    expect(screen.getByTestId('picker-button-background-0')).not.toHaveStyle(
+      'background: white'
     )
-    userEvent.click(screen.getByTitle(/#ebe3e1/i))
-    expect(screen.getByTitle(/#ebe3e1/i)).not.toHaveStyle(
-      'box-shadow: inset 0 0 0 17px #EBE3E1'
+    userEvent.click(screen.getByTestId('picker-button-background-0'))
+    expect(screen.getByTestId('picker-button-background-0')).toHaveStyle(
+      'background: white'
     )
 
     userEvent.click(colorChangeToggle)
