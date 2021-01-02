@@ -52,7 +52,7 @@ const styledBackgroundColorChange = ({
 
   return newBackgroundColor
     ? `
-      html, body, body:not(input), body:not(button) {
+      html, body, body:not(input), body:not(button), div:first-child:not(.eulexia-item):not(.react-toggle):not(.react-toggle-track):not(.react-toggle-track-check):not(.Dropdown-root):not(.Dropdown-control):not(.Dropdown-placeholder):not(.eulexia-slider):not(.eulexia-colorpicker):not(.eulexia-ruler) {
         background-color: ${newBackgroundColor} !important;
       }
     `

@@ -29,6 +29,7 @@ const Track = ({ props, children, value, min, max, dataTestId = 'slider' }) => (
     onMouseDown={props.onMouseDown}
     onTouchStart={props.onTouchStart}
     propsStyle={props.style}
+    className='eulexia-slider'
   >
     <TrackInternalDiv
       data-testid={dataTestId}
@@ -36,6 +37,7 @@ const Track = ({ props, children, value, min, max, dataTestId = 'slider' }) => (
       value={value}
       min={min}
       max={max}
+      className='eulexia-slider'
     >
       {children}
     </TrackInternalDiv>
@@ -55,7 +57,9 @@ const ThumbDiv = styled.div.attrs((props) => ({
   box-shadow: 0px 2px 6px #aaa;
 `
 
-const Thumb = ({ props }) => <ThumbDiv {...props} propsStyle={props.style} />
+const Thumb = ({ props }) => (
+  <ThumbDiv {...props} propsStyle={props.style} className='eulexia-slider' />
+)
 
 const Slider = ({ className, ...props }) => {
   const value = [props.values]

@@ -2,12 +2,11 @@ import React from 'react'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
 import { useEulexia } from '../../Context/eulexia-context.jsx'
-
 import Action from '../../Action/Action.jsx'
+import ColorPicker from '../../ColorPicker/ColorPicker.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { ColorChangeIcon } from '../../Icon/index.jsx'
-import { CirclePicker } from 'react-color'
 
 const ColorChangeAction = () => {
   const {
@@ -75,34 +74,30 @@ const ColorChangeAction = () => {
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
             <span className='eulexia-item eulexia-text'>Text</span>
             <div className='eulexia-item' style={{ marginTop: 16 }}>
-              <CirclePicker
-                width='276'
-                circleSize={32}
-                circleSpacing={16}
+              <ColorPicker
                 color={newTextColor}
-                colors={['#030303', '#191970', '#00008B', '#40E0D0']}
-                onChangeComplete={({ hex }) => {
-                  if (!colorChangeEnabled) return
-                  setNewTextColor(hex)
-                  window.localStorage.setItem('newTextColor', hex)
+                onChange={(value) => {
+                  setNewTextColor(value)
+                  window.localStorage.setItem('newTextColor', value)
                 }}
+                colors={['#030303', '#191970', '#00008B', '#40E0D0']}
+                disabled={!colorChangeEnabled}
+                testTag='text'
               />
             </div>
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
             <span className='eulexia-item eulexia-text'>Background</span>
             <div className='eulexia-item' style={{ marginTop: 16 }}>
-              <CirclePicker
-                width='276'
-                circleSize={32}
-                circleSpacing={16}
+              <ColorPicker
                 color={newBackgroundColor}
-                colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
-                onChangeComplete={({ hex }) => {
-                  if (!colorChangeEnabled) return
-                  setNewBackgroundColor(hex)
-                  window.localStorage.setItem('newBackgroundColor', hex)
+                onChange={(value) => {
+                  setNewBackgroundColor(value)
+                  window.localStorage.setItem('newBackgroundColor', value)
                 }}
+                colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
+                disabled={!colorChangeEnabled}
+                testTag='background'
               />
             </div>
           </div>
