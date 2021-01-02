@@ -42,7 +42,7 @@ const TextToSpeechAction = () => {
       </Action>
       <Tooltip id='textToSpeech'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
-          <div className='eulexia-item title row'>
+          <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>Text to speech</strong>
           </div>
           <div className='eulexia-item eulexia-row eulexia-tall-margin-top eulexia-align-center'>
