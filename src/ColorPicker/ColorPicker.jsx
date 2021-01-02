@@ -35,11 +35,11 @@ const ColorPicker = ({
   colors = [],
   testTag = ''
 }) => (
-  <WrapperDiv>
+  <WrapperDiv className='eulexia-colorpicker'>
     <InvisibleDiv>
       <HexColorPicker color={colorValue} onChange={onChange} />
     </InvisibleDiv>
-    <PickerExternal>
+    <PickerExternal className='eulexia-colorpicker'>
       {colors.map((color, index) => (
         <PickerButton
           key={color}
