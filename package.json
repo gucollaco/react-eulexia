@@ -1,6 +1,6 @@
 {
   "name": "react-eulexia",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A component library aiming to help people with dyslexia.",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
