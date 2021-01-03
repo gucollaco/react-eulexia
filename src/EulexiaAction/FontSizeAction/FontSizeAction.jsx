@@ -22,7 +22,20 @@ const FontSizeAction = () => {
   } = useEulexia()
 
   const getHtmlHeaders = () => {
-    const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
+    const textTags = [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      '.h1',
+      '.h2',
+      '.h3',
+      '.h4',
+      '.h5',
+      '.h6'
+    ]
     const exceptTags = [':not(.eulexia-text)']
     const exceptTagsJoined = exceptTags.join('')
     const textTagsJoined = textTags
