@@ -21,7 +21,23 @@ const ColorChangeAction = () => {
   } = useEulexia()
 
   const getHtmlTexts = () => {
-    const textTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'li', 'span']
+    const textTags = [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      '.h1',
+      '.h2',
+      '.h3',
+      '.h4',
+      '.h5',
+      '.h6',
+      'p',
+      'li',
+      'span'
+    ]
     const exceptTags = [
       ':not(.eulexia-text)',
       ':not(.rtf--ab__c)',
