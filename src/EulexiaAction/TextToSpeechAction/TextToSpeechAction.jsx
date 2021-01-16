@@ -1,11 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { useSpeechSynthesis } from 'react-speech-kit'
+
 import Action from '../../Action/Action.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { PlayButton, StopButton } from '../../Button/index.jsx'
 import { TextToSpeechIcon } from '../../Icon/index.jsx'
 
-const TextToSpeechAction = () => {
+const TextToSpeechAction = ({
+  tooltipTitle = 'Text to speech',
+  unsupportedBrowserLabel = 'Browser not supported',
+  readSelectedLabel = 'Read selected',
+  htmlLang = 'en-us',
+  forceHtmlLang = false
+}) => {
   const { speak, voices: browserVoices, cancel } = useSpeechSynthesis()
   const voices = [].concat(
     browserVoices,
@@ -30,10 +39,14 @@ const TextToSpeechAction = () => {
         : ''
   }
 
-  const getPageLang = () =>
-    document.documentElement.lang.toLowerCase() ||
-    document.head.lang.toLowerCase() ||
-    'en-us'
+  const getPageLang = () => {
+    if (htmlLang && forceHtmlLang) return htmlLang
+    return (
+      document.documentElement.lang.toLowerCase() ||
+      document.head.lang.toLowerCase() ||
+      htmlLang
+    )
+  }
 
   return (
     <>
@@ -43,17 +56,19 @@ const TextToSpeechAction = () => {
       <Tooltip id='textToSpeech'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
-            <strong className='eulexia-item'>Text to speech</strong>
+            <strong className='eulexia-item'>{tooltipTitle}</strong>
           </div>
           <div className='eulexia-item eulexia-row eulexia-tall-margin-top eulexia-align-center'>
             {!voices.length && (
               <span className='eulexia-item eulexia-text'>
-                Browser not supported
+                {unsupportedBrowserLabel}
               </span>
             )}
             {voices.length > 0 && (
               <>
-                <span className='eulexia-item eulexia-text'>Read selected</span>
+                <span className='eulexia-item eulexia-text'>
+                  {readSelectedLabel}
+                </span>
                 <div className='eulexia-item'>
                   <PlayButton
                     data-testid='play-button'
@@ -78,6 +93,14 @@ const TextToSpeechAction = () => {
       </Tooltip>
     </>
   )
+}
+
+TextToSpeechAction.propTypes = {
+  tooltipTitle: PropTypes.string,
+  unsupportedBrowserLabel: PropTypes.string,
+  readSelectedLabel: PropTypes.string,
+  htmlLang: PropTypes.string,
+  forceHtmlLang: PropTypes.bool
 }
 
 export default TextToSpeechAction
