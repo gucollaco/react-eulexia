@@ -101,6 +101,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.12.5",
+    "prop-types": "^15.7.2",
     "react-colorful": "^4.4.4",
     "react-dropdown": "^1.9.0",
     "react-range": "^1.8.3",

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { useEulexia } from '../../Context/eulexia-context.jsx'
 
@@ -8,7 +9,11 @@ import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { RulerIcon } from '../../Icon/index.jsx'
 
-const RulerAction = () => {
+const RulerAction = ({
+  invertedModeLabel = 'Inverted mode',
+  sizeLabel = 'Size',
+  tooltipTitle = 'Reading ruler'
+}) => {
   const {
     ruler: {
       rulerEnabled,
@@ -28,7 +33,7 @@ const RulerAction = () => {
       <Tooltip id='readingRuler'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
-            <strong className='eulexia-item'>Reading ruler</strong>
+            <strong className='eulexia-item'>{tooltipTitle}</strong>
             <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='ruler-toggle'
@@ -53,7 +58,9 @@ const RulerAction = () => {
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
             <span className='eulexia-item eulexia-text'>
-              {rulerEnabled && rulerSize ? `Size (${rulerSize} px)` : 'Size'}
+              {rulerEnabled && rulerSize
+                ? `${sizeLabel} (${rulerSize} px)`
+                : sizeLabel}
             </span>
             <div className='eulexia-item'>
               <Slider
@@ -71,7 +78,9 @@ const RulerAction = () => {
             </div>
           </div>
           <div className='eulexia-item eulexia-row eulexia-tall-margin-top'>
-            <span className='eulexia-item eulexia-text'>Inverted mode</span>
+            <span className='eulexia-item eulexia-text'>
+              {invertedModeLabel}
+            </span>
             <div className='eulexia-item'>
               <Toggle
                 data-testid='inverted-mode-toggle'
@@ -93,6 +102,12 @@ const RulerAction = () => {
       </Tooltip>
     </>
   )
+}
+
+RulerAction.propTypes = {
+  invertedModeLabel: PropTypes.string,
+  sizeLabel: PropTypes.string,
+  tooltipTitle: PropTypes.string
 }
 
 export default RulerAction
