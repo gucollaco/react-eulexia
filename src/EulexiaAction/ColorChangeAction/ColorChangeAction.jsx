@@ -32,7 +32,7 @@ const ColorChangeAction = ({
     'li',
     'span'
   ],
-  tooltipTitle = 'Color Change'
+  tooltipTitle = 'Change color'
 }) => {
   const {
     colorChange: {
