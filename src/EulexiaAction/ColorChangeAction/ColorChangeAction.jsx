@@ -10,9 +10,10 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { ColorChangeIcon } from '../../Icon/index.jsx'
 
 const ColorChangeAction = ({
-  tooltipTitle = 'Color Change',
-  textLabel = 'Text',
+  backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
   backgroundLabel = 'Background',
+  textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
+  textLabel = 'Text',
   textTags = [
     'h1',
     'h2',
@@ -29,7 +30,8 @@ const ColorChangeAction = ({
     'p',
     'li',
     'span'
-  ]
+  ],
+  tooltipTitle = 'Color Change'
 }) => {
   const {
     colorChange: {
@@ -101,7 +103,7 @@ const ColorChangeAction = ({
                   setNewTextColor(value)
                   window.localStorage.setItem('newTextColor', value)
                 }}
-                colors={['#030303', '#191970', '#00008B', '#40E0D0']}
+                colors={textColorOptions}
                 disabled={!colorChangeEnabled}
                 testTag='text'
               />
@@ -116,7 +118,7 @@ const ColorChangeAction = ({
                   setNewBackgroundColor(value)
                   window.localStorage.setItem('newBackgroundColor', value)
                 }}
-                colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
+                colors={backgroundColorOptions}
                 disabled={!colorChangeEnabled}
                 testTag='background'
               />
@@ -129,10 +131,12 @@ const ColorChangeAction = ({
 }
 
 ColorChangeAction.propTypes = {
-  tooltipTitle: PropTypes.string,
-  textLabel: PropTypes.string,
+  backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
   backgroundLabel: PropTypes.string,
-  textTags: PropTypes.arrayOf(PropTypes.string)
+  textColorOptions: PropTypes.arrayOf(PropTypes.string),
+  textLabel: PropTypes.string,
+  textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipTitle: PropTypes.string
 }
 
 export default ColorChangeAction
