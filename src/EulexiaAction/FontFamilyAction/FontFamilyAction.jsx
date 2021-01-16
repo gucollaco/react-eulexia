@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
 import { useEulexia } from '../../Context/eulexia-context.jsx'
@@ -10,27 +9,7 @@ import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontFamilyIcon } from '../../Icon/index.jsx'
 
-const FontFamilyAction = ({
-  dropdownPlaceholder = 'Font family...',
-  textTags = [
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    '.h1',
-    '.h2',
-    '.h3',
-    '.h4',
-    '.h5',
-    '.h6',
-    'p',
-    'li',
-    'span'
-  ],
-  tooltipTitle = 'Font family'
-}) => {
+const FontFamilyAction = () => {
   const {
     fontFamily: {
       fontFamilyEnabled,
@@ -48,6 +27,23 @@ const FontFamilyAction = ({
   ]
 
   const getHtmlTexts = () => {
+    const textTags = [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      '.h1',
+      '.h2',
+      '.h3',
+      '.h4',
+      '.h5',
+      '.h6',
+      'p',
+      'li',
+      'span'
+    ]
     const exceptTags = [
       ':not(.eulexia-text)',
       ':not(.rtf--ab__c)',
@@ -75,7 +71,7 @@ const FontFamilyAction = ({
       <Tooltip id='fontFamily'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
-            <strong className='eulexia-item'>{tooltipTitle}</strong>
+            <strong className='eulexia-item'>Font family</strong>
             <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='font-family-toggle'
@@ -103,7 +99,7 @@ const FontFamilyAction = ({
                   window.localStorage.setItem('fontFamilyValue', obj.value)
                 }}
                 value={fontFamily}
-                placeholder={dropdownPlaceholder}
+                placeholder='Font family...'
                 disabled={!fontFamilyEnabled}
               />
             </div>
@@ -112,12 +108,6 @@ const FontFamilyAction = ({
       </Tooltip>
     </>
   )
-}
-
-FontFamilyAction.propTypes = {
-  dropdownPlaceholder: PropTypes.string,
-  textTags: PropTypes.arrayOf(PropTypes.string),
-  tooltipTitle: PropTypes.string
 }
 
 export default FontFamilyAction

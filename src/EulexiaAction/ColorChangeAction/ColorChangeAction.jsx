@@ -1,39 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
 import { useEulexia } from '../../Context/eulexia-context.jsx'
-
 import Action from '../../Action/Action.jsx'
 import ColorPicker from '../../ColorPicker/ColorPicker.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { ColorChangeIcon } from '../../Icon/index.jsx'
 
-const ColorChangeAction = ({
-  backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
-  backgroundLabel = 'Background',
-  textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
-  textLabel = 'Text',
-  textTags = [
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    '.h1',
-    '.h2',
-    '.h3',
-    '.h4',
-    '.h5',
-    '.h6',
-    'p',
-    'li',
-    'span'
-  ],
-  tooltipTitle = 'Change color'
-}) => {
+const ColorChangeAction = () => {
   const {
     colorChange: {
       colorChangeEnabled,
@@ -46,6 +21,23 @@ const ColorChangeAction = ({
   } = useEulexia()
 
   const getHtmlTexts = () => {
+    const textTags = [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      '.h1',
+      '.h2',
+      '.h3',
+      '.h4',
+      '.h5',
+      '.h6',
+      'p',
+      'li',
+      'span'
+    ]
     const exceptTags = [
       ':not(.eulexia-text)',
       ':not(.rtf--ab__c)',
@@ -74,7 +66,7 @@ const ColorChangeAction = ({
       <Tooltip id='colorChange'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
-            <strong className='eulexia-item'>{tooltipTitle}</strong>
+            <strong className='eulexia-item'>Change color</strong>
             <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='color-change-toggle'
@@ -96,7 +88,7 @@ const ColorChangeAction = ({
             </div>
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
-            <span className='eulexia-item eulexia-text'>{textLabel}</span>
+            <span className='eulexia-item eulexia-text'>Text</span>
             <div className='eulexia-item' style={{ marginTop: 16 }}>
               <ColorPicker
                 color={newTextColor}
@@ -104,14 +96,14 @@ const ColorChangeAction = ({
                   setNewTextColor(value)
                   window.localStorage.setItem('newTextColor', value)
                 }}
-                colors={textColorOptions}
+                colors={['#030303', '#191970', '#00008B', '#40E0D0']}
                 disabled={!colorChangeEnabled}
                 testTag='text'
               />
             </div>
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
-            <span className='eulexia-item eulexia-text'>{backgroundLabel}</span>
+            <span className='eulexia-item eulexia-text'>Background</span>
             <div className='eulexia-item' style={{ marginTop: 16 }}>
               <ColorPicker
                 color={newBackgroundColor}
@@ -119,7 +111,7 @@ const ColorChangeAction = ({
                   setNewBackgroundColor(value)
                   window.localStorage.setItem('newBackgroundColor', value)
                 }}
-                colors={backgroundColorOptions}
+                colors={['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303']}
                 disabled={!colorChangeEnabled}
                 testTag='background'
               />
@@ -129,15 +121,6 @@ const ColorChangeAction = ({
       </Tooltip>
     </>
   )
-}
-
-ColorChangeAction.propTypes = {
-  backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
-  backgroundLabel: PropTypes.string,
-  textColorOptions: PropTypes.arrayOf(PropTypes.string),
-  textLabel: PropTypes.string,
-  textTags: PropTypes.arrayOf(PropTypes.string),
-  tooltipTitle: PropTypes.string
 }
 
 export default ColorChangeAction
