@@ -9,11 +9,11 @@ import { PlayButton, StopButton } from '../../Button/index.jsx'
 import { TextToSpeechIcon } from '../../Icon/index.jsx'
 
 const TextToSpeechAction = ({
-  tooltipTitle = 'Text to speech',
-  unsupportedBrowserLabel = 'Browser not supported',
-  readSelectedLabel = 'Read selected',
+  forceHtmlLang = false,
   htmlLang = 'en-us',
-  forceHtmlLang = false
+  readSelectedLabel = 'Read selected',
+  tooltipTitle = 'Text to speech',
+  unsupportedBrowserLabel = 'Browser not supported'
 }) => {
   const { speak, voices: browserVoices, cancel } = useSpeechSynthesis()
   const voices = [].concat(
@@ -96,11 +96,11 @@ const TextToSpeechAction = ({
 }
 
 TextToSpeechAction.propTypes = {
-  tooltipTitle: PropTypes.string,
-  unsupportedBrowserLabel: PropTypes.string,
-  readSelectedLabel: PropTypes.string,
+  forceHtmlLang: PropTypes.bool,
   htmlLang: PropTypes.string,
-  forceHtmlLang: PropTypes.bool
+  readSelectedLabel: PropTypes.string,
+  tooltipTitle: PropTypes.string,
+  unsupportedBrowserLabel: PropTypes.string
 }
 
 export default TextToSpeechAction

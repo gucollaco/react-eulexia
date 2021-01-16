@@ -11,7 +11,6 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontFamilyIcon } from '../../Icon/index.jsx'
 
 const FontFamilyAction = ({
-  tooltipTitle = 'Font family',
   dropdownPlaceholder = 'Font family...',
   textTags = [
     'h1',
@@ -29,7 +28,8 @@ const FontFamilyAction = ({
     'p',
     'li',
     'span'
-  ]
+  ],
+  tooltipTitle = 'Font family'
 }) => {
   const {
     fontFamily: {
@@ -115,9 +115,9 @@ const FontFamilyAction = ({
 }
 
 FontFamilyAction.propTypes = {
-  tooltipTitle: PropTypes.string,
   dropdownPlaceholder: PropTypes.string,
-  textTags: PropTypes.arrayOf(PropTypes.string)
+  textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipTitle: PropTypes.string
 }
 
 export default FontFamilyAction

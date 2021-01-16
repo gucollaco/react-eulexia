@@ -11,7 +11,6 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontSizeIcon } from '../../Icon/index.jsx'
 
 const FontSizeAction = ({
-  tooltipTitle = 'Font size',
   headerLabel = 'Headers',
   headerTags = [
     'h1',
@@ -28,7 +27,8 @@ const FontSizeAction = ({
     '.h6'
   ],
   textLabel = 'Texts',
-  textTags = ['p', 'li', 'span']
+  textTags = ['p', 'li', 'span'],
+  tooltipTitle = 'Font size'
 }) => {
   const {
     fontSize: {
@@ -148,11 +148,11 @@ const FontSizeAction = ({
 }
 
 FontSizeAction.propTypes = {
-  tooltipTitle: PropTypes.string,
   headerLabel: PropTypes.string,
   headerTags: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,
-  textTags: PropTypes.arrayOf(PropTypes.string)
+  textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipTitle: PropTypes.string
 }
 
 export default FontSizeAction
