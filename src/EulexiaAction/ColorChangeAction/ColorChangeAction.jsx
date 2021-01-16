@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
 import { useEulexia } from '../../Context/eulexia-context.jsx'
+
 import Action from '../../Action/Action.jsx'
 import ColorPicker from '../../ColorPicker/ColorPicker.jsx'
 import Toggle from '../../Toggle/Toggle.jsx'
