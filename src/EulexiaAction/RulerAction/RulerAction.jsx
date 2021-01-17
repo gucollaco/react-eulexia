@@ -12,6 +12,8 @@ import { RulerIcon } from '../../Icon/index.jsx'
 const RulerAction = ({
   invertedModeLabel = 'Inverted mode',
   sizeLabel = 'Size',
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Reading ruler'
 }) => {
   const {
@@ -30,7 +32,11 @@ const RulerAction = ({
       <Action data-tip data-for='readingRuler'>
         <RulerIcon />
       </Action>
-      <Tooltip id='readingRuler'>
+      <Tooltip
+        id='readingRuler'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -107,6 +113,8 @@ const RulerAction = ({
 RulerAction.propTypes = {
   invertedModeLabel: PropTypes.string,
   sizeLabel: PropTypes.string,
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string
 }
 

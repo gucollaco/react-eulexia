@@ -30,6 +30,8 @@ const FontFamilyAction = ({
     'li',
     'span'
   ],
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Font family'
 }) => {
   const {
@@ -73,7 +75,11 @@ const FontFamilyAction = ({
       <Action data-tip data-for='fontFamily'>
         {icon}
       </Action>
-      <Tooltip id='fontFamily'>
+      <Tooltip
+        id='fontFamily'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -119,6 +125,8 @@ FontFamilyAction.propTypes = {
   dropdownPlaceholder: PropTypes.string,
   icon: PropTypes.any,
   textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string
 }
 

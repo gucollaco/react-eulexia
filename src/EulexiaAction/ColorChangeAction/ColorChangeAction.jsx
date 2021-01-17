@@ -14,6 +14,7 @@ const ColorChangeAction = ({
   backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
   backgroundLabel = 'Background',
   icon = <ColorChangeIcon />,
+  paletteColor = '#C1C1CC',
   textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
   textLabel = 'Text',
   textTags = [
@@ -33,6 +34,8 @@ const ColorChangeAction = ({
     'li',
     'span'
   ],
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Change color'
 }) => {
   const {
@@ -72,7 +75,11 @@ const ColorChangeAction = ({
       <Action data-tip data-for='colorChange'>
         {icon}
       </Action>
-      <Tooltip id='colorChange'>
+      <Tooltip
+        id='colorChange'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -107,6 +114,7 @@ const ColorChangeAction = ({
                 }}
                 colors={textColorOptions}
                 disabled={!colorChangeEnabled}
+                paletteColor={paletteColor}
                 testTag='text'
               />
             </div>
@@ -122,6 +130,7 @@ const ColorChangeAction = ({
                 }}
                 colors={backgroundColorOptions}
                 disabled={!colorChangeEnabled}
+                paletteColor={paletteColor}
                 testTag='background'
               />
             </div>
@@ -136,9 +145,12 @@ ColorChangeAction.propTypes = {
   backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
   backgroundLabel: PropTypes.string,
   icon: PropTypes.any,
+  paletteColor: PropTypes.string,
   textColorOptions: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string
 }
 
