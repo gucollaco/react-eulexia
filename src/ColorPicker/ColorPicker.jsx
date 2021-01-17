@@ -30,12 +30,12 @@ const PickerButton = styled.button`
 `
 
 const ColorPicker = ({
+  paletteColor,
   disabled = false,
   color: colorValue,
   onChange,
   colors = [],
-  testTag = '',
-  paletteColor = '#C1C1CC'
+  testTag = ''
 }) => (
   <WrapperDiv paletteColor={paletteColor} className='eulexia-colorpicker'>
     <InvisibleDiv>

@@ -14,6 +14,7 @@ const ColorChangeAction = ({
   backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
   backgroundLabel = 'Background',
   icon = <ColorChangeIcon />,
+  paletteColor = '#C1C1CC',
   textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
   textLabel = 'Text',
   textTags = [
@@ -113,6 +114,7 @@ const ColorChangeAction = ({
                 }}
                 colors={textColorOptions}
                 disabled={!colorChangeEnabled}
+                paletteColor={paletteColor}
                 testTag='text'
               />
             </div>
@@ -128,6 +130,7 @@ const ColorChangeAction = ({
                 }}
                 colors={backgroundColorOptions}
                 disabled={!colorChangeEnabled}
+                paletteColor={paletteColor}
                 testTag='background'
               />
             </div>
@@ -142,6 +145,7 @@ ColorChangeAction.propTypes = {
   backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
   backgroundLabel: PropTypes.string,
   icon: PropTypes.any,
+  paletteColor: PropTypes.string,
   textColorOptions: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),
