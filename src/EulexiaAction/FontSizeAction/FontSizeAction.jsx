@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import GlobalStyle from '../../GlobalStyle/GlobalStyle.jsx'
 import { useEulexia } from '../../Context/eulexia-context.jsx'
@@ -9,7 +10,26 @@ import Toggle from '../../Toggle/Toggle.jsx'
 import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { FontSizeIcon } from '../../Icon/index.jsx'
 
-const FontSizeAction = () => {
+const FontSizeAction = ({
+  headerLabel = 'Headers',
+  headerTags = [
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    '.h1',
+    '.h2',
+    '.h3',
+    '.h4',
+    '.h5',
+    '.h6'
+  ],
+  textLabel = 'Texts',
+  textTags = ['p', 'li', 'span'],
+  tooltipTitle = 'Font size'
+}) => {
   const {
     fontSize: {
       fontSizeEnabled,
@@ -22,30 +42,15 @@ const FontSizeAction = () => {
   } = useEulexia()
 
   const getHtmlHeaders = () => {
-    const textTags = [
-      'h1',
-      'h2',
-      'h3',
-      'h4',
-      'h5',
-      'h6',
-      '.h1',
-      '.h2',
-      '.h3',
-      '.h4',
-      '.h5',
-      '.h6'
-    ]
     const exceptTags = [':not(.eulexia-text)']
     const exceptTagsJoined = exceptTags.join('')
-    const textTagsJoined = textTags
+    const headerTagsJoined = headerTags
       .join(exceptTagsJoined.concat(','))
       .concat(exceptTagsJoined)
-    return textTagsJoined
+    return headerTagsJoined
   }
 
   const getHtmlTexts = () => {
-    const textTags = ['p', 'li', 'span']
     const exceptTags = [
       ':not(.eulexia-text)',
       ':not(.rtf--ab__c)',
@@ -75,7 +80,7 @@ const FontSizeAction = () => {
       <Tooltip id='font-size'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
-            <strong className='eulexia-item'>Font size</strong>
+            <strong className='eulexia-item'>{tooltipTitle}</strong>
             <div className='eulexia-item-text-right'>
               <Toggle
                 data-testid='font-size-toggle'
@@ -98,7 +103,9 @@ const FontSizeAction = () => {
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
             <span className='eulexia-item eulexia-text'>
-              {headerFontSize ? `Headers (${headerFontSize} px)` : 'Headers'}
+              {headerFontSize
+                ? `${headerLabel} (${headerFontSize} px)`
+                : headerLabel}
             </span>
             <div className='eulexia-item'>
               <Slider
@@ -117,7 +124,7 @@ const FontSizeAction = () => {
           </div>
           <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
             <span className='eulexia-item eulexia-text'>
-              {textFontSize ? `Texts (${textFontSize} px)` : 'Texts'}
+              {textFontSize ? `${textLabel} (${textFontSize} px)` : textLabel}
             </span>
             <div className='eulexia-item'>
               <Slider
@@ -138,6 +145,14 @@ const FontSizeAction = () => {
       </Tooltip>
     </>
   )
+}
+
+FontSizeAction.propTypes = {
+  headerLabel: PropTypes.string,
+  headerTags: PropTypes.arrayOf(PropTypes.string),
+  textLabel: PropTypes.string,
+  textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipTitle: PropTypes.string
 }
 
 export default FontSizeAction
