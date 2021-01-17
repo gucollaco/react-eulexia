@@ -18,10 +18,6 @@ describe('Fab', () => {
     render(<Fab />)
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
-  test('Checks if an img role is found on the document', () => {
-    render(<Fab />)
-    expect(screen.getByRole('img')).toBeInTheDocument()
-  })
   test('Checks if the text Some Action is found on the document', () => {
     render(
       <Fab>

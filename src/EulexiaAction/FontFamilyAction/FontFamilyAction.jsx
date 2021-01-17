@@ -12,6 +12,7 @@ import { FontFamilyIcon } from '../../Icon/index.jsx'
 
 const FontFamilyAction = ({
   dropdownPlaceholder = 'Font family...',
+  icon = <FontFamilyIcon />,
   textTags = [
     'h1',
     'h2',
@@ -70,7 +71,7 @@ const FontFamilyAction = ({
         htmlTexts={getHtmlTexts()}
       />
       <Action data-tip data-for='fontFamily'>
-        <FontFamilyIcon />
+        {icon}
       </Action>
       <Tooltip id='fontFamily'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
@@ -116,6 +117,7 @@ const FontFamilyAction = ({
 
 FontFamilyAction.propTypes = {
   dropdownPlaceholder: PropTypes.string,
+  icon: PropTypes.any,
   textTags: PropTypes.arrayOf(PropTypes.string),
   tooltipTitle: PropTypes.string
 }

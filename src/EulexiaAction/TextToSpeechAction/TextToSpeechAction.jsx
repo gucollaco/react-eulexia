@@ -11,6 +11,7 @@ import { TextToSpeechIcon } from '../../Icon/index.jsx'
 const TextToSpeechAction = ({
   forceHtmlLang = false,
   htmlLang = 'en-us',
+  icon = <TextToSpeechIcon />,
   readSelectedLabel = 'Read selected',
   tooltipTitle = 'Text to speech',
   unsupportedBrowserLabel = 'Browser not supported'
@@ -51,7 +52,7 @@ const TextToSpeechAction = ({
   return (
     <>
       <Action data-tip data-for='textToSpeech'>
-        <TextToSpeechIcon />
+        {icon}
       </Action>
       <Tooltip id='textToSpeech'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
@@ -98,6 +99,7 @@ const TextToSpeechAction = ({
 TextToSpeechAction.propTypes = {
   forceHtmlLang: PropTypes.bool,
   htmlLang: PropTypes.string,
+  icon: PropTypes.any,
   readSelectedLabel: PropTypes.string,
   tooltipTitle: PropTypes.string,
   unsupportedBrowserLabel: PropTypes.string
