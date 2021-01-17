@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { EulexiaContextProvider } from '../Context/eulexia-context.jsx'
 
@@ -28,6 +29,15 @@ const EulexiaFab = ({
       </Fab>
     </EulexiaContextProvider>
   )
+}
+
+EulexiaFab.propTypes = {
+  id: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  style: PropTypes.object,
+  event: PropTypes.string,
+  icon: PropTypes.any,
+  children: PropTypes.node
 }
 
 export default EulexiaFab
