@@ -2,8 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { HexColorPicker } from 'react-colorful'
 
-const WrapperDiv = styled.div`
-  background: #c1c1cc;
+const WrapperDiv = styled.div.attrs(({ paletteColor }) => ({
+  style: { background: paletteColor }
+}))`
   border-radius: 12px;
   padding: 8px;
 `
@@ -33,9 +34,10 @@ const ColorPicker = ({
   color: colorValue,
   onChange,
   colors = [],
-  testTag = ''
+  testTag = '',
+  paletteColor = '#C1C1CC'
 }) => (
-  <WrapperDiv className='eulexia-colorpicker'>
+  <WrapperDiv paletteColor={paletteColor} className='eulexia-colorpicker'>
     <InvisibleDiv>
       <HexColorPicker color={colorValue} onChange={onChange} />
     </InvisibleDiv>

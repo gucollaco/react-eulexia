@@ -33,6 +33,8 @@ const ColorChangeAction = ({
     'li',
     'span'
   ],
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Change color'
 }) => {
   const {
@@ -72,7 +74,11 @@ const ColorChangeAction = ({
       <Action data-tip data-for='colorChange'>
         {icon}
       </Action>
-      <Tooltip id='colorChange'>
+      <Tooltip
+        id='colorChange'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -139,6 +145,8 @@ ColorChangeAction.propTypes = {
   textColorOptions: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string
 }
 

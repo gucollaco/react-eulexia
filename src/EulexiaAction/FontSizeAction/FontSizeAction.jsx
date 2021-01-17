@@ -29,6 +29,8 @@ const FontSizeAction = ({
   icon = <FontSizeIcon />,
   textLabel = 'Texts',
   textTags = ['p', 'li', 'span'],
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Font size'
 }) => {
   const {
@@ -78,7 +80,11 @@ const FontSizeAction = ({
       <Action data-tip data-for='font-size'>
         {icon}
       </Action>
-      <Tooltip id='font-size'>
+      <Tooltip
+        id='font-size'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -154,6 +160,8 @@ FontSizeAction.propTypes = {
   icon: PropTypes.any,
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string
 }
 
