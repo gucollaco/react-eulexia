@@ -13,6 +13,7 @@ import { ColorChangeIcon } from '../../Icon/index.jsx'
 const ColorChangeAction = ({
   backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
   backgroundLabel = 'Background',
+  icon = <ColorChangeIcon />,
   textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
   textLabel = 'Text',
   textTags = [
@@ -69,7 +70,7 @@ const ColorChangeAction = ({
         htmlTexts={getHtmlTexts()}
       />
       <Action data-tip data-for='colorChange'>
-        <ColorChangeIcon />
+        {icon}
       </Action>
       <Tooltip id='colorChange'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
@@ -134,6 +135,7 @@ const ColorChangeAction = ({
 ColorChangeAction.propTypes = {
   backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
   backgroundLabel: PropTypes.string,
+  icon: PropTypes.any,
   textColorOptions: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),

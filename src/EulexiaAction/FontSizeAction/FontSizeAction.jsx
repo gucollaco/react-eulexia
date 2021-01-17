@@ -26,6 +26,7 @@ const FontSizeAction = ({
     '.h5',
     '.h6'
   ],
+  icon = <FontSizeIcon />,
   textLabel = 'Texts',
   textTags = ['p', 'li', 'span'],
   tooltipTitle = 'Font size'
@@ -75,7 +76,7 @@ const FontSizeAction = ({
         htmlTexts={getHtmlTexts()}
       />
       <Action data-tip data-for='font-size'>
-        <FontSizeIcon />
+        {icon}
       </Action>
       <Tooltip id='font-size'>
         <div className='eulexia-wrapper eulexia-column eulexia'>
@@ -150,6 +151,7 @@ const FontSizeAction = ({
 FontSizeAction.propTypes = {
   headerLabel: PropTypes.string,
   headerTags: PropTypes.arrayOf(PropTypes.string),
+  icon: PropTypes.any,
   textLabel: PropTypes.string,
   textTags: PropTypes.arrayOf(PropTypes.string),
   tooltipTitle: PropTypes.string
