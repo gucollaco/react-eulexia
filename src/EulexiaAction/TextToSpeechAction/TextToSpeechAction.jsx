@@ -13,6 +13,8 @@ const TextToSpeechAction = ({
   htmlLang = 'en-us',
   icon = <TextToSpeechIcon />,
   readSelectedLabel = 'Read selected',
+  tooltipBackgroundColor = '#FFFFFF',
+  tooltipTextColor = '#000000',
   tooltipTitle = 'Text to speech',
   unsupportedBrowserLabel = 'Browser not supported'
 }) => {
@@ -54,7 +56,11 @@ const TextToSpeechAction = ({
       <Action data-tip data-for='textToSpeech'>
         {icon}
       </Action>
-      <Tooltip id='textToSpeech'>
+      <Tooltip
+        id='textToSpeech'
+        textColor={tooltipTextColor}
+        backgroundColor={tooltipBackgroundColor}
+      >
         <div className='eulexia-wrapper eulexia-column eulexia'>
           <div className='eulexia-item eulexia-title eulexia-row'>
             <strong className='eulexia-item'>{tooltipTitle}</strong>
@@ -101,6 +107,8 @@ TextToSpeechAction.propTypes = {
   htmlLang: PropTypes.string,
   icon: PropTypes.any,
   readSelectedLabel: PropTypes.string,
+  tooltipBackgroundColor: PropTypes.string,
+  tooltipTextColor: PropTypes.string,
   tooltipTitle: PropTypes.string,
   unsupportedBrowserLabel: PropTypes.string
 }
