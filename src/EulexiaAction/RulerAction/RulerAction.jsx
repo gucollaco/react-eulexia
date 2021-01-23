@@ -10,6 +10,7 @@ import Tooltip from '../../Tooltip/Tooltip.jsx'
 import { RulerIcon } from '../../Icon/index.jsx'
 
 const RulerAction = ({
+  icon = <RulerIcon />,
   invertedModeLabel = 'Inverted mode',
   sizeLabel = 'Size',
   tooltipBackgroundColor = '#FFFFFF',
@@ -30,7 +31,7 @@ const RulerAction = ({
   return (
     <>
       <Action data-tip data-for='readingRuler'>
-        <RulerIcon />
+        {icon}
       </Action>
       <Tooltip
         id='readingRuler'
@@ -111,6 +112,7 @@ const RulerAction = ({
 }
 
 RulerAction.propTypes = {
+  icon: PropTypes.any,
   invertedModeLabel: PropTypes.string,
   sizeLabel: PropTypes.string,
   tooltipBackgroundColor: PropTypes.string,
