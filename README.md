@@ -78,7 +78,7 @@ The main component. It is basically a wrapper of the Fab provided by [react-tiny
 </br>
 
 ### ColorChangeAction
-This component lets the user modify the text and background colors of the page. The color picker component is provided by [react-colorful](https://github.com/omgovich/react-colorful).
+This component lets the user modify the texts, links and background colors of the page. The color picker component is provided by [react-colorful](https://github.com/omgovich/react-colorful).
 
 | Prop              | Type          | Default                           | Description   |
 | -------------     | ------------- | ---------------------             | ------------- |
@@ -86,9 +86,12 @@ This component lets the user modify the text and background colors of the page. 
 | backgroundLabel   | `string`        | `'Background'`                         | The label for the change background color feature.  |
 | icon             | `any`        | 	```<ColorChangeIcon />```          | The icon to be displayed on the Floating Action Button. Defaults to `<ColorChangeIcon />`, a customized icon that displays a `paint-brush` icon from the [Remix Icon](https://remixicon.com/) set.  |
 | paletteColor             | `string`        | `'#C1C1CC'`                          | The palette color. Palette is a div that wraps the color options displayed. |
+| linkColorOptions              | `array`        | ```['#030303', '#191970', '#00008B', '#40E0D0']```                    | The link color options.  |
+| linkLabel          | `string`          |        `'Text'`                           | The label for the change link color feature.   |
+| linkTags          | `array`          |             ```['a']```                     | The tags that should be considered links, and will have the color change applied.   |
 | textColorOptions              | `array`        | ```['#030303', '#191970', '#00008B', '#40E0D0']```                    | The text color options.  |
 | textLabel          | `string`          |        `'Text'`                           | The label for the change text color feature.   |
-| textTags          | `array`          |             ```['h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.h1', '.h2', '.h3', '.h4', '.h5', '.h6', 'p', 'li', 'span']```                     | The tags that should be considered text, and will have the color change applied.   |
+| textTags          | `array`          |             ```['h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.h1', '.h2', '.h3', '.h4', '.h5', '.h6', 'p', 'li', 'span']```                     | The tags that should be considered texts, and will have the color change applied.   |
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Change color'`                       | The title displayed for the color change tooltip.   |
@@ -101,7 +104,7 @@ This component lets the user modify the font family of the words on the page. Th
 | -------------     | ------------- | ---------------------             | ------------- |
 | dropdownPlaceholder                | `string`        | `'Font family...'`                      | The font family dropdown placeholder.  |
 | icon             | `any`        | 	```<FontFamilyIcon />```          | The icon to be displayed on the Floating Action Button. Defaults to `<FontFamilyIcon />`, a customized icon that displays a `text` icon from the [Remix Icon](https://remixicon.com/) set.  |
-| textTags          | `array`          |             ```['h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.h1', '.h2', '.h3', '.h4', '.h5', '.h6', 'p', 'li', 'span']```                     | The tags that should be considered text, and will have the font family change applied.   |
+| textTags          | `array`          |             ```['h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.h1', '.h2', '.h3', '.h4', '.h5', '.h6', 'p', 'li', 'span']```                     | The tags that should be considered texts, and will have the font family change applied.   |
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Font family'`                       | The title displayed for the font family tooltip.   |
