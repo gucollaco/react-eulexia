@@ -16,6 +16,7 @@ const EulexiaContextProvider = ({ children }) => {
 
   const [colorChangeEnabled, setColorChangeEnabled] = useState(false)
   const [newTextColor, setNewTextColor] = useState('')
+  const [newLinkColor, setNewLinkColor] = useState('')
   const [newBackgroundColor, setNewBackgroundColor] = useState('')
 
   const [fontFamilyEnabled, setFontFamilyEnabled] = useState(false)
@@ -61,6 +62,9 @@ const EulexiaContextProvider = ({ children }) => {
   useEffect(() => {
     if (window.localStorage.getItem('newTextColor')) {
       setNewTextColor(window.localStorage.getItem('newTextColor'))
+    }
+    if (window.localStorage.getItem('newLinkColor')) {
+      setNewLinkColor(window.localStorage.getItem('newLinkColor'))
     }
     if (window.localStorage.getItem('newBackgroundColor')) {
       setNewBackgroundColor(window.localStorage.getItem('newBackgroundColor'))
@@ -125,6 +129,8 @@ const EulexiaContextProvider = ({ children }) => {
       setColorChangeEnabled,
       newTextColor,
       setNewTextColor,
+      newLinkColor,
+      setNewLinkColor,
       newBackgroundColor,
       setNewBackgroundColor
     },
