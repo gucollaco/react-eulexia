@@ -6,7 +6,7 @@ Components library to allow UI customizations, giving the person the possibility
 ## Demo
 [Here is an example](https://react-eulexia-example.vercel.app/) and [it's source code](https://github.com/gucollaco/ibge-news-portal)!
 
-You can also try it over here.
+You can also try it over here.</br>
 [![Edit react-eulexia](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/bhgvb)
 
 ## Install
@@ -62,6 +62,7 @@ The main component is called EulexiaFab.
 Inside it, we can pass some Action buttons, which can be used independently from each other, and each provide some unique features.
 
 The configurations made by the user that is visting the website are stored on the localStorage, so that the setup can be kept through the pages the user visits within the website.
+</br>
 
 ### EulexiaFab
 The main component. It is basically a wrapper of the Fab provided by [react-tiny-fab](https://github.com/dericgw/react-tiny-fab), with some default configurations.
@@ -74,6 +75,7 @@ The main component. It is basically a wrapper of the Fab provided by [react-tiny
 | event             | `string`        | `'hover'`                           | The way the EulexiaFab displays the other Action buttons. It defaults to 'hover', but can also be 'click' |
 | icon              | `any`        | ```<ConfigIcon />```                   | The icon to be displayed on the Floating Action Button. Defaults to `<ConfigIcon />`, a customized icon that displays a 'settings' icon from the [Remix Icon](https://remixicon.com/) set.  |
 | children          | `node`          |                                   | The children for this component should be the other components from this library. You can use the ones you want, no need to use all of them.   |
+</br>
 
 ### ColorChangeAction
 This component lets the user modify the text and background colors of the page. The color picker component is provided by [react-colorful](https://github.com/omgovich/react-colorful).
@@ -90,6 +92,7 @@ This component lets the user modify the text and background colors of the page. 
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Change color'`                       | The title displayed for the color change tooltip.   |
+</br>
 
 ### FontFamilyAction
 This component lets the user modify the font family of the words on the page. The fonts are collected from [Google Fonts](https://fonts.google.com/). Today, the four fonts available on react-eulexia are 'Courier', 'Open Sans', 'Roboto' and 'Roboto Mono', all of them are either sans serif or monospaced, which are recommended for people with dyslexia.
@@ -102,6 +105,7 @@ This component lets the user modify the font family of the words on the page. Th
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Font family'`                       | The title displayed for the font family tooltip.   |
+</br>
 
 ### FontSizeAction
 This component lets the user modify the font size of the words on the page. The words are separated into two categories, Headers and Texts, each has a different slider to set the value.
@@ -116,6 +120,7 @@ This component lets the user modify the font size of the words on the page. The 
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Font size'`                       | The title displayed for the font size change tooltip.   |
+</br>
 
 ### RulerAction
 This component lets the user display a reading ruler on the page, a useful tool for people with dyslexia. The ruler size can be modified through a slider, and there is also an inverted mode that can be activated.
@@ -128,6 +133,7 @@ This component lets the user display a reading ruler on the page, a useful tool 
 | tooltipBackgroundColor          | `string`          |   `'#FFFFFF'`                             | The background color for the tooltip.   |
 | tooltipTextColor          | `string`          |              `'#000000'`                     | The text color for the tooltip.   |
 | tooltipTitle          | `string`          |            `'Reading ruler'`                       | The title displayed for the reading ruler tooltip.   |
+</br>
 
 ### TextToSpeechAction
 This component lets the user use the text-to-speech feature to read a selected text. The [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis) is used through [react-speech-kit](https://github.com/MikeyParton/react-speech-kit), so not all browsers are supported. If browser is not supported, a 'Browser not supported' label will be shown.
