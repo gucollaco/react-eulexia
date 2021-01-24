@@ -14,6 +14,9 @@ const ColorChangeAction = ({
   backgroundColorOptions = ['#F8F5F4', '#EBE3E1', '#F5F5DC', '#030303'],
   backgroundLabel = 'Background',
   icon = <ColorChangeIcon />,
+  linkColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
+  linkLabel = 'Link',
+  linkTags = ['a'],
   paletteColor = '#C1C1CC',
   textColorOptions = ['#030303', '#191970', '#00008B', '#40E0D0'],
   textLabel = 'Text',
@@ -44,6 +47,8 @@ const ColorChangeAction = ({
       setColorChangeEnabled,
       newTextColor,
       setNewTextColor,
+      newLinkColor,
+      setNewLinkColor,
       newBackgroundColor,
       setNewBackgroundColor
     }
@@ -64,13 +69,20 @@ const ColorChangeAction = ({
     return textTagsJoined
   }
 
+  const getHtmlLinks = () => {
+    const linkTagsJoined = linkTags.join(',')
+    return linkTagsJoined
+  }
+
   return (
     <>
       <GlobalStyle
         colorChangeEnabled={colorChangeEnabled}
         newBackgroundColor={newBackgroundColor}
         newTextColor={newTextColor}
+        newLinkColor={newLinkColor}
         htmlTexts={getHtmlTexts()}
+        htmlLinks={getHtmlLinks()}
       />
       <Action data-tip data-for='colorChange'>
         {icon}
@@ -94,9 +106,11 @@ const ColorChangeAction = ({
                     return
                   }
                   setNewTextColor('')
+                  setNewLinkColor('')
                   setNewBackgroundColor('')
                   window.localStorage.removeItem('colorChangeEnabled')
                   window.localStorage.removeItem('newTextColor')
+                  window.localStorage.removeItem('newLinkColor')
                   window.localStorage.removeItem('newBackgroundColor')
                 }}
                 icons={false}
@@ -116,6 +130,22 @@ const ColorChangeAction = ({
                 disabled={!colorChangeEnabled}
                 paletteColor={paletteColor}
                 testTag='text'
+              />
+            </div>
+          </div>
+          <div className='eulexia-item eulexia-column eulexia-tall-margin-top'>
+            <span className='eulexia-item eulexia-text'>{linkLabel}</span>
+            <div className='eulexia-item' style={{ marginTop: 16 }}>
+              <ColorPicker
+                color={newLinkColor}
+                onChange={(value) => {
+                  setNewLinkColor(value)
+                  window.localStorage.setItem('newLinkColor', value)
+                }}
+                colors={linkColorOptions}
+                disabled={!colorChangeEnabled}
+                paletteColor={paletteColor}
+                testTag='link'
               />
             </div>
           </div>
@@ -145,6 +175,9 @@ ColorChangeAction.propTypes = {
   backgroundColorOptions: PropTypes.arrayOf(PropTypes.string),
   backgroundLabel: PropTypes.string,
   icon: PropTypes.any,
+  linkColorOptions: PropTypes.arrayOf(PropTypes.string),
+  linkLabel: PropTypes.string,
+  linkTags: PropTypes.arrayOf(PropTypes.string),
   paletteColor: PropTypes.string,
   textColorOptions: PropTypes.arrayOf(PropTypes.string),
   textLabel: PropTypes.string,

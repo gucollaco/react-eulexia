@@ -25,10 +25,11 @@ describe('ColorChangeAction', () => {
   test('Checking the texts shown on the Action', () => {
     expect(screen.getByText('Change color')).toBeInTheDocument()
     expect(screen.getByText('Text')).toBeInTheDocument()
+    expect(screen.getByText('Link')).toBeInTheDocument()
     expect(screen.getByText('Background')).toBeInTheDocument()
   })
 
-  test('Enabling functionality, selecting text color, selecting background color and disabling functionality', () => {
+  test('Enabling functionality, selecting text color, selecting link color, selecting background color and disabling functionality', () => {
     const colorChangeToggle = screen.getByTestId('color-change-toggle')
     expect(colorChangeToggle.checked).toEqual(false)
     userEvent.click(colorChangeToggle)
@@ -39,6 +40,14 @@ describe('ColorChangeAction', () => {
     )
     userEvent.click(screen.getByTestId('picker-button-text-0'))
     expect(screen.getByTestId('picker-button-text-0')).toHaveStyle(
+      'background: white'
+    )
+
+    expect(screen.getByTestId('picker-button-link-0')).not.toHaveStyle(
+      'background: white'
+    )
+    userEvent.click(screen.getByTestId('picker-button-link-0'))
+    expect(screen.getByTestId('picker-button-link-0')).toHaveStyle(
       'background: white'
     )
 
