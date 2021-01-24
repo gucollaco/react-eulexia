@@ -75,12 +75,29 @@ const styledTextColorChange = ({
     : ''
 }
 
+const styledLinkColorChange = ({
+  colorChangeEnabled,
+  newLinkColor,
+  htmlLinks
+}) => {
+  if (!colorChangeEnabled) return ''
+
+  return newLinkColor
+    ? `
+      ${htmlLinks} {
+        color: ${newLinkColor} !important;
+      }
+    `
+    : ''
+}
+
 const GlobalStyle = createGlobalStyle`
   ${(props) => styledHeaderFontSize(props)}
   ${(props) => styledTextFontSize(props)}
   ${(props) => styledFontFamily(props)}
   ${(props) => styledBackgroundColorChange(props)}
   ${(props) => styledTextColorChange(props)}
+  ${(props) => styledLinkColorChange(props)}
 
   ${BaseStyle}
   ${DropdownStyle}
