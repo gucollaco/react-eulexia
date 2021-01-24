@@ -61,7 +61,6 @@ The main component is called EulexiaFab.
 Inside it, we can pass some Action buttons, which can be used independently from each other, and each provide some unique features.
 
 The configurations made by the user that is visting the website are stored on the localStorage, so that the setup can be kept through the pages the user visits within the website.
-<br />
 
 ### EulexiaFab
 The main component. It is basically a wrapper of the Fab provided by [react-tiny-fab](https://github.com/dericgw/react-tiny-fab), with some default configurations.
