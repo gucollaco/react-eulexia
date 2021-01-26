@@ -28,7 +28,8 @@ const FontFamilyAction = ({
     '.h6',
     'p',
     'li',
-    'span'
+    'span',
+    'a'
   ],
   tooltipBackgroundColor = '#FFFFFF',
   tooltipTextColor = '#000000',
