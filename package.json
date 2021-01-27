@@ -86,12 +86,15 @@
     "styled-components": "^5.2.1"
   },
   "keywords": [
+    "front-end",
     "dyslexia",
     "accessibility",
     "react",
     "components",
     "customize",
-    "ui"
+    "ui",
+    "user interface",
+    "web"
   ],
   "repository": {
     "type": "git",
