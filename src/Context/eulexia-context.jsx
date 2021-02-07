@@ -96,7 +96,7 @@ const EulexiaContextProvider = ({ children }) => {
     link.type = 'text/css'
     link.rel = 'stylesheet'
     link.href =
-      'https://fonts.googleapis.com/css2?family=Courier&family=Open+Sans&family=Roboto&family=Roboto+Mono&display=swap'
+      'https://fonts.googleapis.com/css2?family=Courier+Prime&family=Lexend+Mega&family=Montserrat&family=Open+Sans&family=Roboto&family=Roboto+Mono&family=Nunito&display=swap'
 
     head.appendChild(link)
 
