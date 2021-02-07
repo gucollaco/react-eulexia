@@ -45,10 +45,13 @@ const FontFamilyAction = ({
   } = useEulexia()
 
   const fontOptions = [
-    { value: 'Courier', label: 'Courier' },
-    { value: 'Open Sans, sans-serif', label: 'Open Sans' },
-    { value: 'Roboto', label: 'Roboto' },
-    { value: 'Roboto Mono, monospace', label: 'Roboto Mono' }
+    { value: '\'Courier Prime\', monospace', label: 'Courier Prime' },
+    { value: '\'Lexend Mega\', sans-serif', label: 'Lexend Mega' },
+    { value: '\'Montserrat\', sans-serif', label: 'Montserrat' },
+    { value: '\'Open Sans\', sans-serif', label: 'Open Sans' },
+    { value: '\'Roboto\', sans-serif', label: 'Roboto' },
+    { value: '\'Roboto Mono\', monospace', label: 'Roboto Mono' },
+    { value: '\'Nunito\', sans-serif', label: 'Nunito' }
   ]
 
   const getHtmlTexts = () => {
